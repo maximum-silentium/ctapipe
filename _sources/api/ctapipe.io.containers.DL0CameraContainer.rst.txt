@@ -1,0 +1,17 @@
+DL0CameraContainer
+==================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: DL0CameraContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~DL0CameraContainer.pe_samples
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: pe_samples

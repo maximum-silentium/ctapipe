@@ -1,0 +1,17 @@
+MCHeaderContainer
+=================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: MCHeaderContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~MCHeaderContainer.run_array_direction
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: run_array_direction

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input/Output (io) &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>Input/Output (io) &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
-        <link rel="next" title="make_rectangular_camera_geometry" href="../api/ctapipe.io.camera.make_rectangular_camera_geometry.html"/>
-        <link rel="prev" title="write_fits" href="../api/ctapipe.instrument.InstrumentDescription.write_fits.html"/> 
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
+        <link rel="next" title="hessio_event_source" href="../api/ctapipe.io.hessio.hessio_event_source.html"/>
+        <link rel="prev" title="CameraGeometry" href="../api/ctapipe.instrument.CameraGeometry.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -102,21 +102,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#access-to-raw-data">Access to Raw Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#serialization-of-containers">Serialization of Containers:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.io.camera">ctapipe.io.camera Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.io.hessio">ctapipe.io.hessio Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.io.containers">ctapipe.io.containers Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.io.serializer">ctapipe.io.serializer Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Classes</a></li>
 </ul>
 </li>
 </ul>
@@ -175,10 +170,7 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.io</span></code> contains functions and classes related to reading data,
-like <code class="xref py py-obj docutils literal"><span class="pre">hessio_event_source</span></code>.  It currently contains some
-data structures related to the observatory layout, like
-<a class="reference internal" href="../api/ctapipe.io.camera.CameraGeometry.html#ctapipe.io.camera.CameraGeometry" title="ctapipe.io.camera.CameraGeometry"><code class="xref py py-class docutils literal"><span class="pre">CameraGeometry</span></code></a>, but those will likely move
-soon to an instrument package.</p>
+like <code class="xref py py-obj docutils literal"><span class="pre">hessio_event_source</span></code>.</p>
 </div>
 <div class="section" id="container-classes">
 <h2>Container Classes<a class="headerlink" href="#container-classes" title="Permalink to this headline">¶</a></h2>
@@ -248,7 +240,7 @@ productions. It requires the <code class="xref py py-obj docutils literal"><span
 <dd>testing purposes</dd>
 </dl>
 <p><code class="xref py py-obj docutils literal"><span class="pre">zfits.zfits_event_source</span></code>: reads zfits raw event files</p>
-<div class="figure" id="id4">
+<div class="figure" id="id2">
 <img alt="../_images/shower.png" src="../_images/shower.png" />
 <p class="caption"><span class="caption-text">an image read from a <em>simtelarray</em> data file.</span></p>
 </div>
@@ -261,45 +253,13 @@ tables or pickle files)</p>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-ctapipe.io.camera">
-<span id="ctapipe-io-camera-module"></span><h3>ctapipe.io.camera Module<a class="headerlink" href="#module-ctapipe.io.camera" title="Permalink to this headline">¶</a></h3>
-<p>Utilities for reading or working with Camera geometry files</p>
-<div class="section" id="functions">
-<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.camera.make_rectangular_camera_geometry.html#ctapipe.io.camera.make_rectangular_camera_geometry" title="ctapipe.io.camera.make_rectangular_camera_geometry"><code class="xref py py-obj docutils literal"><span class="pre">make_rectangular_camera_geometry</span></code></a>([npix_x,&nbsp;...])</td>
-<td>Generate a simple camera with 2D rectangular geometry.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="classes">
-<h4>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.camera.CameraGeometry.html#ctapipe.io.camera.CameraGeometry" title="ctapipe.io.camera.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a>(cam_id,&nbsp;pix_id,&nbsp;pix_x,&nbsp;pix_y,&nbsp;...)</td>
-<td><a class="reference internal" href="../api/ctapipe.io.camera.CameraGeometry.html#ctapipe.io.camera.CameraGeometry" title="ctapipe.io.camera.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> is a class that stores information about a</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <hr class="docutils" />
 <div class="section" id="module-ctapipe.io.hessio">
 <span id="ctapipe-io-hessio-module"></span><h3>ctapipe.io.hessio Module<a class="headerlink" href="#module-ctapipe.io.hessio" title="Permalink to this headline">¶</a></h3>
 <p>Components to read HESSIO data.</p>
 <p>This requires the hessio python library to be installed</p>
-<div class="section" id="id1">
-<h4>Functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="functions">
+<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -317,49 +277,70 @@ tables or pickle files)</p>
 <div class="section" id="module-ctapipe.io.containers">
 <span id="ctapipe-io-containers-module"></span><h3>ctapipe.io.containers Module<a class="headerlink" href="#module-ctapipe.io.containers" title="Permalink to this headline">¶</a></h3>
 <p>Container structures for data that should be read or written to disk</p>
-<div class="section" id="id2">
-<h4>Classes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="classes">
+<h4>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.DataContainer.html#ctapipe.io.containers.DataContainer" title="ctapipe.io.containers.DataContainer"><code class="xref py py-obj docutils literal"><span class="pre">DataContainer</span></code></a>()</td>
-<td>Top-level container for all event information</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.InstrumentContainer.html#ctapipe.io.containers.InstrumentContainer" title="ctapipe.io.containers.InstrumentContainer"><code class="xref py py-obj docutils literal"><span class="pre">InstrumentContainer</span></code></a>()</td>
+<td>Storage of header info that does not change with event.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.RawDataContainer.html#ctapipe.io.containers.RawDataContainer" title="ctapipe.io.containers.RawDataContainer"><code class="xref py py-obj docutils literal"><span class="pre">RawDataContainer</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.R0Container.html#ctapipe.io.containers.R0Container" title="ctapipe.io.containers.R0Container"><code class="xref py py-obj docutils literal"><span class="pre">R0Container</span></code></a>()</td>
 <td>Storage of a Merged Raw Data Event</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.RawCameraContainer.html#ctapipe.io.containers.RawCameraContainer" title="ctapipe.io.containers.RawCameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">RawCameraContainer</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.R0CameraContainer.html#ctapipe.io.containers.R0CameraContainer" title="ctapipe.io.containers.R0CameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">R0CameraContainer</span></code></a>()</td>
 <td>Storage of raw data from a single telescope</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.MCEventContainer.html#ctapipe.io.containers.MCEventContainer" title="ctapipe.io.containers.MCEventContainer"><code class="xref py py-obj docutils literal"><span class="pre">MCEventContainer</span></code></a>()</td>
-<td>Monte-Carlo</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.R1Container.html#ctapipe.io.containers.R1Container" title="ctapipe.io.containers.R1Container"><code class="xref py py-obj docutils literal"><span class="pre">R1Container</span></code></a>()</td>
+<td>Storage of a r1 calibrated Data Event</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.MCCameraEventContainer.html#ctapipe.io.containers.MCCameraEventContainer" title="ctapipe.io.containers.MCCameraEventContainer"><code class="xref py py-obj docutils literal"><span class="pre">MCCameraEventContainer</span></code></a>()</td>
-<td>Storage of mc data for a single telescope that change per event</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.R1CameraContainer.html#ctapipe.io.containers.R1CameraContainer" title="ctapipe.io.containers.R1CameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">R1CameraContainer</span></code></a>()</td>
+<td>Storage of r1 calibrated data from a single telescope</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.CameraCalibrationContainer.html#ctapipe.io.containers.CameraCalibrationContainer" title="ctapipe.io.containers.CameraCalibrationContainer"><code class="xref py py-obj docutils literal"><span class="pre">CameraCalibrationContainer</span></code></a>()</td>
-<td>Storage of externally calculated calibration parameters (not per-event)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL0Container.html#ctapipe.io.containers.DL0Container" title="ctapipe.io.containers.DL0Container"><code class="xref py py-obj docutils literal"><span class="pre">DL0Container</span></code></a>()</td>
+<td>Storage of a data volume reduced Event</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedShowerContainer.html#ctapipe.io.containers.ReconstructedShowerContainer" title="ctapipe.io.containers.ReconstructedShowerContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedShowerContainer</span></code></a>()</td>
-<td>Standard output of algorithms reconstructing shower geometry</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL0CameraContainer.html#ctapipe.io.containers.DL0CameraContainer" title="ctapipe.io.containers.DL0CameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">DL0CameraContainer</span></code></a>()</td>
+<td>Storage of data volume reduced dl0 data from a single telescope</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedEnergyContainer.html#ctapipe.io.containers.ReconstructedEnergyContainer" title="ctapipe.io.containers.ReconstructedEnergyContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedEnergyContainer</span></code></a>()</td>
-<td>Standard output of algorithms estimating energy</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.ParticleClassificationContainer.html#ctapipe.io.containers.ParticleClassificationContainer" title="ctapipe.io.containers.ParticleClassificationContainer"><code class="xref py py-obj docutils literal"><span class="pre">ParticleClassificationContainer</span></code></a>()</td>
-<td>Standard output of gamma/hadron classification algorithms</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedContainer.html#ctapipe.io.containers.ReconstructedContainer" title="ctapipe.io.containers.ReconstructedContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedContainer</span></code></a>()</td>
-<td>collect reconstructed shower info from multiple algorithms</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL1Container.html#ctapipe.io.containers.DL1Container" title="ctapipe.io.containers.DL1Container"><code class="xref py py-obj docutils literal"><span class="pre">DL1Container</span></code></a>()</td>
+<td>DL1 Calibrated Camera Images and associated data</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL1CameraContainer.html#ctapipe.io.containers.DL1CameraContainer" title="ctapipe.io.containers.DL1CameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">DL1CameraContainer</span></code></a>()</td>
 <td>Storage of output of camera calibrationm e.g the final calibrated image in intensity units and other per-event calculated calibration information.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL1Container.html#ctapipe.io.containers.DL1Container" title="ctapipe.io.containers.DL1Container"><code class="xref py py-obj docutils literal"><span class="pre">DL1Container</span></code></a>()</td>
-<td>DL1 Calibrated Camera Images and associated data</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.MCEventContainer.html#ctapipe.io.containers.MCEventContainer" title="ctapipe.io.containers.MCEventContainer"><code class="xref py py-obj docutils literal"><span class="pre">MCEventContainer</span></code></a>()</td>
+<td>Monte-Carlo</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.MCHeaderContainer.html#ctapipe.io.containers.MCHeaderContainer" title="ctapipe.io.containers.MCHeaderContainer"><code class="xref py py-obj docutils literal"><span class="pre">MCHeaderContainer</span></code></a>()</td>
+<td>Monte-Carlo information that doesn't change per event</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.MCCameraEventContainer.html#ctapipe.io.containers.MCCameraEventContainer" title="ctapipe.io.containers.MCCameraEventContainer"><code class="xref py py-obj docutils literal"><span class="pre">MCCameraEventContainer</span></code></a>()</td>
+<td>Storage of mc data for a single telescope that change per event</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.CameraCalibrationContainer.html#ctapipe.io.containers.CameraCalibrationContainer" title="ctapipe.io.containers.CameraCalibrationContainer"><code class="xref py py-obj docutils literal"><span class="pre">CameraCalibrationContainer</span></code></a>()</td>
+<td>Storage of externally calculated calibration parameters (not per-event)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.CentralTriggerContainer.html#ctapipe.io.containers.CentralTriggerContainer" title="ctapipe.io.containers.CentralTriggerContainer"><code class="xref py py-obj docutils literal"><span class="pre">CentralTriggerContainer</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedContainer.html#ctapipe.io.containers.ReconstructedContainer" title="ctapipe.io.containers.ReconstructedContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedContainer</span></code></a>()</td>
+<td>collect reconstructed shower info from multiple algorithms</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedShowerContainer.html#ctapipe.io.containers.ReconstructedShowerContainer" title="ctapipe.io.containers.ReconstructedShowerContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedShowerContainer</span></code></a>()</td>
+<td>Standard output of algorithms reconstructing shower geometry</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedEnergyContainer.html#ctapipe.io.containers.ReconstructedEnergyContainer" title="ctapipe.io.containers.ReconstructedEnergyContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedEnergyContainer</span></code></a>()</td>
+<td>Standard output of algorithms estimating energy</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.ParticleClassificationContainer.html#ctapipe.io.containers.ParticleClassificationContainer" title="ctapipe.io.containers.ParticleClassificationContainer"><code class="xref py py-obj docutils literal"><span class="pre">ParticleClassificationContainer</span></code></a>()</td>
+<td>Standard output of gamma/hadron classification algorithms</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.DataContainer.html#ctapipe.io.containers.DataContainer" title="ctapipe.io.containers.DataContainer"><code class="xref py py-obj docutils literal"><span class="pre">DataContainer</span></code></a>()</td>
+<td>Top-level container for all event information</td>
 </tr>
 </tbody>
 </table>
@@ -369,8 +350,8 @@ tables or pickle files)</p>
 <div class="section" id="module-ctapipe.io.serializer">
 <span id="ctapipe-io-serializer-module"></span><h3>ctapipe.io.serializer Module<a class="headerlink" href="#module-ctapipe.io.serializer" title="Permalink to this headline">¶</a></h3>
 <p>Serialize ctapipe containers to file</p>
-<div class="section" id="id3">
-<h4>Classes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id1">
+<h4>Classes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -394,10 +375,10 @@ tables or pickle files)</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.io.camera.make_rectangular_camera_geometry.html" class="btn btn-neutral float-right" title="make_rectangular_camera_geometry" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.io.hessio.hessio_event_source.html" class="btn btn-neutral float-right" title="hessio_event_source" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../api/ctapipe.instrument.InstrumentDescription.write_fits.html" class="btn btn-neutral" title="write_fits" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../api/ctapipe.instrument.CameraGeometry.html" class="btn btn-neutral" title="CameraGeometry" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -406,7 +387,7 @@ tables or pickle files)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -428,7 +409,7 @@ tables or pickle files)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

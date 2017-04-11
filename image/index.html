@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
         <link rel="next" title="chi_squared" href="../api/ctapipe.image.chi_squared.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -104,12 +104,9 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.toymodel">ctapipe.image.toymodel Module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toymodel-example">Toymodel Example</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.hillas">ctapipe.image.hillas Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#todo">TODO:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#change-log">CHANGE LOG:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Functions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Classes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
@@ -120,10 +117,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.pixel_likelihood">ctapipe.image.pixel_likelihood Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">TODO:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">Classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">Class Inheritance Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#todo">TODO:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -187,9 +184,9 @@
 <p>A <em>Cherenkov image</em> is defined as two pieces of data:</p>
 <ul class="simple">
 <li>a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> array of pixel values (which can either be 1D, or 2D if time samples are included)</li>
-<li>a description of the Camera geometry (pixel positions, etc), usually a <code class="xref py py-obj docutils literal"><span class="pre">io.CameraGeometry</span></code> object</li>
+<li>a description of the Camera geometry (pixel positions, etc), usually a <code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code> object</li>
 </ul>
-<p>This module contains the following sub-modules:</p>
+<p>This module contains the following sub-modules, but the most important functions of each are imported into the <a class="reference internal" href="#module-ctapipe.image" title="ctapipe.image"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.image</span></code></a> namespace</p>
 <ul class="simple">
 <li><a class="reference internal" href="#module-ctapipe.image.cleaning" title="ctapipe.image.cleaning"><code class="xref py py-obj docutils literal"><span class="pre">cleaning</span></code></a> : image noise suppression</li>
 <li><a class="reference internal" href="#module-ctapipe.image.hillas" title="ctapipe.image.hillas"><code class="xref py py-obj docutils literal"><span class="pre">hillas</span></code></a>: image moment parameterization</li>
@@ -199,6 +196,7 @@
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
 <div class="section" id="module-ctapipe.image">
 <span id="ctapipe-image-package"></span><h3>ctapipe.image Package<a class="headerlink" href="#module-ctapipe.image" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="functions">
@@ -213,7 +211,7 @@
 <td>Simple chi-squared statistic from Le Bohec et al 2008</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.dilate.html#ctapipe.image.dilate" title="ctapipe.image.dilate"><code class="xref py py-obj docutils literal"><span class="pre">dilate</span></code></a>(geom,&nbsp;mask)</td>
-<td>Add one row of neighbors to the True values of a pixel mask.</td>
+<td>Add one row of neighbors to the True values of a pixel mask and return  the new mask.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas_parameters.html#ctapipe.image.hillas_parameters" title="ctapipe.image.hillas_parameters"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
 <td>Compute Hillas parameters for a given shower image.</td>
@@ -245,7 +243,7 @@
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood_gaussian.html#ctapipe.image.poisson_likelihood_gaussian" title="ctapipe.image.poisson_likelihood_gaussian"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_gaussian</span></code></a>(image,&nbsp;...)</td>
 <td>Calculate likelihood of prediction given the measured signal, gaussian approx from</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.tailcuts_clean" title="ctapipe.image.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">tailcuts_clean</span></code></a>(geom,&nbsp;image,&nbsp;pedvars[,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.tailcuts_clean" title="ctapipe.image.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">tailcuts_clean</span></code></a>(geom,&nbsp;image[,&nbsp;...])</td>
 <td>Clean an image by selection pixels that pass a two-threshold tail-cuts procedure.</td>
 </tr>
 </tbody>
@@ -272,13 +270,16 @@
 </table>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="module-ctapipe.image.toymodel">
 <span id="ctapipe-image-toymodel-module"></span><h3>ctapipe.image.toymodel Module<a class="headerlink" href="#module-ctapipe.image.toymodel" title="Permalink to this headline">¶</a></h3>
-<p>Utilities to generate toymodel (fake) reconstruction inputs for testing purposes.</p>
+<p>Utilities to generate toymodel (fake) reconstruction inputs for testing 
+purposes.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ctapipe.io</span> <span class="kn">import</span> <span class="n">camera</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">geom</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">make_rectangular_camera_geometry</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">showermodel</span> <span class="o">=</span> <span class="n">generate_2d_shower_model</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">psi</span><span class="o">=</span><span class="s1">&#39;40d&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">instrument</span> <span class="kn">import</span> <span class="n">CameraGeometry</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">make_rectangular</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">showermodel</span> <span class="o">=</span> <span class="n">generate_2d_shower_model</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> 
+<span class="go">length=0.1,width=0.02, psi=&#39;40d&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="n">make_toymodel_shower_image</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">showermodel</span><span class="o">.</span><span class="n">pdf</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(400,)</span>
@@ -300,19 +301,17 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="toymodel-example">
-<h4>Toymodel Example<a class="headerlink" href="#toymodel-example" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Example how to make a toymodel shower image and plot it.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">ctapipe.io.camera</span> <span class="kn">import</span> <span class="n">make_rectangular_camera_geometry</span>
-<span class="kn">from</span> <span class="nn">ctapipe.image.toymodel</span> <span class="kn">import</span> <span class="n">generate_2d_shower_model</span><span class="p">,</span> <span class="n">make_toymodel_shower_image</span>
+<span class="kn">from</span> <span class="nn">ctapipe.image.toymodel</span> <span class="kn">import</span> <span class="n">generate_2d_shower_model</span><span class="p">,</span> \
+    <span class="n">make_toymodel_shower_image</span>
+<span class="kn">from</span> <span class="nn">ctapipe.instrument</span> <span class="kn">import</span> <span class="n">CameraGeometry</span>
 
 <span class="n">NX</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="n">NY</span> <span class="o">=</span> <span class="mi">40</span>
 
-<span class="n">geom</span> <span class="o">=</span> <span class="n">make_rectangular_camera_geometry</span><span class="p">(</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">)</span>
+<span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">make_rectangular</span><span class="p">(</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">)</span>
 
 <span class="n">showermodel</span> <span class="o">=</span> <span class="n">generate_2d_shower_model</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                                        <span class="n">width</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">psi</span><span class="o">=</span><span class="s1">&#39;40d&#39;</span><span class="p">)</span>
@@ -350,159 +349,10 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="module-ctapipe.image.hillas">
 <span id="ctapipe-image-hillas-module"></span><h3>ctapipe.image.hillas Module<a class="headerlink" href="#module-ctapipe.image.hillas" title="Permalink to this headline">¶</a></h3>
-<p>Hillas shower parametrization.</p>
-<div class="section" id="todo">
-<h4>TODO:<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>remove alpha calculation (which is only about (0,0)),</dt>
-<dd>and make a get alpha function that does it from an arbitrary point given a pre-computed list of parameters
-(has this alpha function been implemented?  V. easy, given centroid and psi, or miss and dist/r)
-(logically, should also remove &quot;miss&quot;, which is relative to (0,0)</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>add function(s) to calculate asymmetry (or asymmetries?) including sign calculation</dt>
-<dd>(for now, MP/Whipple asymmetry is positive for &quot;tail&quot; pointing away from (0,0))
-(I have a wonderful way to to this, but this margin is too small to contain it)</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>psi of hillas_parameters_1 and 2 does not match. Mismatch in hillas_parameters_2 need to be resolved:</dt>
-<dd>psi of hillas_parameters_1 has inconsistent sign.  hillas_parameters_2/3/4 better, since +ve for tail pointing away
-Mismatch between hillas_parameters_1/2 fixed in previous version, shouldn't this TODO be removed?</dd>
-</dl>
-</li>
-<li>Implement higher order hillas parameters in hillas_parameters_2: Done (MP)</li>
-</ul>
-</div>
-<div class="section" id="change-log">
-<h4>CHANGE LOG:<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h4>
-<ul>
-<li><p class="first">MP: Speed comparison for an image in a 960 pixel camera for image created with &quot;mock&quot;:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10000</span>
-<span class="n">hillas_parameters_1</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>                        <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">598</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_1</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>                       <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">391</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-
-<span class="n">hillas_parameters_2</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">210</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_2</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>       <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">137</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_2</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>       <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">125</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_2</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>      <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>      <span class="mf">95.9</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-
-<span class="n">hillas_parameters_3</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>                        <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>   <span class="mf">1.55</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_3</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>                       <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>   <span class="mf">1.5</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span>
-
-<span class="n">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">130</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>       <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>     <span class="mi">110</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>       <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>      <span class="mf">70.4</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-<span class="n">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">higherMoments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>      <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span>      <span class="mf">62.7</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p>(any way to compare compiled versions?)</p>
-<ul>
-<li><p class="first">MP: all routines tested with +/- combinations and x/y swaps of &quot;mini-camera&quot;:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">pix_x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">pix_y</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span> <span class="p">])</span>
-
-
-<span class="n">TODO</span><span class="p">:</span> <span class="n">add</span> <span class="n">this</span> <span class="k">as</span> <span class="n">a</span> <span class="n">test</span><span class="p">,</span> <span class="k">with</span> <span class="n">known</span> <span class="n">results</span> <span class="p">(</span><span class="n">change</span> <span class="n">sign</span> <span class="n">of</span> <span class="n">psi</span> <span class="n">where</span> <span class="n">needed</span><span class="p">):</span>
-    <span class="p">(</span><span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mf">37.0</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="mf">1.027027027027027</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="mf">3.4864864864864864</span><span class="p">,</span>
-    <span class="n">length</span><span class="o">=</span><span class="mf">1.9951647036522218</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.028933760477638449</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">3.6346076177074274</span><span class="p">,</span>
-    <span class="n">phi</span><span class="o">=</span><span class="mf">1.2843252459918457</span><span class="p">,</span> <span class="n">psi</span><span class="o">=</span><span class="mf">1.5876852050217887</span><span class="p">,</span> <span class="n">miss</span><span class="o">=</span><span class="mf">1.0857606054046072</span><span class="p">),</span>
-    <span class="n">HighOrderMomentParameters</span><span class="p">(</span><span class="n">Skewness</span><span class="o">=</span><span class="mf">0.21338802620071526</span><span class="p">,</span> <span class="n">Kurtosis</span><span class="o">=</span><span class="mf">1.9087015993786907</span><span class="p">))</span>
-</pre></div>
-</div>
-</li>
-<li><dl class="first docutils">
-<dt>MP: removed returning of asymmetry, just left skewness...</dt>
-<dd><p class="first last">either MP/Whipple or MAGIC asymmetry can be calculated then in function</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>MP: added two Boolean variables to the call: higherMoments (default True) and recalculate_pixels (default True)</dt>
-<dd><p class="first last">If higherMoments is False, then it doesn't calculate them (if True, calculated for those routines have them)
-If recalculate_pixels is False, then the multiples of pixel positions are calculated always (if True, only if not existing)</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>MP: hillas_parameter_1 doesn't work for the case of horizontal image</dt>
-<dd><p class="first last">It raises an exception wrongly; no reason to raise exception for S_xy = 0</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>MP: In hillas_parameter_1, it says delta/psi is angle with x-axis, but adds pi/2 (as does hillas_parameter_2).</dt>
-<dd><dl class="first last docutils">
-<dt>cos_delta and sin_delta are correct, though.</dt>
-<dd><p class="first last">=&gt; changed this in hillas_parameter_1, and in modified the display visualization (in visualization/mpl.py)... and &quot;mock.py&quot; in reco.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>MP: Added higher moments to hillas_parameters_2, and added a sub-function to hold static variables</dt>
-<dd><p class="first last">of pixel multiplications, if pixel positions don't change</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>MP: Added Pythonified version of hillas_parameters_3, called hillal_parameters_4, also using</dt>
-<dd><p class="first last">a sub-function's attributes to hold &quot;static variables&quot; of pixel multiplications, if pixel positions don't change</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>MP: Added the historic 1993 Whipple calculation (translated Fortran code via c), as hillas_parameters_3</dt>
-<dd><p class="first last">Note, MAGIC's &quot;skewness&quot; is the same as the Whipple/MP &quot;asymmetry^3&quot;, why ???
-... and also, Whipple/MP &quot;asymmetry&quot; * &quot;length&quot; = MAGIC &quot;asymmetry&quot;
-... so, MAGIC &quot;asymmetry&quot; = MAGIC &quot;skewness&quot;^(1/3) * &quot;length&quot;
-I don't know what MAGIC's &quot;asymmetry&quot; is supposed to be.</p>
-</dd>
-</dl>
-</li>
-<li><p class="first">MP: MAGIC (hillas_parameters_1) seems to be using the Whipple 1989 Weekes et al. formula calculation!
-The Whipple 1993 Reynolds et al formula calculation is better (using non central or raw moments, not central moments).</p>
-</li>
-<li><dl class="first docutils">
-<dt>Higher order moments need not be explicitly defined.</dt>
-<dd><p class="first last">Only mean and size parameters are enough to define correlations of all order.
-Implemented in the same way as in MAGIC.</p>
-</dd>
-</dl>
-</li>
-<li><p class="first">Third and fourth order correlations implemented in hillas_1.</p>
-</li>
-<li><p class="first">Sanity checks for size, x_y correlation
-(HillasParameterizationError), length, width.</p>
-</li>
-<li><p class="first">Parameter psi introduced in hillas_parameters_1: angle between
-ellipse major axis and camera x-axis.</p>
-</li>
-<li><dl class="first docutils">
-<dt>Correction in implementation of miss parameter of hillas_parameters_1.</dt>
-<dd><p class="first last">Previous implementation missed a square root factor.</p>
-</dd>
-</dl>
-</li>
-<li><p class="first">Correction in implementation of length, width in
-hillas_parameters_2. Previous version missed a 2 in the denominator.</p>
-</li>
-<li><p class="first">Implementation of Higher Order Moment Parameters in
-hillas_parameters_1: Skewness, Kurtosis.</p>
-</li>
-<li><p class="first">Implementation of Asymmetry. Alternative definition of asym using
-higher order correlations mentioned in comments below asym.</p>
-</li>
-</ul>
-</div>
+<p>Hillas-style moment-based shower image parametrization.</p>
 <div class="section" id="id2">
 <h4>Functions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
@@ -555,6 +405,7 @@ higher order correlations mentioned in comments below asym.</p>
 </map>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="module-ctapipe.image.cleaning">
 <span id="ctapipe-image-cleaning-module"></span><h3>ctapipe.image.cleaning Module<a class="headerlink" href="#module-ctapipe.image.cleaning" title="Permalink to this headline">¶</a></h3>
 <p>Image Cleaning Algorithms (identification of noisy pixels)</p>
@@ -566,16 +417,19 @@ higher order correlations mentioned in comments below asym.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.cleaning.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean" title="ctapipe.image.cleaning.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">tailcuts_clean</span></code></a>(geom,&nbsp;image,&nbsp;pedvars[,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.cleaning.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean" title="ctapipe.image.cleaning.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">tailcuts_clean</span></code></a>(geom,&nbsp;image[,&nbsp;...])</td>
 <td>Clean an image by selection pixels that pass a two-threshold tail-cuts procedure.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.cleaning.dilate.html#ctapipe.image.cleaning.dilate" title="ctapipe.image.cleaning.dilate"><code class="xref py py-obj docutils literal"><span class="pre">dilate</span></code></a>(geom,&nbsp;mask)</td>
-<td>Add one row of neighbors to the True values of a pixel mask.</td>
+<td>Add one row of neighbors to the True values of a pixel mask and return  the new mask.</td>
 </tr>
 </tbody>
 </table>
+<p>An example of image cleaning and dilation:</p>
+<img alt="../_images/dilate.png" src="../_images/dilate.png" />
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="module-ctapipe.image.pixel_likelihood">
 <span id="ctapipe-image-pixel-likelihood-module"></span><h3>ctapipe.image.pixel_likelihood Module<a class="headerlink" href="#module-ctapipe.image.pixel_likelihood" title="Permalink to this headline">¶</a></h3>
 <p>Class for calculation of likelihood of a pixel expectation, given the pixel amplitude,
@@ -596,15 +450,15 @@ implementation, which tries to intellegently switch between the two. Speed tests
 93.4 µs per loop</p>
 <p>poisson_likelihood(image, prediction, spe, ped)
 59.9 µs per loop</p>
-<div class="section" id="id5">
-<h4>TODO:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="todo">
+<h4>TODO:<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Need to implement more tests, particularly checking for error states</li>
 <li>Additional terms may be useful to add to the likelihood</li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h4>Functions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id5">
+<h4>Functions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -632,8 +486,8 @@ implementation, which tries to intellegently switch between the two. Speed tests
 </tbody>
 </table>
 </div>
-<div class="section" id="id7">
-<h4>Classes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id6">
+<h4>Classes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -646,8 +500,8 @@ implementation, which tries to intellegently switch between the two. Speed tests
 </tbody>
 </table>
 </div>
-<div class="section" id="id8">
-<h4>Class Inheritance Diagram<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id7">
+<h4>Class Inheritance Diagram<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <img src="../_images/inheritance-3fbb6b8af91154dff93d5b7d39921e581d29abd0.png" alt="Inheritance diagram of ctapipe.image.pixel_likelihood.PixelLikelihoodError" usemap="#inheritance06ec4ffbc4" class="inheritance"/>
 <map id="inheritance06ec4ffbc4" name="inheritance06ec4ffbc4">
 <area shape="rect" id="node1" href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html#ctapipe.image.pixel_likelihood.PixelLikelihoodError" target="_top" title="PixelLikelihoodError" alt="" coords="5,5,145,31"/>
@@ -676,7 +530,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -698,7 +552,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -1,6 +1,0 @@
-guess_camera_type
-=================
-
-.. currentmodule:: ctapipe.instrument.CameraDescription
-
-.. autofunction:: guess_camera_type

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.hillas &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>ctapipe.image.hillas &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -146,113 +146,8 @@
   <h1>Source code for ctapipe.image.hillas</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Licensed under a 3-clause BSD style license - see LICENSE.rst</span>
 <span class="c1"># -*- coding: UTF-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Hillas shower parametrization.</span>
-
-<span class="sd">TODO:</span>
-<span class="sd">=====</span>
-
-<span class="sd">* remove alpha calculation (which is only about (0,0)),</span>
-<span class="sd">    and make a get alpha function that does it from an arbitrary point given a pre-computed list of parameters</span>
-<span class="sd">    (has this alpha function been implemented?  V. easy, given centroid and psi, or miss and dist/r)</span>
-<span class="sd">    (logically, should also remove &quot;miss&quot;, which is relative to (0,0)</span>
-<span class="sd">* add function(s) to calculate asymmetry (or asymmetries?) including sign calculation</span>
-<span class="sd">    (for now, MP/Whipple asymmetry is positive for &quot;tail&quot; pointing away from (0,0))</span>
-<span class="sd">    (I have a wonderful way to to this, but this margin is too small to contain it)</span>
-<span class="sd">* psi of hillas_parameters_1 and 2 does not match. Mismatch in hillas_parameters_2 need to be resolved:</span>
-<span class="sd">    psi of hillas_parameters_1 has inconsistent sign.  hillas_parameters_2/3/4 better, since +ve for tail pointing away</span>
-<span class="sd">    Mismatch between hillas_parameters_1/2 fixed in previous version, shouldn&#39;t this TODO be removed?</span>
-<span class="sd">* Implement higher order hillas parameters in hillas_parameters_2: Done (MP)</span>
-
-<span class="sd">CHANGE LOG:</span>
-<span class="sd">===========</span>
-<span class="sd">* MP: Speed comparison for an image in a 960 pixel camera for image created with &quot;mock&quot;::</span>
-
-<span class="sd">    %timeit -n 10000</span>
-<span class="sd">    hillas_parameters_1(pix_x, pix_y, image, higherMoments=True)                        best of 3:     598 µs per loop</span>
-<span class="sd">    hillas_parameters_1(pix_x, pix_y, image, higherMoments=False)                       best of 3:     391 µs per loop</span>
-
-<span class="sd">    hillas_parameters_2(pix_x, pix_y, image, higherMoments=True, recalculate_pixels=True)        best of 3:     210 µs per loop</span>
-<span class="sd">    hillas_parameters_2(pix_x, pix_y, image, higherMoments=True, recalculate_pixels=False)       best of 3:     137 µs per loop</span>
-<span class="sd">    hillas_parameters_2(pix_x, pix_y, image, higherMoments=False, recalculate_pixels=True)       best of 3:     125 µs per loop</span>
-<span class="sd">    hillas_parameters_2(pix_x, pix_y, image, higherMoments=False, recalculate_pixels=False)      best of 3:      95.9 µs per loop</span>
-
-<span class="sd">    hillas_parameters_3(pix_x, pix_y, image, higherMoments=True)                        best of 3:   1.55 ms per loop</span>
-<span class="sd">    hillas_parameters_3(pix_x, pix_y, image, higherMoments=False)                       best of 3:   1.5 ms per loop</span>
-
-<span class="sd">    hillas_parameters_4(pix_x, pix_y, image, higherMoments=True, recalculate_pixels=True)        best of 3:     130 µs per loop</span>
-<span class="sd">    hillas_parameters_4(pix_x, pix_y, image, higherMoments=True, recalculate_pixels=False)       best of 3:     110 µs per loop</span>
-<span class="sd">    hillas_parameters_4(pix_x, pix_y, image, higherMoments=False, recalculate_pixels=True)       best of 3:      70.4 µs per loop</span>
-<span class="sd">    hillas_parameters_4(pix_x, pix_y, image, higherMoments=False, recalculate_pixels=False)      best of 3:      62.7 µs per loop</span>
-
-
-<span class="sd">(any way to compare compiled versions?)</span>
-
-<span class="sd">* MP: all routines tested with +/- combinations and x/y swaps of &quot;mini-camera&quot;::</span>
-
-<span class="sd">        pix_x = array([1.1, 1.1, 1, 1, 1, 1, 1, 1])</span>
-<span class="sd">        pix_y = array([0, 1, 2, 3, 4, 5, 6, 7])</span>
-<span class="sd">        image = array([0., 10, 3, 5, 7, 6, 2, 4 ])</span>
-
-
-<span class="sd">    TODO: add this as a test, with known results (change sign of psi where needed):</span>
-<span class="sd">        (MomentParameters(size=37.0, cen_x=1.027027027027027, cen_y=3.4864864864864864,</span>
-<span class="sd">        length=1.9951647036522218, width=0.028933760477638449, r=3.6346076177074274,</span>
-<span class="sd">        phi=1.2843252459918457, psi=1.5876852050217887, miss=1.0857606054046072),</span>
-<span class="sd">        HighOrderMomentParameters(Skewness=0.21338802620071526, Kurtosis=1.9087015993786907))</span>
-
-<span class="sd">* MP: removed returning of asymmetry, just left skewness...</span>
-<span class="sd">    either MP/Whipple or MAGIC asymmetry can be calculated then in function</span>
-
-<span class="sd">* MP: added two Boolean variables to the call: higherMoments (default True) and recalculate_pixels (default True)</span>
-<span class="sd">    If higherMoments is False, then it doesn&#39;t calculate them (if True, calculated for those routines have them)</span>
-<span class="sd">    If recalculate_pixels is False, then the multiples of pixel positions are calculated always (if True, only if not existing)</span>
-
-<span class="sd">* MP: hillas_parameter_1 doesn&#39;t work for the case of horizontal image</span>
-<span class="sd">    It raises an exception wrongly; no reason to raise exception for S_xy = 0</span>
-
-<span class="sd">* MP: In hillas_parameter_1, it says delta/psi is angle with x-axis, but adds pi/2 (as does hillas_parameter_2).</span>
-<span class="sd">    cos_delta and sin_delta are correct, though.</span>
-<span class="sd">     =&gt; changed this in hillas_parameter_1, and in modified the display visualization (in visualization/mpl.py)... and &quot;mock.py&quot; in reco.</span>
-
-<span class="sd">* MP: Added higher moments to hillas_parameters_2, and added a sub-function to hold static variables</span>
-<span class="sd">    of pixel multiplications, if pixel positions don&#39;t change</span>
-
-<span class="sd">* MP: Added Pythonified version of hillas_parameters_3, called hillal_parameters_4, also using</span>
-<span class="sd">    a sub-function&#39;s attributes to hold &quot;static variables&quot; of pixel multiplications, if pixel positions don&#39;t change</span>
-
-<span class="sd">* MP: Added the historic 1993 Whipple calculation (translated Fortran code via c), as hillas_parameters_3</span>
-<span class="sd">    Note, MAGIC&#39;s &quot;skewness&quot; is the same as the Whipple/MP &quot;asymmetry^3&quot;, why ???</span>
-<span class="sd">    ... and also, Whipple/MP &quot;asymmetry&quot; * &quot;length&quot; = MAGIC &quot;asymmetry&quot;</span>
-<span class="sd">    ... so, MAGIC &quot;asymmetry&quot; = MAGIC &quot;skewness&quot;^(1/3) * &quot;length&quot;</span>
-<span class="sd">    I don&#39;t know what MAGIC&#39;s &quot;asymmetry&quot; is supposed to be.</span>
-
-<span class="sd">* MP: MAGIC (hillas_parameters_1) seems to be using the Whipple 1989 Weekes et al. formula calculation!</span>
-<span class="sd">  The Whipple 1993 Reynolds et al formula calculation is better (using non central or raw moments, not central moments).</span>
-
-<span class="sd">* Higher order moments need not be explicitly defined.</span>
-<span class="sd">    Only mean and size parameters are enough to define correlations of all order.</span>
-<span class="sd">    Implemented in the same way as in MAGIC.</span>
-
-<span class="sd">* Third and fourth order correlations implemented in hillas_1.</span>
-
-<span class="sd">* Sanity checks for size, x_y correlation</span>
-<span class="sd">  (HillasParameterizationError), length, width.</span>
-
-<span class="sd">* Parameter psi introduced in hillas_parameters_1: angle between</span>
-<span class="sd">  ellipse major axis and camera x-axis.</span>
-
-<span class="sd">* Correction in implementation of miss parameter of hillas_parameters_1.</span>
-<span class="sd">    Previous implementation missed a square root factor.</span>
-
-<span class="sd">* Correction in implementation of length, width in</span>
-<span class="sd">  hillas_parameters_2. Previous version missed a 2 in the denominator.</span>
-
-<span class="sd">* Implementation of Higher Order Moment Parameters in</span>
-<span class="sd">  hillas_parameters_1: Skewness, Kurtosis.</span>
-
-<span class="sd">* Implementation of Asymmetry. Alternative definition of asym using</span>
-<span class="sd">  higher order correlations mentioned in comments below asym.</span>
-
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Hillas-style moment-based shower image parametrization.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
@@ -1038,8 +933,8 @@
                             <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
                             <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
-<span class="c1"># use the 1 version by default. Version 2 has apparent differences.</span>
-<span class="n">hillas_parameters</span> <span class="o">=</span> <span class="n">hillas_parameters_1</span>
+<span class="c1"># use the 4 version by default.</span>
+<span class="n">hillas_parameters</span> <span class="o">=</span> <span class="n">hillas_parameters_4</span>
 
 </pre></div>
 
@@ -1052,7 +947,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -1074,7 +969,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

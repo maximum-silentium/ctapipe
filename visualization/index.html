@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visualization (visualization) &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>Visualization (visualization) &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
         <link rel="next" title="ArrayDisplay" href="../api/ctapipe.visualization.ArrayDisplay.html"/>
         <link rel="prev" title="Histogram" href="../api/ctapipe.utils.Histogram.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -178,9 +178,9 @@ to render displays, but in the future more rendering methods may be supported.</
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">ctapipe</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">visualization</span>
-<span class="kn">from</span> <span class="nn">ctapipe.image</span> <span class="kn">import</span> <span class="n">toymodel</span>
-<span class="kn">from</span> <span class="nn">ctapipe.image.hillas</span> <span class="kn">import</span> <span class="n">hillas_parameters_1</span> <span class="k">as</span> <span class="n">hillas_parameters</span>
+<span class="kn">from</span> <span class="nn">ctapipe.instrument</span> <span class="kn">import</span> <span class="n">CameraGeometry</span>
+<span class="kn">from</span> <span class="nn">ctapipe.visualization</span> <span class="kn">import</span> <span class="n">CameraDisplay</span>
+<span class="kn">from</span> <span class="nn">ctapipe.image</span> <span class="kn">import</span> <span class="n">toymodel</span><span class="p">,</span> <span class="n">hillas_parameters</span><span class="p">,</span> <span class="n">tailcuts_clean</span>
 
 
 <span class="k">def</span> <span class="nf">draw_neighbors</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">pixel_index</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -196,8 +196,8 @@ to render displays, but in the future more rendering methods may be supported.</
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
     <span class="c1"># Load the camera</span>
-    <span class="n">geom</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">CameraGeometry</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s2">&quot;hess&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">disp</span> <span class="o">=</span> <span class="n">visualization</span><span class="o">.</span><span class="n">CameraDisplay</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s2">&quot;hess&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">CameraDisplay</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
     <span class="n">disp</span><span class="o">.</span><span class="n">set_limits_minmax</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
     <span class="n">disp</span><span class="o">.</span><span class="n">add_colorbar</span><span class="p">()</span>
 
@@ -211,17 +211,21 @@ to render displays, but in the future more rendering methods may be supported.</
                                                          <span class="n">intensity</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
                                                          <span class="n">nsb_level_pe</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
-    <span class="c1"># Apply really stupid image cleaning (single threshold):</span>
+    <span class="c1"># Apply image cleaning</span>
+    <span class="n">cleanmask</span> <span class="o">=</span> <span class="n">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                               <span class="n">boundary_thresh</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">clean</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">clean</span><span class="p">[</span><span class="n">image</span> <span class="o">&lt;=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">image</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">clean</span><span class="p">[</span><span class="o">~</span><span class="n">cleanmask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 
     <span class="c1"># Calculate image parameters</span>
     <span class="n">hillas</span> <span class="o">=</span> <span class="n">hillas_parameters</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">pix_y</span><span class="p">,</span> <span class="n">clean</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">hillas</span><span class="p">)</span>
 
-    <span class="c1"># Show the camera image and overlay Hillas ellipse</span>
+    <span class="c1"># Show the camera image and overlay Hillas ellipse and clean pixels</span>
     <span class="n">disp</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
-    <span class="n">disp</span><span class="o">.</span><span class="n">overlay_moments</span><span class="p">(</span><span class="n">hillas</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">disp</span><span class="o">.</span><span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;PuOr&#39;</span>
+    <span class="n">disp</span><span class="o">.</span><span class="n">highlight_pixels</span><span class="p">(</span><span class="n">cleanmask</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">disp</span><span class="o">.</span><span class="n">overlay_moments</span><span class="p">(</span><span class="n">hillas</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
     <span class="c1"># Draw the neighbors of pixel 100 in red, and the neighbor-neighbors in</span>
     <span class="c1"># green</span>
@@ -325,7 +329,7 @@ to render displays, but in the future more rendering methods may be supported.</
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -347,7 +351,7 @@ to render displays, but in the future more rendering methods may be supported.</
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

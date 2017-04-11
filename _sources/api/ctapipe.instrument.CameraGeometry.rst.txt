@@ -1,0 +1,41 @@
+CameraGeometry
+==============
+
+.. currentmodule:: ctapipe.instrument
+
+.. autoclass:: CameraGeometry
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~CameraGeometry.neighbor_matrix
+      ~CameraGeometry.neighbors
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~CameraGeometry.from_file
+      ~CameraGeometry.from_name
+      ~CameraGeometry.from_table
+      ~CameraGeometry.guess
+      ~CameraGeometry.make_rectangular
+      ~CameraGeometry.rotate
+      ~CameraGeometry.to_table
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: neighbor_matrix
+   .. autoattribute:: neighbors
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: from_file
+   .. automethod:: from_name
+   .. automethod:: from_table
+   .. automethod:: guess
+   .. automethod:: make_rectangular
+   .. automethod:: rotate
+   .. automethod:: to_table

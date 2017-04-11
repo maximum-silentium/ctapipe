@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started For Developers &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>Getting Started For Developers &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
         <link rel="next" title="Development Guidelines" href="../development/index.html"/>
         <link rel="prev" title="CTA Experimental Pipeline Framework (ctapipe)" href="../index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -86,11 +86,11 @@
             
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started For Developers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#set-up-your-environment">Set up your environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#get-the-ctapipe-software">Get the ctapipe software</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#step-1-fork">Step 1: Fork</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-clone">Step 2: clone</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-3-setup">Step 3: Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-fork-the-master-cta-observatory-ctapipe-repository">Step 1: Fork the Master CTA-Observatory ctapipe repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-clone-your-forked-version-locally">Step 2: clone your forked version locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-set-up-your-package-environment">Step 4: Set up your package environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-setup-ctapipe-for-development">Step 5: Setup ctapipe for development</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#developing-a-new-feature-or-code-change">Developing a new feature or code change</a><ul>
@@ -174,44 +174,29 @@ with <code class="xref py py-obj docutils literal"><span class="pre">conda</span
 </div>
 <p>This guide assumes you are using the <em>Anaconda</em> python distribution,
 installed locally (<em>miniconda</em> should also work).</p>
-<p>First you should create a virtual environment in which to do your
-development (this will allow you to control the dependent libraries
-independently of other projects). You can use either python 3.4 or
-python 3.5. Here we will create a virtualenv called &quot;cta&quot; (but you can
-choose another name if you like)</p>
-<div class="section" id="set-up-your-environment">
-<h2>Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>conda create -n cta <span class="nv">python</span><span class="o">=</span>3.5 astropy matplotlib scipy scikit-learn numba cython
-</pre></div>
-</div>
-<p>Next, switch to this new virtual environment and install some other useful tools for development:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">source</span> activate cta
-
-conda install -c cta-observatory pyhessio ipython ipython-notebook pyflakes traitlets
-conda install -c conda-forge autopep8 graphviz
-</pre></div>
-</div>
-<p>Next, you should create a directory where you can store the software you check out. For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir ctasoft
-<span class="nb">cd</span> ctasoft
-</pre></div>
-</div>
-</div>
+<p>You can use <em>python 3.4</em> or above (we've tested with at least 3.4,
+3.5, and 3.6.</p>
 <div class="section" id="get-the-ctapipe-software">
 <h2>Get the ctapipe software<a class="headerlink" href="#get-the-ctapipe-software" title="Permalink to this headline">¶</a></h2>
 <p>In order to checkout the software in such a way that you can read <em>and
 commit</em> changes, you need to <a class="reference external" href="https://help.github.com/articles/fork-a-repo/">Fork and Clone</a> the main ctapipe
 repository (cta-observatory/ctapipe).</p>
-<div class="section" id="step-1-fork">
-<h3>Step 1: Fork<a class="headerlink" href="#step-1-fork" title="Permalink to this headline">¶</a></h3>
+<p>First, it's useful to make a directory where you have can check out
+cta GIT repos (this is optinal - you can put it anywhere)</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir ctasoft
+<span class="nb">cd</span> ctasoft
+</pre></div>
+</div>
+<div class="section" id="step-1-fork-the-master-cta-observatory-ctapipe-repository">
+<h3>Step 1: Fork the Master CTA-Observatory ctapipe repository<a class="headerlink" href="#step-1-fork-the-master-cta-observatory-ctapipe-repository" title="Permalink to this headline">¶</a></h3>
 <p>Follow the instructions in the link above to make a <em>fork</em> of the
 ctapipe repo in your own GitHub userspace. That fork will be then
 called <em>yourusername</em>/ctapipe (it's as simple as clicking the fork button on <a class="reference external" href="https://github.com/cta-observatory/ctapipe">main ctapipe github page</a>.</p>
 <p>You only need to make this fork once, when you first start developing, and
 you can use it from then on.</p>
 </div>
-<div class="section" id="step-2-clone">
-<h3>Step 2: clone<a class="headerlink" href="#step-2-clone" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-2-clone-your-forked-version-locally">
+<h3>Step 2: clone your forked version locally<a class="headerlink" href="#step-2-clone-your-forked-version-locally" title="Permalink to this headline">¶</a></h3>
 <p>Next, you need to clone (copy to your local machine) the newly forked
 ctapipe repo (make sure you put in your own username there):</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/<span class="o">[</span>YOUR-GITHUB-USERNAME<span class="o">]</span>/ctapipe.git
@@ -227,8 +212,27 @@ addition to <em>origin</em> when typing <code class="xref py py-obj docutils lit
 to pull in any changes from the master repo, you just need to type
 <code class="xref py py-obj docutils literal"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">upstream</span> <span class="pre">master</span></code>.</p>
 </div>
-<div class="section" id="step-3-setup">
-<h3>Step 3: Setup<a class="headerlink" href="#step-3-setup" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-4-set-up-your-package-environment">
+<h3>Step 4: Set up your package environment<a class="headerlink" href="#step-4-set-up-your-package-environment" title="Permalink to this headline">¶</a></h3>
+<p>Change to the directory where you cloned <code class="xref py py-obj docutils literal"><span class="pre">ctapipe</span></code>, and type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+</div>
+<p>This will create a conda virtual environment called <code class="xref py py-obj docutils literal"><span class="pre">cta-dev</span></code> with all
+the ctapipe dependencies and a few useful packages for development and
+interaction. Next, switch to this new virtual environment:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">source</span> activate cta-dev
+</pre></div>
+</div>
+<p>You will need to type that last command any time you open a new
+terminal to actiavate the virtual environment (you can of course
+install everything into the base Anaconda environment without creating
+a virtual environment, but then you may have trouble if you want to
+install other packages with different requirements on the
+dependencies)</p>
+</div>
+<div class="section" id="step-5-setup-ctapipe-for-development">
+<h3>Step 5: Setup ctapipe for development<a class="headerlink" href="#step-5-setup-ctapipe-for-development" title="Permalink to this headline">¶</a></h3>
 <p>Now setup this cloned version for development:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>make init     <span class="c1"># will fetch required sub-repos and set up package</span>
 make develop  <span class="c1"># will make symlinks in your python library dir</span>
@@ -366,7 +370,7 @@ issue pull-requests.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -388,7 +392,7 @@ issue pull-requests.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

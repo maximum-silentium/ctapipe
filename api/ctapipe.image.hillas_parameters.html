@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>hillas_parameters &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>hillas_parameters &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
         <link rel="up" title="Imaging (image)" href="../image/index.html"/>
         <link rel="next" title="hillas_parameters_1" href="ctapipe.image.hillas_parameters_1.html"/>
         <link rel="prev" title="dilate" href="ctapipe.image.dilate.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -168,12 +168,10 @@
 <dt id="ctapipe.image.hillas_parameters">
 <code class="descclassname">ctapipe.image.</code><code class="descname">hillas_parameters</code><span class="sig-paren">(</span><em>pix_x</em>, <em>pix_y</em>, <em>image</em>, <em>recalculate_pixels=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ctapipe.image.hillas_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Hillas parameters for a given shower image.</p>
-<p>Reference: Appendix of the Whipple Crab paper Weekes et al. (1998) /
-//MP: 1998 paper has no appendix with the parameters, means 1989 paper
-<a class="reference external" href="http://adsabs.harvard.edu/abs/1989ApJ...342..379W">http://adsabs.harvard.edu/abs/1989ApJ...342..379W</a>
-(corrected for some obvious typos)
-//MP: probably better to use Whipple Reynolds et al 1993 paper:
-<a class="reference external" href="http://adsabs.harvard.edu/abs/1993ApJ...404..206R">http://adsabs.harvard.edu/abs/1993ApJ...404..206R</a></p>
+<p>As for hillas_parameters_3 (old Whipple Fortran code), but more Pythonized</p>
+<p>MP: Parameters calculated as Whipple Reynolds et al 1993 paper:
+<a class="reference external" href="http://adsabs.harvard.edu/abs/1993ApJ...404..206R">http://adsabs.harvard.edu/abs/1993ApJ...404..206R</a>
+which should be the same as one of my ICRC 1991 papers and my thesis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -192,8 +190,7 @@
 </div></blockquote>
 <p><strong>recalculate_pixels</strong> : Boolean (default True)</p>
 <blockquote>
-<div><p>Recalculate the pixel higher multiples (e.g., if pixels move (!) or
-pixel list changes between calls)</p>
+<div><p>Recalculate the pixel higher multiples (e.g., if pixels move (!) or pixel list changes between calls)</p>
 </div></blockquote>
 </td>
 </tr>
@@ -225,7 +222,7 @@ pixel list changes between calls)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -247,7 +244,7 @@ pixel list changes between calls)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

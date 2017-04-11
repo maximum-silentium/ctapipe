@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.io.containers &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>ctapipe.io.containers &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -154,23 +154,30 @@
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Container</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Map</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">ndarray</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DataContainer&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;RawDataContainer&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;RawCameraContainer&#39;</span><span class="p">,</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;InstrumentContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;R0Container&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;R0CameraContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;R1Container&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;R1CameraContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DL0Container&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DL0CameraContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DL1Container&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DL1CameraContainer&#39;</span><span class="p">,</span>
            <span class="s1">&#39;MCEventContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;MCHeaderContainer&#39;</span><span class="p">,</span>
            <span class="s1">&#39;MCCameraEventContainer&#39;</span><span class="p">,</span>
            <span class="s1">&#39;CameraCalibrationContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CentralTriggerContainer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ReconstructedContainer&#39;</span><span class="p">,</span>
            <span class="s1">&#39;ReconstructedShowerContainer&#39;</span><span class="p">,</span>
            <span class="s1">&#39;ReconstructedEnergyContainer&#39;</span><span class="p">,</span>
            <span class="s1">&#39;ParticleClassificationContainer&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;ReconstructedContainer&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;DL1CameraContainer&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;DL1Container&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;DataContainer&#39;</span><span class="p">]</span>
 
 <span class="c1"># todo: change some of these Maps to be just 3D NDarrays?</span>
 
 
-<span class="k">class</span> <span class="nc">InstrumentContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+<div class="viewcode-block" id="InstrumentContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.InstrumentContainer.html#ctapipe.io.containers.InstrumentContainer">[docs]</a><span class="k">class</span> <span class="nc">InstrumentContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Storage of header info that does not change with event. This is a</span>
 <span class="sd">    temporary hack until the Instrument module and database is fully</span>
 <span class="sd">    implemented.  Eventually static information like this will not be</span>
@@ -184,7 +191,7 @@
     <span class="n">optical_foclen</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to focal length&quot;</span><span class="p">)</span>
     <span class="n">tel_pos</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to telescope position&quot;</span><span class="p">)</span>
     <span class="n">num_pixels</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to number of pixels in camera&quot;</span><span class="p">)</span>
-    <span class="n">num_channels</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to number of channels&quot;</span><span class="p">)</span>
+    <span class="n">num_channels</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to number of channels&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DL1CameraContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.DL1CameraContainer.html#ctapipe.io.containers.DL1CameraContainer">[docs]</a><span class="k">class</span> <span class="nc">DL1CameraContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
@@ -200,7 +207,9 @@
                                     <span class="s2">&quot;Shape=(nchan, npix, nsamples).&quot;</span><span class="p">))</span>
     <span class="n">peakpos</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;numpy array containing position of the peak as &quot;</span>
                           <span class="s2">&quot;determined by the &quot;</span>
-                          <span class="s2">&quot;peak-finding algorithm for each pixel and channel&quot;</span><span class="p">))</span></div>
+                          <span class="s2">&quot;peak-finding algorithm for each pixel and channel&quot;</span><span class="p">))</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;numpy array containing the waveform &quot;</span>
+                          <span class="s2">&quot;after cleaning&quot;</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="CameraCalibrationContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.CameraCalibrationContainer.html#ctapipe.io.containers.CameraCalibrationContainer">[docs]</a><span class="k">class</span> <span class="nc">CameraCalibrationContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
@@ -217,7 +226,7 @@
                <span class="s2">&quot;map of tel_id to DL1CameraContainer&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RawCameraContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.RawCameraContainer.html#ctapipe.io.containers.RawCameraContainer">[docs]</a><span class="k">class</span> <span class="nc">RawCameraContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+<div class="viewcode-block" id="R0CameraContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.R0CameraContainer.html#ctapipe.io.containers.R0CameraContainer">[docs]</a><span class="k">class</span> <span class="nc">R0CameraContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Storage of raw data from a single telescope</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -228,7 +237,8 @@
     <span class="n">num_samples</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;number of time samples for telescope&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RawDataContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.RawDataContainer.html#ctapipe.io.containers.RawDataContainer">[docs]</a><span class="k">class</span> <span class="nc">RawDataContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+
+<div class="viewcode-block" id="R0Container"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.R0Container.html#ctapipe.io.containers.R0Container">[docs]</a><span class="k">class</span> <span class="nc">R0Container</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Storage of a Merged Raw Data Event</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -236,7 +246,46 @@
     <span class="n">run_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;run id number&quot;</span><span class="p">)</span>
     <span class="n">event_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;event id number&quot;</span><span class="p">)</span>
     <span class="n">tels_with_data</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span> <span class="s2">&quot;list of telescopes with data&quot;</span><span class="p">)</span>
-    <span class="n">tel</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">RawCameraContainer</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to RawCameraContainer&quot;</span><span class="p">)</span></div>
+    <span class="n">tel</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">R0CameraContainer</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to R0CameraContainer&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="R1CameraContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.R1CameraContainer.html#ctapipe.io.containers.R1CameraContainer">[docs]</a><span class="k">class</span> <span class="nc">R1CameraContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage of r1 calibrated data from a single telescope</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pe_samples</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;numpy array containing p.e. samples&quot;</span>
+                             <span class="s2">&quot;(n_channels x n_pixels, n_samples)&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="R1Container"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.R1Container.html#ctapipe.io.containers.R1Container">[docs]</a><span class="k">class</span> <span class="nc">R1Container</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage of a r1 calibrated Data Event</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">run_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;run id number&quot;</span><span class="p">)</span>
+    <span class="n">event_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;event id number&quot;</span><span class="p">)</span>
+    <span class="n">tels_with_data</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span> <span class="s2">&quot;list of telescopes with data&quot;</span><span class="p">)</span>
+    <span class="n">tel</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">R1CameraContainer</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to R1CameraContainer&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DL0CameraContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.DL0CameraContainer.html#ctapipe.io.containers.DL0CameraContainer">[docs]</a><span class="k">class</span> <span class="nc">DL0CameraContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage of data volume reduced dl0 data from a single telescope</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pe_samples</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;numpy array containing data volume reduced &quot;</span>
+                             <span class="s2">&quot;p.e. samples&quot;</span>
+                             <span class="s2">&quot;(n_channels x n_pixels, n_samples)&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DL0Container"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.DL0Container.html#ctapipe.io.containers.DL0Container">[docs]</a><span class="k">class</span> <span class="nc">DL0Container</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage of a data volume reduced Event</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">run_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;run id number&quot;</span><span class="p">)</span>
+    <span class="n">event_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;event id number&quot;</span><span class="p">)</span>
+    <span class="n">tels_with_data</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span> <span class="s2">&quot;list of telescopes with data&quot;</span><span class="p">)</span>
+    <span class="n">tel</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">DL0CameraContainer</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to DL0CameraContainer&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="MCCameraEventContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.MCCameraEventContainer.html#ctapipe.io.containers.MCCameraEventContainer">[docs]</a><span class="k">class</span> <span class="nc">MCCameraEventContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
@@ -276,7 +325,7 @@
                <span class="s2">&quot;map of tel_id to MCCameraEventContainer&quot;</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">MCHeaderContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+<div class="viewcode-block" id="MCHeaderContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.MCHeaderContainer.html#ctapipe.io.containers.MCHeaderContainer">[docs]</a><span class="k">class</span> <span class="nc">MCHeaderContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Monte-Carlo information that doesn&#39;t change per event</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -285,13 +334,13 @@
                                    <span class="s2">&quot;this either contains: &quot;</span>
                                    <span class="s2">&quot;[0]=Azimuth, [1]=Altitude in mode 0, &quot;</span>
                                    <span class="s2">&quot;OR &quot;</span>
-                                   <span class="s2">&quot;[0]=R.A., [1]=Declination in mode 1.&quot;</span><span class="p">)</span>
+                                   <span class="s2">&quot;[0]=R.A., [1]=Declination in mode 1.&quot;</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">CentralTriggerContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+<div class="viewcode-block" id="CentralTriggerContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.CentralTriggerContainer.html#ctapipe.io.containers.CentralTriggerContainer">[docs]</a><span class="k">class</span> <span class="nc">CentralTriggerContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
 
     <span class="n">gps_time</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Time</span><span class="p">,</span> <span class="s2">&quot;central average time stamp&quot;</span><span class="p">)</span>
-    <span class="n">tels_with_trigger</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span> <span class="s2">&quot;list of telescopes with data&quot;</span><span class="p">)</span>
+    <span class="n">tels_with_trigger</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span> <span class="s2">&quot;list of telescopes with data&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ReconstructedShowerContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.ReconstructedShowerContainer.html#ctapipe.io.containers.ReconstructedShowerContainer">[docs]</a><span class="k">class</span> <span class="nc">ReconstructedShowerContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
@@ -369,8 +418,10 @@
 <div class="viewcode-block" id="DataContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.DataContainer.html#ctapipe.io.containers.DataContainer">[docs]</a><span class="k">class</span> <span class="nc">DataContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Top-level container for all event information &quot;&quot;&quot;</span>
 
-    <span class="n">dl0</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">RawDataContainer</span><span class="p">(),</span> <span class="s2">&quot;Raw Data&quot;</span><span class="p">)</span>
-    <span class="n">dl1</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">DL1Container</span><span class="p">())</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">R0Container</span><span class="p">(),</span> <span class="s2">&quot;Raw Data&quot;</span><span class="p">)</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">R1Container</span><span class="p">(),</span> <span class="s2">&quot;R1 Calibrated Data&quot;</span><span class="p">)</span>
+    <span class="n">dl0</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">DL0Container</span><span class="p">(),</span> <span class="s2">&quot;DL0 Data Volume Reduced Data&quot;</span><span class="p">)</span>
+    <span class="n">dl1</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">DL1Container</span><span class="p">(),</span> <span class="s2">&quot;DL1 Calibrated image&quot;</span><span class="p">)</span>
     <span class="n">dl2</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">ReconstructedContainer</span><span class="p">(),</span> <span class="s2">&quot;Reconstructed Shower Information&quot;</span><span class="p">)</span>
     <span class="n">mc</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">MCEventContainer</span><span class="p">(),</span> <span class="s2">&quot;Monte-Carlo data&quot;</span><span class="p">)</span>
     <span class="n">mcheader</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">MCHeaderContainer</span><span class="p">,</span> <span class="s2">&quot;Monte-Carlo run header data&quot;</span><span class="p">)</span>
@@ -388,7 +439,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -410,7 +461,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -10,12 +10,14 @@ DL1CameraContainer
 
    .. autosummary::
 
+      ~DL1CameraContainer.cleaned
       ~DL1CameraContainer.extracted_samples
       ~DL1CameraContainer.image
       ~DL1CameraContainer.peakpos
 
    .. rubric:: Attributes Documentation
 
+   .. autoattribute:: cleaned
    .. autoattribute:: extracted_samples
    .. autoattribute:: image
    .. autoattribute:: peakpos

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.cleaning &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>ctapipe.image.cleaning &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -150,9 +150,9 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tailcuts_clean&#39;</span><span class="p">,</span> <span class="s1">&#39;dilate&#39;</span><span class="p">]</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="tailcuts_clean"><a class="viewcode-back" href="../../../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean">[docs]</a><span class="k">def</span> <span class="nf">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">pedvars</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mf">4.25</span><span class="p">,</span>
-                   <span class="n">boundary_thresh</span><span class="o">=</span><span class="mf">2.25</span><span class="p">):</span>
+<div class="viewcode-block" id="tailcuts_clean"><a class="viewcode-back" href="../../../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean">[docs]</a><span class="k">def</span> <span class="nf">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">boundary_thresh</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Clean an image by selection pixels that pass a two-threshold</span>
 <span class="sd">    tail-cuts procedure.  The picture and boundary thresholds are</span>
 <span class="sd">    defined with respect to the pedestal dispersion. All pixels that</span>
@@ -165,19 +165,15 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    geom: `ctapipe.io.CameraGeometry`</span>
+<span class="sd">    geom: `ctapipe.instrument.CameraGeometry`</span>
 <span class="sd">        Camera geometry information</span>
 <span class="sd">    image: array</span>
-<span class="sd">        pedestal-subtracted, flat-fielded pixel values</span>
-<span class="sd">    pedvars: array or scalar</span>
-<span class="sd">        pedestal dispersion of all pixels, or any other</span>
-<span class="sd">        multiplicative factor that one wants to use to normalize the</span>
-<span class="sd">        thresholds (e.g. if your image is already in PE units, this could</span>
-<span class="sd">        simply be set to 1, and the thresholds defined in PE)</span>
-<span class="sd">    picture_thresh: float</span>
-<span class="sd">        high threshold as multiple of the pedvar</span>
-<span class="sd">    boundary_thresh: float</span>
-<span class="sd">        low-threshold as mutiple of pedvar (+ nearest neighbor)</span>
+<span class="sd">        pixel values</span>
+<span class="sd">    picture_thresh: float or array</span>
+<span class="sd">        threshold above which all pixels are retained</span>
+<span class="sd">    boundary_thresh: float or array</span>
+<span class="sd">        threshold above which pixels are retained if they have a neighbor </span>
+<span class="sd">        already above the picture_thresh</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -185,32 +181,38 @@
 <span class="sd">    A boolean mask of *clean* pixels.  To get a zero-suppressed image and pixel</span>
 <span class="sd">    list, use `image[mask], geom.pix_id[mask]`, or to keep the same</span>
 <span class="sd">    image size and just set unclean pixels to 0 or similar, use</span>
-<span class="sd">    `image[mask] = 0`</span>
+<span class="sd">    `image[~mask] = 0`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">clean_mask</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;=</span> <span class="n">picture_thresh</span> <span class="o">*</span> <span class="n">pedvars</span>  <span class="c1"># starts as picture pixels</span>
+    <span class="n">pixels_in_picture</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;=</span> <span class="n">picture_thresh</span>
 
-    <span class="c1"># good boundary pixels are those that have any picture pixel as a</span>
-    <span class="c1"># neighbor</span>
-    <span class="n">boundary_mask</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;=</span> <span class="n">boundary_thresh</span> <span class="o">*</span> <span class="n">pedvars</span>
-    <span class="n">boundary_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">pix_id</span> <span class="k">for</span> <span class="n">pix_id</span> <span class="ow">in</span> <span class="n">geom</span><span class="o">.</span><span class="n">pix_id</span><span class="p">[</span><span class="n">boundary_mask</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">clean_mask</span><span class="p">[</span><span class="n">geom</span><span class="o">.</span><span class="n">neighbors</span><span class="p">[</span><span class="n">pix_id</span><span class="p">]]</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span>
+    <span class="c1"># by broadcasting together pixels_in_picture (1d) with the neighbor</span>
+    <span class="c1"># matrix (2d), we find all pixels that are above the boundary threshold</span>
+    <span class="c1"># AND have any neighbor that is in the picture</span>
+    <span class="n">pixels_above_boundary</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;=</span> <span class="n">boundary_thresh</span>
+    <span class="n">pixels_with_picture_neighbors</span> <span class="o">=</span> <span class="p">(</span><span class="n">pixels_in_picture</span>
+                                     <span class="o">*</span> <span class="n">geom</span><span class="o">.</span><span class="n">neighbor_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="n">clean_mask</span><span class="p">[</span><span class="n">boundary_ids</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">clean_mask</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pixels_above_boundary</span>
+            <span class="o">&amp;</span> <span class="n">pixels_with_picture_neighbors</span><span class="p">)</span> <span class="o">|</span> <span class="n">pixels_in_picture</span></div>
 
 
 <div class="viewcode-block" id="dilate"><a class="viewcode-back" href="../../../api/ctapipe.image.dilate.html#ctapipe.image.cleaning.dilate">[docs]</a><span class="k">def</span> <span class="nf">dilate</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Add one row of neighbors to the True values of a pixel mask.  This</span>
-<span class="sd">    can be used to include extra rows of pixels in a mask that was</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add one row of neighbors to the True values of a pixel mask and return </span>
+<span class="sd">    the new mask.</span>
+<span class="sd">    This can be used to include extra rows of pixels in a mask that was</span>
 <span class="sd">    pre-computed, e.g. via `tailcuts_clean`.</span>
-
-<span class="sd">    Modifies mask in-place by default (pass `mask.copy()` if you want</span>
-<span class="sd">    to maintain a copy of the undialated data)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    geom: `~ctapipe.instrument.CameraGeometry`</span>
+<span class="sd">        Camera geometry information</span>
+<span class="sd">    mask: ndarray </span>
+<span class="sd">        input mask (array of booleans) to be dilated</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">pixid</span> <span class="ow">in</span> <span class="n">geom</span><span class="o">.</span><span class="n">pix_id</span><span class="p">[</span><span class="n">mask</span><span class="p">]:</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">geom</span><span class="o">.</span><span class="n">neighbors</span><span class="p">[</span><span class="n">pixid</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span></div>
+    <span class="k">return</span> <span class="n">mask</span> <span class="o">|</span> <span class="p">(</span><span class="n">mask</span> <span class="o">*</span> <span class="n">geom</span><span class="o">.</span><span class="n">neighbor_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
@@ -222,7 +224,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -244,7 +246,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

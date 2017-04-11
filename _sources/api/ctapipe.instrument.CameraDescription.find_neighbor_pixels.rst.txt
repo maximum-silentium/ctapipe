@@ -1,6 +1,0 @@
-find_neighbor_pixels
-====================
-
-.. currentmodule:: ctapipe.instrument.CameraDescription
-
-.. autofunction:: find_neighbor_pixels

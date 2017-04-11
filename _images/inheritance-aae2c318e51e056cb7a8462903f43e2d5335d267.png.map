@@ -1,0 +1,7 @@
+<map id="inheritance7898305620" name="inheritance7898305620">
+<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="393,78,461,97"/>
+<area shape="rect" id="node5" title="This is the base class from which all direction reconstruction" alt="" coords="497,78,640,97"/>
+<area shape="rect" id="node4" title="class that reconstructs the direction of an atmospheric shower" alt="" coords="676,78,764,97"/>
+<area shape="rect" id="node6" title="a tiny helper class to collect some parameters for each great great circle" alt="" coords="45,41,112,60"/>
+<area shape="rect" id="node7" title="The base class for all classes that have descriptors." alt="" coords="36,78,121,97"/>
+</map>

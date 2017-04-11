@@ -1,6 +1,0 @@
-rotate_camera
-=============
-
-.. currentmodule:: ctapipe.instrument.CameraDescription
-
-.. autofunction:: rotate_camera

@@ -1,0 +1,17 @@
+R1CameraContainer
+=================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: R1CameraContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~R1CameraContainer.pe_samples
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: pe_samples

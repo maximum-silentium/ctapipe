@@ -17,6 +17,8 @@ DataContainer
       ~DataContainer.inst
       ~DataContainer.mc
       ~DataContainer.mcheader
+      ~DataContainer.r0
+      ~DataContainer.r1
       ~DataContainer.trig
 
    .. rubric:: Attributes Documentation
@@ -28,4 +30,6 @@ DataContainer
    .. autoattribute:: inst
    .. autoattribute:: mc
    .. autoattribute:: mcheader
+   .. autoattribute:: r0
+   .. autoattribute:: r1
    .. autoattribute:: trig

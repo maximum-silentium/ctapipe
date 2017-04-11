@@ -1,6 +1,0 @@
-read_config_data
-================
-
-.. currentmodule:: ctapipe.instrument.InstrumentDescription
-
-.. autofunction:: read_config_data

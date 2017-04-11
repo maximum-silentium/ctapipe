@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>DL1CameraContainer &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>DL1CameraContainer &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,10 +33,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
         <link rel="up" title="Input/Output (io)" href="../io/index.html"/>
-        <link rel="next" title="DL1Container" href="ctapipe.io.containers.DL1Container.html"/>
-        <link rel="prev" title="ReconstructedContainer" href="ctapipe.io.containers.ReconstructedContainer.html"/> 
+        <link rel="next" title="MCEventContainer" href="ctapipe.io.containers.MCEventContainer.html"/>
+        <link rel="prev" title="DL1Container" href="ctapipe.io.containers.DL1Container.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -103,10 +103,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../io/index.html#access-to-raw-data">Access to Raw Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../io/index.html#serialization-of-containers">Serialization of Containers:</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../io/index.html#reference-api">Reference/API</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.camera">ctapipe.io.camera Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.hessio">ctapipe.io.hessio Module</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../io/index.html#module-ctapipe.io.containers">ctapipe.io.containers Module</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../io/index.html#id2">Classes</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../io/index.html#classes">Classes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.serializer">ctapipe.io.serializer Module</a></li>
@@ -179,18 +178,26 @@ calibration information.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.extracted_samples" title="ctapipe.io.containers.DL1CameraContainer.extracted_samples"><code class="xref py py-obj docutils literal"><span class="pre">extracted_samples</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.cleaned" title="ctapipe.io.containers.DL1CameraContainer.cleaned"><code class="xref py py-obj docutils literal"><span class="pre">cleaned</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.image" title="ctapipe.io.containers.DL1CameraContainer.image"><code class="xref py py-obj docutils literal"><span class="pre">image</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.extracted_samples" title="ctapipe.io.containers.DL1CameraContainer.extracted_samples"><code class="xref py py-obj docutils literal"><span class="pre">extracted_samples</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.peakpos" title="ctapipe.io.containers.DL1CameraContainer.peakpos"><code class="xref py py-obj docutils literal"><span class="pre">peakpos</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.image" title="ctapipe.io.containers.DL1CameraContainer.image"><code class="xref py py-obj docutils literal"><span class="pre">image</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.peakpos" title="ctapipe.io.containers.DL1CameraContainer.peakpos"><code class="xref py py-obj docutils literal"><span class="pre">peakpos</span></code></a></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="ctapipe.io.containers.DL1CameraContainer.cleaned">
+<code class="descname">cleaned</code><em class="property"> = numpy array containing the waveform after cleaning</em><a class="headerlink" href="#ctapipe.io.containers.DL1CameraContainer.cleaned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="ctapipe.io.containers.DL1CameraContainer.extracted_samples">
 <code class="descname">extracted_samples</code><em class="property"> = numpy array of bools indicating which samples were included in the charge extraction as a result of the charge extractor chosen. Shape=(nchan, npix, nsamples).</em><a class="headerlink" href="#ctapipe.io.containers.DL1CameraContainer.extracted_samples" title="Permalink to this definition">¶</a></dt>
@@ -217,10 +224,10 @@ calibration information.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ctapipe.io.containers.DL1Container.html" class="btn btn-neutral float-right" title="DL1Container" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.io.containers.MCEventContainer.html" class="btn btn-neutral float-right" title="MCEventContainer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ctapipe.io.containers.ReconstructedContainer.html" class="btn btn-neutral" title="ReconstructedContainer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ctapipe.io.containers.DL1Container.html" class="btn btn-neutral" title="DL1Container" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -229,7 +236,7 @@ calibration information.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -251,7 +258,7 @@ calibration information.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

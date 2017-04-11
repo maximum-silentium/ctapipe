@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.io.hessio &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>ctapipe.io.hessio &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -261,6 +261,12 @@
                         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="k">continue</span>
 
+                <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">run_id</span> <span class="o">=</span> <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_run_number</span><span class="p">()</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">event_id</span> <span class="o">=</span> <span class="n">event_id</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pyhessio</span><span class="o">.</span><span class="n">get_teldata_list</span><span class="p">())</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">run_id</span> <span class="o">=</span> <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_run_number</span><span class="p">()</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">event_id</span> <span class="o">=</span> <span class="n">event_id</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pyhessio</span><span class="o">.</span><span class="n">get_teldata_list</span><span class="p">())</span>
                 <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">run_id</span> <span class="o">=</span> <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_run_number</span><span class="p">()</span>
                 <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">event_id</span> <span class="o">=</span> <span class="n">event_id</span>
                 <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pyhessio</span><span class="o">.</span><span class="n">get_teldata_list</span><span class="p">())</span>
@@ -268,9 +274,11 @@
                 <span class="c1"># handle telescope filtering by taking the intersection of</span>
                 <span class="c1"># tels_with_data and allowed_tels</span>
                 <span class="k">if</span> <span class="n">allowed_tels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">selected</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">&amp;</span> <span class="n">allowed_tels</span>
+                    <span class="n">selected</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">&amp;</span> <span class="n">allowed_tels</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="k">continue</span>  <span class="c1"># skip event</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">=</span> <span class="n">selected</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">=</span> <span class="n">selected</span>
                     <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tels_with_data</span> <span class="o">=</span> <span class="n">selected</span>
 
                 <span class="n">data</span><span class="o">.</span><span class="n">trig</span><span class="o">.</span><span class="n">tels_with_trigger</span> \
@@ -296,12 +304,15 @@
                 <span class="c1"># data each time (right now it&#39;s just deleted and garbage</span>
                 <span class="c1"># collected)</span>
 
+                <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">tel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
                 <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">dl1</span><span class="o">.</span><span class="n">tel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
                 <span class="n">data</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c1"># clear the previous telescopes</span>
 
                 <span class="n">_fill_instrument_info</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pyhessio</span><span class="p">)</span>
 
-                <span class="k">for</span> <span class="n">tel_id</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tels_with_data</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">tel_id</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tels_with_data</span><span class="p">:</span>
 
                     <span class="c1"># event.mc.tel[tel_id] = MCCameraContainer()</span>
 
@@ -310,9 +321,9 @@
                     <span class="n">data</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">pedestal</span> \
                         <span class="o">=</span> <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_pedestal</span><span class="p">(</span><span class="n">tel_id</span><span class="p">)</span>
 
-                    <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">adc_samples</span> <span class="o">=</span> \
+                    <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">adc_samples</span> <span class="o">=</span> \
                         <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_adc_sample</span><span class="p">(</span><span class="n">tel_id</span><span class="p">)</span>
-                    <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">adc_sums</span> <span class="o">=</span> \
+                    <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">adc_sums</span> <span class="o">=</span> \
                         <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_adc_sum</span><span class="p">(</span><span class="n">tel_id</span><span class="p">)</span>
                     <span class="n">data</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">reference_pulse_shape</span> <span class="o">=</span> \
                         <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_ref_shapes</span><span class="p">(</span><span class="n">tel_id</span><span class="p">)</span>
@@ -320,7 +331,7 @@
                     <span class="n">nsamples</span> <span class="o">=</span> <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_event_num_samples</span><span class="p">(</span><span class="n">tel_id</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">nsamples</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">nsamples</span> <span class="o">=</span> <span class="mi">1</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">dl0</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">nsamples</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tel_id</span><span class="p">]</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">nsamples</span>
 
                     <span class="c1"># load the data per telescope/pixel</span>
                     <span class="n">hessio_mc_npe</span> <span class="o">=</span> <span class="n">pyhessio</span><span class="o">.</span><span class="n">get_mc_number_photon_electron</span>
@@ -387,7 +398,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -409,7 +420,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

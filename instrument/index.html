@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Instrument (instrument) &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
+  <title>Instrument (instrument) &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
   
 
   
@@ -33,8 +33,8 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
-        <link rel="next" title="find_neighbor_pixels" href="../api/ctapipe.instrument.CameraDescription.find_neighbor_pixels.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
+        <link rel="next" title="CameraGeometry" href="../api/ctapipe.instrument.CameraGeometry.html"/>
         <link rel="prev" title="PixelLikelihoodError" href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post13+git2f38f60
+                0.4.0.post63+git75ca69c
               </div>
             
           
@@ -97,16 +97,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../image/index.html">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Instrument (<code class="docutils literal"><span class="pre">instrument</span></code>)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.instrument.CameraDescription">ctapipe.instrument.CameraDescription Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#camera-geometries">Camera Geometries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-output">Input/Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-note-on-pixel-neighbors">A note on Pixel Neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.instrument.InstrumentDescription">ctapipe.instrument.InstrumentDescription Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.instrument">ctapipe.instrument Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -165,44 +165,117 @@
 <span id="instrument"></span><h1>Instrument (<code class="xref py py-obj docutils literal"><span class="pre">instrument</span></code>)<a class="headerlink" href="#instrument-instrument" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="xref py py-obj docutils literal"><span class="pre">ctapipe.instrument</span></code> module contains classes and methods for
+<p>The <a class="reference internal" href="#module-ctapipe.instrument" title="ctapipe.instrument"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.instrument</span></code></a> module contains classes and methods for
 describing the instrumental layout and configuration.</p>
 <p>This module is under heavy restructuring and should not be considered
-ready for general use.</p>
+ready for general use, except for the <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> object, which
+provides pixel positions, etc.</p>
 </div>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="camera-geometries">
+<h2>Camera Geometries<a class="headerlink" href="#camera-geometries" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> provides an easy way to work with images or data
+cubes related to Cherenkov Cameras.  In <em>ctapipe</em>, a camera image is
+simply a flat 1D array (or 2D if time information is included), where
+there is one value per pixel. Of course, to work with such an array,
+one needs spatial information about how the pixels are laid out.
+Since CTA has at least 6 different camera types, and may have multiple
+versions of each as revisions are made, it is necessary to have a
+common way to describe all cameras.</p>
+<p>So far there are several ways to construct a <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a>:</p>
+<ul class="simple">
+<li>use the <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> constructor, where one has to specify all
+necessary information (pixel positions, types, areas, etc)</li>
+<li>use <code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry.from_name(telescope,</span> <span class="pre">revision)</span></code> (ex: <code class="xref py py-obj docutils literal"><span class="pre">geom</span> <span class="pre">=</span>
+<span class="pre">CameraGeometry.from_name('HESS',1)</span></code>).  This reads the telescope def
+from the <code class="xref py py-obj docutils literal"><span class="pre">$CTAPIPE_EXTRA</span></code> directory, and so far we only have HESS
+telescopes there (more to come)</li>
+<li>load a Monte-Carlo file, get the list of pixel X and Y positions and
+the telescope focal length and use
+<code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry.guess(x,y,flen)</span></code> - this will work for all telescopes
+in CTA so far</li>
+<li>load it from a pre-written file (which can be in any format
+supported by <a class="reference external" href="http://docs.astropy.org/en/latest/table/index.html#module-astropy.table" title="(in Astropy v2.0.dev18104)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table</span></code></a>, as long as that format allows for
+header-keywords as well as table entries.</li>
+</ul>
+<p>Once loaded, the <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> object gives you access the pixel
+positions, areas, neighbors, and shapes.  Since the geometries are
+cached in the class, subsequent calls to <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.guess" title="ctapipe.instrument.CameraGeometry.guess"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry.guess()</span></code></a> will
+return the same object if the inputs are the same, and are thus
+speed-efficient.</p>
+<p><a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> is used by most image processing algorithms in the
+<a class="reference internal" href="../image/index.html#module-ctapipe.image" title="ctapipe.image"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.image</span></code></a> module, as well as displays in the
+<a class="reference internal" href="../visualization/index.html#module-ctapipe.visualization" title="ctapipe.visualization"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.visualization</span></code></a> module.</p>
+<div class="section" id="input-output">
+<h3>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>You can write out a <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> by using the <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.to_table" title="ctapipe.instrument.CameraGeometry.to_table"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry.to_table()</span></code></a></dt>
+<dd><dl class="first last docutils">
+<dt>method to turn it into an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18104)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a>, and then call its <code class="xref py py-obj docutils literal"><span class="pre">write()</span></code></dt>
+<dd>function.  Reading it back in can be done with <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.from_table" title="ctapipe.instrument.CameraGeometry.from_table"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry.from_table()</span></code></a></dd>
+</dl>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="c1"># constructed elsewhere</span>
+
+<span class="n">geom</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;mycam.fits.gz&#39;</span><span class="p">)</span> <span class="c1"># FITS output</span>
+<span class="n">geom</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;mycam.h5&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/cameras/mycam&#39;</span><span class="p">)</span> <span class="c1"># hdf5 output</span>
+<span class="n">geom</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;mycam.ecsv&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;ascii.ecsv&#39;</span><span class="p">)</span> <span class="c1"># text table</span>
+
+<span class="c1"># later read back in:</span>
+
+<span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">from_table</span><span class="p">(</span><span class="s1">&#39;mycam.ecsv&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;ascii.ecsv&#39;</span><span class="p">)</span>
+<span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">from_table</span><span class="p">(</span><span class="s1">&#39;mycam.fits.gz&#39;</span><span class="p">)</span>
+<span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">from_table</span><span class="p">(</span><span class="s1">&#39;mycam.h5&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/cameras/mycam&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-note-on-pixel-neighbors">
+<h3>A note on Pixel Neighbors<a class="headerlink" href="#a-note-on-pixel-neighbors" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> object provides two pixel-neighbor
+representations: a <em>neighbor adjacency list</em> (in the <code class="xref py py-obj docutils literal"><span class="pre">neighbors</span></code>
+attribute) and a <em>pixel adjacency matrix</em> (in the <code class="xref py py-obj docutils literal"><span class="pre">neighbor_matrix</span></code>
+attribute).  The former is a list of lists, where element <em>i</em> is a
+list of neighbors <em>j</em> of the <em>i*th pixel.  The latter is a 2D matrix
+where row *i</em> is a boolean mask of pixels that are neighbors. It is
+not necessary to load or specify either of these neighbor
+representations when constructing a <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a>, since they
+will be computed on-the-fly if left blank, using a KD-tree
+nearest-neighbor algorithm.</p>
+<p>It is recommended that all algorithms that need to be computationally
+fast use the <code class="xref py py-obj docutils literal"><span class="pre">neighbor_matrix</span></code> attribute, particularly in conjunction
+with <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> operations, since it is quite speed-efficient.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ctapipe.instrument</span> <span class="kn">import</span> <span class="n">CameraGeometry</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s2">&quot;HESS&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">neighbor_matrix</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pixel Neighbor Matrix&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">pix_y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pixel Positions&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../instrument/camerageometry_example.py">Source code</a>, <a class="reference external" href="../instrument/camerageometry_example.png">png</a>, <a class="reference external" href="../instrument/camerageometry_example.hires.png">hires.png</a>, <a class="reference external" href="../instrument/camerageometry_example.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/camerageometry_example.png" src="../_images/camerageometry_example.png" />
+</div>
+<p>see also <a class="reference internal" href="../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.tailcuts_clean" title="ctapipe.image.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.image.tailcuts_clean()</span></code></a> and <a class="reference internal" href="../api/ctapipe.image.dilate.html#ctapipe.image.dilate" title="ctapipe.image.dilate"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.image.dilate()</span></code></a>
+for usage examples</p>
+</div>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-ctapipe.instrument.CameraDescription">
-<span id="ctapipe-instrument-cameradescription-module"></span><h3>ctapipe.instrument.CameraDescription Module<a class="headerlink" href="#module-ctapipe.instrument.CameraDescription" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="functions">
-<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.find_neighbor_pixels.html#ctapipe.instrument.CameraDescription.find_neighbor_pixels" title="ctapipe.instrument.CameraDescription.find_neighbor_pixels"><code class="xref py py-obj docutils literal"><span class="pre">find_neighbor_pixels</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;rad)</td>
-<td>uses a KD-Tree to quickly find nearest neighbors of the pixels in a</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.guess_camera_geometry.html#ctapipe.instrument.CameraDescription.guess_camera_geometry" title="ctapipe.instrument.CameraDescription.guess_camera_geometry"><code class="xref py py-obj docutils literal"><span class="pre">guess_camera_geometry</span></code></a>(pix_x:&nbsp;Unit(&quot;m&quot;),&nbsp;...)</td>
-<td>returns a the camera class, the pixel area, the pixel type and the</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.guess_camera_type.html#ctapipe.instrument.CameraDescription.guess_camera_type" title="ctapipe.instrument.CameraDescription.guess_camera_type"><code class="xref py py-obj docutils literal"><span class="pre">guess_camera_type</span></code></a>(npix,&nbsp;pix_sep)</td>
-<td>guesses and returns the camera type using the number of pixels</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.make_rectangular_camera_geometry.html#ctapipe.instrument.CameraDescription.make_rectangular_camera_geometry" title="ctapipe.instrument.CameraDescription.make_rectangular_camera_geometry"><code class="xref py py-obj docutils literal"><span class="pre">make_rectangular_camera_geometry</span></code></a>([npix_x,&nbsp;...])</td>
-<td>Generate a simple camera with 2D rectangular geometry.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.rotate_camera.html#ctapipe.instrument.CameraDescription.rotate_camera" title="ctapipe.instrument.CameraDescription.rotate_camera"><code class="xref py py-obj docutils literal"><span class="pre">rotate_camera</span></code></a>(angle,&nbsp;pix_x:&nbsp;Unit(&quot;m&quot;),&nbsp;...)</td>
-<td>rotate the camera coordinates about the center of the camera by</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="section" id="module-ctapipe.instrument">
+<span id="ctapipe-instrument-package"></span><h3>ctapipe.instrument Package<a class="headerlink" href="#module-ctapipe.instrument" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="classes">
 <h4>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
@@ -211,56 +284,18 @@ ready for general use.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.Camera.html#ctapipe.instrument.CameraDescription.Camera" title="ctapipe.instrument.CameraDescription.Camera"><code class="xref py py-obj docutils literal"><span class="pre">Camera</span></code></a>(pix_id,&nbsp;pix_X,&nbsp;pix_Y,&nbsp;pix_area,&nbsp;...)</td>
-<td><a class="reference internal" href="../api/ctapipe.instrument.CameraDescription.Camera.html#ctapipe.instrument.CameraDescription.Camera" title="ctapipe.instrument.CameraDescription.Camera"><code class="xref py py-obj docutils literal"><span class="pre">Camera</span></code></a> is a class that provides and gets all the information about</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a>(cam_id,&nbsp;pix_id,&nbsp;pix_x,&nbsp;pix_y,&nbsp;...)</td>
+<td><a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> is a class that stores information about a</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="class-inheritance-diagram">
 <h4>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h4>
-<img src="../_images/inheritance-b90c4c85efb58afbef6cea68ebc83f1ef4c1fd39.png" alt="Inheritance diagram of ctapipe.instrument.CameraDescription.Camera" usemap="#inheritance5602642956" class="inheritance"/>
-<map id="inheritance5602642956" name="inheritance5602642956">
-<area shape="rect" id="node1" href="../api/ctapipe.instrument.CameraDescription.Camera.html#ctapipe.instrument.CameraDescription.Camera" target="_top" title="`Camera` is a class that provides and gets all the information about" alt="" coords="5,5,77,31"/>
+<img src="../_images/inheritance-641cdc8f2407c448206f9260ecffeab63ca02f5a.png" alt="Inheritance diagram of ctapipe.instrument.camera.CameraGeometry" usemap="#inheritance780eb50cd2" class="inheritance"/>
+<map id="inheritance780eb50cd2" name="inheritance780eb50cd2">
+<area shape="rect" id="node1" title="`CameraGeometry` is a class that stores information about a" alt="" coords="5,5,133,31"/>
 </map>
-</div>
-</div>
-<div class="section" id="module-ctapipe.instrument.InstrumentDescription">
-<span id="ctapipe-instrument-instrumentdescription-module"></span><h3>ctapipe.instrument.InstrumentDescription Module<a class="headerlink" href="#module-ctapipe.instrument.InstrumentDescription" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id1">
-<h4>Functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.load.html#ctapipe.instrument.InstrumentDescription.load" title="ctapipe.instrument.InstrumentDescription.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>([filename,&nbsp;path,&nbsp;version,&nbsp;instr_item,&nbsp;...])</td>
-<td>Function to load instrument data from a file</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.load_fakedata.html#ctapipe.instrument.InstrumentDescription.load_fakedata" title="ctapipe.instrument.InstrumentDescription.load_fakedata"><code class="xref py py-obj docutils literal"><span class="pre">load_fakedata</span></code></a>()</td>
-<td>Function writing faked date into an astropy.table Table</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.load_hessio.html#ctapipe.instrument.InstrumentDescription.load_hessio" title="ctapipe.instrument.InstrumentDescription.load_hessio"><code class="xref py py-obj docutils literal"><span class="pre">load_hessio</span></code></a>(filename)</td>
-<td>Function to open and load a hessio file</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.load_fits.html#ctapipe.instrument.InstrumentDescription.load_fits" title="ctapipe.instrument.InstrumentDescription.load_fits"><code class="xref py py-obj docutils literal"><span class="pre">load_fits</span></code></a>([filename,&nbsp;path,&nbsp;version,&nbsp;instr_item])</td>
-<td>Function to load data from a fits file</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.load_config.html#ctapipe.instrument.InstrumentDescription.load_config" title="ctapipe.instrument.InstrumentDescription.load_config"><code class="xref py py-obj docutils literal"><span class="pre">load_config</span></code></a>(filename)</td>
-<td>Function to load config file data into a table</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.read_config_data.html#ctapipe.instrument.InstrumentDescription.read_config_data" title="ctapipe.instrument.InstrumentDescription.read_config_data"><code class="xref py py-obj docutils literal"><span class="pre">read_config_data</span></code></a>(filename)</td>
-<td>Function to open and load a config file</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.get_var_from_file.html#ctapipe.instrument.InstrumentDescription.get_var_from_file" title="ctapipe.instrument.InstrumentDescription.get_var_from_file"><code class="xref py py-obj docutils literal"><span class="pre">get_var_from_file</span></code></a>(filename)</td>
-<td>Function to load and initialize a module implemented as a Python source file called <code class="xref py py-obj docutils literal"><span class="pre">filename</span></code> and to return its module objects.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.instrument.InstrumentDescription.write_fits.html#ctapipe.instrument.InstrumentDescription.write_fits" title="ctapipe.instrument.InstrumentDescription.write_fits"><code class="xref py py-obj docutils literal"><span class="pre">write_fits</span></code></a>([filename,&nbsp;path,&nbsp;instr_dict,&nbsp;...])</td>
-<td>Function writing data from the astropy.table Table into a fits file</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -273,7 +308,7 @@ ready for general use.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.instrument.CameraDescription.find_neighbor_pixels.html" class="btn btn-neutral float-right" title="find_neighbor_pixels" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.instrument.CameraGeometry.html" class="btn btn-neutral float-right" title="CameraGeometry" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html" class="btn btn-neutral" title="PixelLikelihoodError" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -285,7 +320,7 @@ ready for general use.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
+        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
 
     </p>
   </div>
@@ -307,7 +342,7 @@ ready for general use.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post13+git2f38f60',
+            VERSION:'0.4.0.post63+git75ca69c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
