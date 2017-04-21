@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.io.containers &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
+  <title>ctapipe.io.containers &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post63+git75ca69c
+                0.4.0.post105+gitd78cb8b
               </div>
             
           
@@ -195,7 +195,7 @@
 
 
 <div class="viewcode-block" id="DL1CameraContainer"><a class="viewcode-back" href="../../../api/ctapipe.io.containers.DL1CameraContainer.html#ctapipe.io.containers.DL1CameraContainer">[docs]</a><span class="k">class</span> <span class="nc">DL1CameraContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Storage of output of camera calibrationm e.g the final calibrated</span>
+    <span class="sd">&quot;&quot;&quot;Storage of output of camera calibration e.g the final calibrated</span>
 <span class="sd">    image in intensity units and other per-event calculated</span>
 <span class="sd">    calibration information.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -315,12 +315,12 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Monte-Carlo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">energy</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Monte-Carlo Energy&quot;</span><span class="p">)</span>
-    <span class="n">alt</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Monte-carlo altitude&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
-    <span class="n">az</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Monte-Carlo azimuth&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
-    <span class="n">core_x</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;MC core position&quot;</span><span class="p">)</span>
-    <span class="n">core_y</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;MC core position&quot;</span><span class="p">)</span>
-    <span class="n">h_first_int</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Height of first interaction&quot;</span><span class="p">)</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Monte-Carlo Energy&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">TeV</span><span class="p">)</span>
+    <span class="n">alt</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Monte-carlo altitude&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+    <span class="n">az</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Monte-Carlo azimuth&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+    <span class="n">core_x</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;MC core position&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">core_y</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;MC core position&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">h_first_int</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Height of first interaction&quot;</span><span class="p">)</span>
     <span class="n">tel</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">MCCameraEventContainer</span><span class="p">),</span>
                <span class="s2">&quot;map of tel_id to MCCameraEventContainer&quot;</span><span class="p">)</span></div>
 
@@ -439,7 +439,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
+        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
 
     </p>
   </div>
@@ -461,7 +461,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post63+git75ca69c',
+            VERSION:'0.4.0.post105+gitd78cb8b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

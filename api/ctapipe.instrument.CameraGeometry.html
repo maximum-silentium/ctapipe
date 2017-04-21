@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraGeometry &mdash; ctapipe v0.4.0.post63+git75ca69c</title>
+  <title>CameraGeometry &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post63+git75ca69c" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../index.html"/>
         <link rel="up" title="Instrument (instrument)" href="../instrument/index.html"/>
         <link rel="next" title="Input/Output (io)" href="../io/index.html"/>
         <link rel="prev" title="Instrument (instrument)" href="../instrument/index.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.0.post63+git75ca69c
+                0.4.0.post105+gitd78cb8b
               </div>
             
           
@@ -209,7 +209,7 @@ times with the same inputs will give back the same object (for speed).</p>
 <td>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> from the name of the instrument and telescope id, if it can be found in a standard database.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_table" title="ctapipe.instrument.CameraGeometry.from_table"><code class="xref py py-obj docutils literal"><span class="pre">from_table</span></code></a>(url_or_table,&nbsp;\*\*kwargs)</td>
-<td>Load a CameraGeometry from an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18104)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> instance or a</td>
+<td>Load a CameraGeometry from an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18130)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> instance or a</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.guess" title="ctapipe.instrument.CameraGeometry.guess"><code class="xref py py-obj docutils literal"><span class="pre">guess</span></code></a>(pix_x:&nbsp;Unit(&quot;m&quot;),&nbsp;pix_y:&nbsp;Unit(&quot;m&quot;),&nbsp;...)</td>
 <td>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> by guessing the appropriate quantities from a list of pixel positions and the focal length.</td>
@@ -221,7 +221,7 @@ times with the same inputs will give back the same object (for speed).</p>
 <td>rotate the camera coordinates about the center of the camera by</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.to_table" title="ctapipe.instrument.CameraGeometry.to_table"><code class="xref py py-obj docutils literal"><span class="pre">to_table</span></code></a>()</td>
-<td>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18104)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></td>
+<td>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18130)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -255,7 +255,7 @@ telescope id, if it can be found in a standard database.</p>
 <dl class="classmethod">
 <dt id="ctapipe.instrument.CameraGeometry.from_table">
 <em class="property">classmethod </em><code class="descname">from_table</code><span class="sig-paren">(</span><em>url_or_table</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/camera.html#CameraGeometry.from_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraGeometry.from_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load a CameraGeometry from an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18104)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> instance or a 
+<dd><p>Load a CameraGeometry from an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18130)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> instance or a 
 file that is readable by <code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table.read()</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -352,7 +352,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
 <dl class="method">
 <dt id="ctapipe.instrument.CameraGeometry.to_table">
 <code class="descname">to_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/camera.html#CameraGeometry.to_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraGeometry.to_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18104)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></p>
+<dd><p>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18130)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -378,7 +378,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 11 Apr 2017 12:19.
+        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
 
     </p>
   </div>
@@ -400,7 +400,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post63+git75ca69c',
+            VERSION:'0.4.0.post105+gitd78cb8b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
