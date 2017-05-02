@@ -1,0 +1,6 @@
+tr_list_to_mask
+===============
+
+.. currentmodule:: ctapipe.io.hdftableio
+
+.. autofunction:: tr_list_to_mask

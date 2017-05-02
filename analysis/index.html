@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Analysis (analysis) &mdash; ctapipe v0.4.0.post377+gitb116417</title>
+  <title>Analysis (analysis) &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
   
 
   
@@ -33,7 +33,8 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../index.html"/>
+        <link rel="next" title="ChargeResolutionCalculator" href="../api/ctapipe.analysis.camera.ChargeResolutionCalculator.html"/>
         <link rel="prev" title="info" href="../api/ctapipe.tools.info.html"/> 
 
   
@@ -62,7 +63,7 @@
             
             
               <div class="version">
-                0.4.0.post377+gitb116417
+                0.4.0.post379+gitfd54a25
               </div>
             
           
@@ -89,9 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Analysis (<code class="docutils literal"><span class="pre">analysis</span></code>)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.analysis">ctapipe.analysis Package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.analysis.camera">ctapipe.analysis.camera Package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
@@ -161,19 +160,12 @@
 <span id="analysis"></span><h1>Analysis (<code class="xref py py-obj docutils literal"><span class="pre">analysis</span></code>)<a class="headerlink" href="#analysis-analysis" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#module-ctapipe.analysis" title="ctapipe.analysis"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.analysis</span></code></a> contains functions and classes to ... TODO.</p>
-<p>TODO: add high-level description.</p>
-</div>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>TODO: add examples.</p>
+<p><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.analysis</span></code> contains functions and classes to analyze outputs of
+the pipeline and perform validation and verification.</p>
+<p>Currently this includes computing charge resolution.</p>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-ctapipe.analysis">
-<span id="ctapipe-analysis-package"></span><h3>ctapipe.analysis Package<a class="headerlink" href="#module-ctapipe.analysis" title="Permalink to this headline">¶</a></h3>
-<p>Analysis</p>
-</div>
 <div class="section" id="module-ctapipe.analysis.camera">
 <span id="ctapipe-analysis-camera-package"></span><h3>ctapipe.analysis.camera Package<a class="headerlink" href="#module-ctapipe.analysis.camera" title="Permalink to this headline">¶</a></h3>
 <p>Analysis modules specifically related to camera properties.</p>
@@ -185,17 +177,8 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Bool</span></code>([default_value,&nbsp;allow_none,&nbsp;read_only,&nbsp;...])</td>
-<td>A boolean (True, False) trait.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.analysis.camera.ChargeResolutionCalculator.html#ctapipe.analysis.camera.ChargeResolutionCalculator" title="ctapipe.analysis.camera.ChargeResolutionCalculator"><code class="xref py py-obj docutils literal"><span class="pre">ChargeResolutionCalculator</span></code></a>(config,&nbsp;tool,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.analysis.camera.ChargeResolutionCalculator.html#ctapipe.analysis.camera.ChargeResolutionCalculator" title="ctapipe.analysis.camera.ChargeResolutionCalculator"><code class="xref py py-obj docutils literal"><span class="pre">ChargeResolutionCalculator</span></code></a>(config,&nbsp;tool,&nbsp;...)</td>
 <td>Class to handle the calculation of Charge Resolution.</td>
-</tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Component</span></code>([parent])</td>
-<td>Base class of all Components (sometimes called workers, makers, etc).</td>
-</tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">Int</span></code>([default_value,&nbsp;allow_none])</td>
-<td>An int trait.</td>
 </tr>
 </tbody>
 </table>
@@ -220,6 +203,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../api/ctapipe.analysis.camera.ChargeResolutionCalculator.html" class="btn btn-neutral float-right" title="ChargeResolutionCalculator" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="../api/ctapipe.tools.info.html" class="btn btn-neutral" title="info" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -230,7 +215,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:08.
 
     </p>
   </div>
@@ -252,7 +237,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post377+gitb116417',
+            VERSION:'0.4.0.post379+gitfd54a25',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

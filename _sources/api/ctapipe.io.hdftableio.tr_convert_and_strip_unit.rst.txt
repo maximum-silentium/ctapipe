@@ -1,0 +1,6 @@
+tr_convert_and_strip_unit
+=========================
+
+.. currentmodule:: ctapipe.io.hdftableio
+
+.. autofunction:: tr_convert_and_strip_unit

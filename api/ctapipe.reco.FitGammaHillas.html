@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FitGammaHillas &mdash; ctapipe v0.4.0.post377+gitb116417</title>
+  <title>FitGammaHillas &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../index.html"/>
         <link rel="up" title="Reconstruction (reco)" href="../reco/index.html"/>
         <link rel="next" title="GreatCircle" href="ctapipe.reco.GreatCircle.html"/>
         <link rel="prev" title="dist_to_traces" href="ctapipe.reco.dist_to_traces.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.0.post377+gitb116417
+                0.4.0.post379+gitfd54a25
               </div>
             
           
@@ -190,7 +190,7 @@ uncertainty on the reconstructed parameters</p>
 <td>calculates the origin of the gamma as the weighted average</td>
 </tr>
 <tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_minimise</span></code>([seed,&nbsp;test_function])</td>
-<td>Fits the origin of the gamma with a minimisation procedure this function expects that <a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-func docutils literal"><span class="pre">get_great_circles</span></code></a> has been run already.</td>
+<td>Fits the origin of the gamma with a minimisation procedure this function expects that <a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code></a> has been run already.</td>
 </tr>
 <tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code>(hillas_dict,&nbsp;inst,&nbsp;...)</td>
 <td>creates a dictionary of <a class="reference internal" href="ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle" title="ctapipe.reco.GreatCircle"><code class="xref py py-class docutils literal"><span class="pre">GreatCircle</span></code></a> from a dictionary of hillas</td>
@@ -223,7 +223,7 @@ of an (over-constrained) equation system</p>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>The basis is the &quot;trace&quot; of each telescope's <a class="reference internal" href="ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle" title="ctapipe.reco.GreatCircle"><code class="xref py py-class docutils literal"><span class="pre">GreatCircle</span></code></a> which
+<p>The basis is the &quot;trace&quot; of each telescope's <a class="reference internal" href="ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle" title="ctapipe.reco.GreatCircle"><code class="xref py py-obj docutils literal"><span class="pre">GreatCircle</span></code></a> which
 can be determined by the telescope's position P=(Px, Py) and
 the circle's normal vector, projected to the ground n=(nx,
 ny), so that for every r=(x, y) on the trace</p>
@@ -255,10 +255,9 @@ the method of least linear square:</p>
 <p><span class="math">\(\vec{r}_{\chi^2}\)</span> minimises the squared difference of</p>
 <div class="math">
 \[\vec D - \boldsymbol{A} \cdot \vec r.\]</div>
-<p>Weights are applied to every line of equation <a class="reference internal" href="#equation-fullmatrix">(1)</a> as stored in
-circle.weight (assuming they have been set in
-<a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-func docutils literal"><span class="pre">get_great_circles</span></code></a>
-or elsewhere).</p>
+<p>Weights are applied to every line of equation 
+<a class="reference internal" href="#equation-fullmatrix">(1)</a> as stored in circle.weight (assuming they have been 
+set in <a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code></a> or elsewhere).</p>
 </dd></dl>
 
 <dl class="method">
@@ -316,8 +315,7 @@ direction of the intersections of all great circles</p>
 <dt id="ctapipe.reco.FitGammaHillas.fit_origin_minimise">
 <code class="descname">fit_origin_minimise</code><span class="sig-paren">(</span><em>seed=(0</em>, <em>0</em>, <em>1)</em>, <em>test_function=&lt;function neg_angle_sum&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_origin_minimise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_origin_minimise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fits the origin of the gamma with a minimisation procedure this
-function expects that
-<a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-func docutils literal"><span class="pre">get_great_circles</span></code></a>
+function expects that <a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code></a>
 has been run already. A seed should be given otherwise it defaults to
 &quot;straight up&quot; supperted functions to minimise are an M-estimator and the
 negative sum of the angles to all normal vectors of the great
@@ -433,7 +431,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:08.
 
     </p>
   </div>
@@ -455,7 +453,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post377+gitb116417',
+            VERSION:'0.4.0.post379+gitfd54a25',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

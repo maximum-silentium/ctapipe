@@ -10,6 +10,8 @@ InstrumentContainer
 
    .. autosummary::
 
+      ~InstrumentContainer.mirror_dish_area
+      ~InstrumentContainer.mirror_numtiles
       ~InstrumentContainer.num_channels
       ~InstrumentContainer.num_pixels
       ~InstrumentContainer.optical_foclen
@@ -19,6 +21,8 @@ InstrumentContainer
 
    .. rubric:: Attributes Documentation
 
+   .. autoattribute:: mirror_dish_area
+   .. autoattribute:: mirror_numtiles
    .. autoattribute:: num_channels
    .. autoattribute:: num_pixels
    .. autoattribute:: optical_foclen

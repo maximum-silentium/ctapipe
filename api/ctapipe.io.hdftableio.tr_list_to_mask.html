@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Array calibration &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>tr_list_to_mask &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
   
 
   
@@ -33,10 +33,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../index.html"/>
-        <link rel="up" title="Calibration (calib)" href="index.html"/>
-        <link rel="next" title="Atmosphere calibration" href="index_atmo.html"/>
-        <link rel="prev" title="Calibration (calib)" href="index.html"/> 
+    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../index.html"/>
+        <link rel="up" title="Input/Output (io)" href="../io/index.html"/>
+        <link rel="next" title="SimpleHDF5TableWriter" href="ctapipe.io.hdftableio.SimpleHDF5TableWriter.html"/>
+        <link rel="prev" title="tr_convert_and_strip_unit" href="ctapipe.io.hdftableio.tr_convert_and_strip_unit.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post379+gitfd54a25
               </div>
             
           
@@ -90,32 +90,36 @@
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analysis/index.html">Analysis (<code class="docutils literal"><span class="pre">analysis</span></code>)</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Calibration (<code class="docutils literal"><span class="pre">calib</span></code>)</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Array calibration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#reference-api">Reference/API</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="index_atmo.html">Atmosphere calibration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index_camera.html">Camera calibration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index_pointing.html">Pointing calibration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#reference-api">Reference/API</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../calib/index.html">Calibration (<code class="docutils literal"><span class="pre">calib</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../coordinates/index.html">Coordinates (<code class="docutils literal"><span class="pre">coordinates</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Structures and Base Classes (<code class="docutils literal"><span class="pre">core</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets (<code class="docutils literal"><span class="pre">datasets</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../flow/index.html">Flow-based framework (<code class="docutils literal"><span class="pre">flow</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../image/index.html">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../instrument/index.html">Instrument (<code class="docutils literal"><span class="pre">instrument</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../io/index.html">Input/Output (<code class="docutils literal"><span class="pre">io</span></code>)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../io/index.html">Input/Output (<code class="docutils literal"><span class="pre">io</span></code>)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#container-classes">Container Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#access-to-raw-data">Access to Raw Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#serialization-of-containers">Serialization of Containers:</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../io/index.html#reference-api">Reference/API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.hessio">ctapipe.io.hessio Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.containers">ctapipe.io.containers Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.serializer">ctapipe.io.serializer Module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../io/index.html#module-ctapipe.io.hdftableio">ctapipe.io.hdftableio Module</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../io/index.html#id2">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../io/index.html#id3">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../io/index.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -146,13 +150,13 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="index.html">Calibration (<code class="docutils literal"><span class="pre">calib</span></code>)</a> &raquo;</li>
+          <li><a href="../io/index.html">Input/Output (<code class="docutils literal"><span class="pre">io</span></code>)</a> &raquo;</li>
       
-    <li>Array calibration</li>
+    <li>tr_list_to_mask</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/calib/index_array.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.io.hdftableio.tr_list_to_mask.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -162,37 +166,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="array-calibration">
-<span id="calib-array"></span><h1>Array calibration<a class="headerlink" href="#array-calibration" title="Permalink to this headline">¶</a></h1>
-<p>This module contains the functions to cross- and inter-calibrate the CTA telescopes.</p>
-<p>These functions are divided into the different python modules, corresponding to the diffferent calibration tasks defined for array calibration:</p>
-<ul>
-<li><p class="first"><em>Array calibration using CTA data</em>:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Muon (<code class="xref py py-obj docutils literal"><span class="pre">muon.py</span></code>)</li>
-<li>Air showers (<code class="xref py py-obj docutils literal"><span class="pre">cr.py</span></code>)</li>
-<li>Cherenkov Transparency Coefficient (<code class="xref py py-obj docutils literal"><span class="pre">ctc_tel.py</span></code>)</li>
-<li>Electrons (<code class="xref py py-obj docutils literal"><span class="pre">electrons.py</span></code>)</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first"><em>Array calibration using non-CTA data</em>:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Space detectors in operation (<code class="xref py py-obj docutils literal"><span class="pre">space_detectors_calib.py</span></code>)</li>
-<li>Archival data (<code class="xref py py-obj docutils literal"><span class="pre">archival_data_calib.py</span></code>)</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<div class="section" id="reference-api">
-<h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-ctapipe.calib.array">
-<span id="ctapipe-calib-array-package"></span><h3>ctapipe.calib.array Package<a class="headerlink" href="#module-ctapipe.calib.array" title="Permalink to this headline">¶</a></h3>
-<p>Calibration</p>
-</div>
-</div>
+  <div class="section" id="tr-list-to-mask">
+<h1>tr_list_to_mask<a class="headerlink" href="#tr-list-to-mask" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="ctapipe.io.hdftableio.tr_list_to_mask">
+<code class="descclassname">ctapipe.io.hdftableio.</code><code class="descname">tr_list_to_mask</code><span class="sig-paren">(</span><em>thelist</em>, <em>length</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/hdftableio.html#tr_list_to_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.hdftableio.tr_list_to_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform list to a fixed-length mask</p>
+</dd></dl>
+
 </div>
 
 
@@ -202,10 +183,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="index_atmo.html" class="btn btn-neutral float-right" title="Atmosphere calibration" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.io.hdftableio.SimpleHDF5TableWriter.html" class="btn btn-neutral float-right" title="SimpleHDF5TableWriter" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Calibration (calib)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ctapipe.io.hdftableio.tr_convert_and_strip_unit.html" class="btn btn-neutral" title="tr_convert_and_strip_unit" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -214,7 +195,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:08.
 
     </p>
   </div>
@@ -236,7 +217,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post379+gitfd54a25',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

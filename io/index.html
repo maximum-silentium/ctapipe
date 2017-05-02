@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input/Output (io) &mdash; ctapipe v0.4.0.post377+gitb116417</title>
+  <title>Input/Output (io) &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../index.html"/>
         <link rel="next" title="hessio_event_source" href="../api/ctapipe.io.hessio.hessio_event_source.html"/>
         <link rel="prev" title="CameraGeometry" href="../api/ctapipe.instrument.CameraGeometry.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.4.0.post377+gitb116417
+                0.4.0.post379+gitfd54a25
               </div>
             
           
@@ -112,6 +112,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.io.serializer">ctapipe.io.serializer Module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.io.hdftableio">ctapipe.io.hdftableio Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -241,7 +247,7 @@ productions. It requires the <code class="xref py py-obj docutils literal"><span
 <dd>testing purposes</dd>
 </dl>
 <p><code class="xref py py-obj docutils literal"><span class="pre">zfits.zfits_event_source</span></code>: reads zfits raw event files</p>
-<div class="figure" id="id2">
+<div class="figure" id="id4">
 <img alt="../_images/shower.png" src="../_images/shower.png" />
 <p class="caption"><span class="caption-text">an image read from a <em>simtelarray</em> data file.</span></p>
 </div>
@@ -251,10 +257,11 @@ productions. It requires the <code class="xref py py-obj docutils literal"><span
 <p>The <a class="reference internal" href="#module-ctapipe.io.serializer" title="ctapipe.io.serializer"><code class="xref py py-obj docutils literal"><span class="pre">serializer</span></code></a> module provide support for storing
 <code class="xref py py-obj docutils literal"><span class="pre">ctapipe.io.Container</span></code> classes in output files (for example FITS
 tables or pickle files)</p>
+<p>The <a class="reference internal" href="#module-ctapipe.io.hdftableio" title="ctapipe.io.hdftableio"><code class="xref py py-obj docutils literal"><span class="pre">hdftableio</span></code></a> submodule provides an API to write/read Containers to and
+from HDF5 tables using the pytables package.</p>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
-<hr class="docutils" />
 <div class="section" id="module-ctapipe.io.hessio">
 <span id="ctapipe-io-hessio-module"></span><h3>ctapipe.io.hessio Module<a class="headerlink" href="#module-ctapipe.io.hessio" title="Permalink to this headline">¶</a></h3>
 <p>Components to read HESSIO data.</p>
@@ -366,6 +373,50 @@ tables or pickle files)</p>
 </table>
 </div>
 </div>
+<hr class="docutils" />
+<div class="section" id="module-ctapipe.io.hdftableio">
+<span id="ctapipe-io-hdftableio-module"></span><h3>ctapipe.io.hdftableio Module<a class="headerlink" href="#module-ctapipe.io.hdftableio" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h4>Functions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.hdftableio.tr_convert_and_strip_unit.html#ctapipe.io.hdftableio.tr_convert_and_strip_unit" title="ctapipe.io.hdftableio.tr_convert_and_strip_unit"><code class="xref py py-obj docutils literal"><span class="pre">tr_convert_and_strip_unit</span></code></a>(quantity,&nbsp;unit)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.hdftableio.tr_list_to_mask.html#ctapipe.io.hdftableio.tr_list_to_mask" title="ctapipe.io.hdftableio.tr_list_to_mask"><code class="xref py py-obj docutils literal"><span class="pre">tr_list_to_mask</span></code></a>(thelist,&nbsp;length)</td>
+<td>transform list to a fixed-length mask</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h4>Classes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.hdftableio.SimpleHDF5TableWriter.html#ctapipe.io.hdftableio.SimpleHDF5TableWriter" title="ctapipe.io.hdftableio.SimpleHDF5TableWriter"><code class="xref py py-obj docutils literal"><span class="pre">SimpleHDF5TableWriter</span></code></a>(filename,&nbsp;group_name,&nbsp;...)</td>
+<td>A very basic table writer that can take a container (or more than one)  and write it to an HDF5 file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="class-inheritance-diagram">
+<h4>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h4>
+<img src="../_images/inheritance-9385d769984c8ec7f23ea638277a7a49d026e7a6.png" alt="Inheritance diagram of ctapipe.io.hdftableio.SimpleHDF5TableWriter" usemap="#inheritancec2e205d1cc" class="inheritance"/>
+<map id="inheritancec2e205d1cc" name="inheritancec2e205d1cc">
+<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="379,5,458,27"/>
+<area shape="rect" id="node4" title="The base class for all classes that have descriptors." alt="" coords="5,5,103,27"/>
+<area shape="rect" id="node5" href="../api/ctapipe.io.hdftableio.SimpleHDF5TableWriter.html#ctapipe.io.hdftableio.SimpleHDF5TableWriter" target="_top" title="A very basic table writer that can take a container (or more than one) " alt="" coords="619,5,763,27"/>
+</map>
+</div>
+</div>
 </div>
 </div>
 
@@ -388,7 +439,7 @@ tables or pickle files)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:08.
 
     </p>
   </div>
@@ -410,7 +461,7 @@ tables or pickle files)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post377+gitb116417',
+            VERSION:'0.4.0.post379+gitfd54a25',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

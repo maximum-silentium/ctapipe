@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.analysis.camera.chargeresolution &mdash; ctapipe v0.4.0.post377+gitb116417</title>
+  <title>ctapipe.analysis.camera.chargeresolution &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post377+gitb116417
+                0.4.0.post379+gitfd54a25
               </div>
             
           
@@ -145,15 +145,18 @@
            <div itemprop="articleBody">
             
   <h1>Source code for ctapipe.analysis.camera.chargeresolution</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">exists</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">makedirs</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log10</span><span class="p">,</span> <span class="n">sqrt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">binned_statistic</span> <span class="k">as</span> <span class="n">bs</span>
-<span class="kn">from</span> <span class="nn">traitlets</span> <span class="k">import</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Bool</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">ctapipe.core</span> <span class="k">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">makedirs</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">exists</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">binned_statistic</span> <span class="k">as</span> <span class="n">bs</span>
+
+<span class="kn">from</span> <span class="nn">ctapipe.core</span> <span class="k">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">ctapipe.core.traits</span> <span class="k">import</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Bool</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ChargeResolutionCalculator&#39;</span><span class="p">,]</span>
 
 <div class="viewcode-block" id="ChargeResolutionCalculator"><a class="viewcode-back" href="../../../../api/ctapipe.analysis.camera.ChargeResolutionCalculator.html#ctapipe.analysis.camera.ChargeResolutionCalculator">[docs]</a><span class="k">class</span> <span class="nc">ChargeResolutionCalculator</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -439,7 +442,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:08.
 
     </p>
   </div>
@@ -461,7 +464,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'0.4.0.post377+gitb116417',
+            VERSION:'0.4.0.post379+gitfd54a25',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

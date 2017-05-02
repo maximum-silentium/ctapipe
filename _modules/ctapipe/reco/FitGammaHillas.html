@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.reco.FitGammaHillas &mdash; ctapipe v0.4.0.post377+gitb116417</title>
+  <title>ctapipe.reco.FitGammaHillas &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post377+gitb116417
+                0.4.0.post379+gitfd54a25
               </div>
             
           
@@ -145,7 +145,13 @@
            <div itemprop="articleBody">
             
   <h1>Source code for ctapipe.reco.FitGammaHillas</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">ctapipe.utils</span> <span class="k">import</span> <span class="n">linalg</span>
+<span></span><span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">Line-intersection-based fitting.</span>
+
+<span class="sd">Contact: Tino Michael &lt;Tino.Michael@cea.fr&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctapipe.utils</span> <span class="k">import</span> <span class="n">linalg</span>
 <span class="kn">from</span> <span class="nn">ctapipe.reco.reco_algorithms</span> <span class="k">import</span> <span class="n">RecoShowerGeomAlgorithm</span>
 <span class="kn">from</span> <span class="nn">ctapipe.io.containers</span> <span class="k">import</span> <span class="n">ReconstructedShowerContainer</span>
 
@@ -177,15 +183,14 @@
 <span class="sd">    calculates the direction vector of corresponding to a</span>
 <span class="sd">    (x,y) position on the camera</span>
 
+<span class="sd">    beta is the pixel&#39;s angular distance to the centre</span>
+<span class="sd">    according to beta / tel_view = r / maxR</span>
+<span class="sd">    alpha is the polar angle between the y-axis and the pixel</span>
+<span class="sd">    to find the direction the pixel is looking at:</span>
 
-<span class="sd">      beta is the pixel&#39;s angular distance to the centre</span>
-<span class="sd">      according to beta / tel_view = r / maxR</span>
-<span class="sd">      alpha is the polar angle between the y-axis and the pixel</span>
-<span class="sd">      to find the direction the pixel is looking at:</span>
-
-<span class="sd">      - the pixel direction is set to the telescope direction</span>
-<span class="sd">      - offset by beta towards up</span>
-<span class="sd">      - rotated around the telescope direction by the angle alpha</span>
+<span class="sd">    - the pixel direction is set to the telescope direction</span>
+<span class="sd">    - offset by beta towards up</span>
+<span class="sd">    - rotated around the telescope direction by the angle alpha</span>
 
 
 <span class="sd">    Parameters</span>
@@ -230,8 +235,8 @@
 <span class="sd">    projected perpendicular to the trace.</span>
 
 <span class="sd">    This is implemented as the scalar product of the connecting vector</span>
-<span class="sd">    between the core and the position of the telescope and `{ trace[1],</span>
-<span class="sd">    -trace[0] }` as the normal vector of the trace.</span>
+<span class="sd">    between the core and the position of the telescope and { trace[1],</span>
+<span class="sd">    -trace[0] } as the normal vector of the trace.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -240,6 +245,8 @@
 <span class="sd">    .. math::</span>
 
 <span class="sd">        M_\\text{Est} = \sum_i{ 2 \cdot \sqrt{1 + d_i^2} - 2}</span>
+
+<span class="sd">        </span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -266,6 +273,7 @@
 <span class="sd">    .. math::</span>
 
 <span class="sd">        M_\\text{Est} = \sum_i{ 2 \cdot \sqrt{1 + d_i^2} - 2}</span>
+
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -468,8 +476,7 @@
 
 <div class="viewcode-block" id="FitGammaHillas.fit_origin_minimise"><a class="viewcode-back" href="../../../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas.fit_origin_minimise">[docs]</a>    <span class="k">def</span> <span class="nf">fit_origin_minimise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">test_function</span><span class="o">=</span><span class="n">neg_angle_sum</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Fits the origin of the gamma with a minimisation procedure this</span>
-<span class="sd">        function expects that</span>
-<span class="sd">        :func:`get_great_circles&lt;ctapipe.reco.FitGammaHillas.get_great_circles&gt;`</span>
+<span class="sd">        function expects that `get_great_circles`</span>
 <span class="sd">        has been run already. A seed should be given otherwise it defaults to</span>
 <span class="sd">        &quot;straight up&quot; supperted functions to minimise are an M-estimator and the</span>
 <span class="sd">        negative sum of the angles to all normal vectors of the great</span>
@@ -515,7 +522,7 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The basis is the &quot;trace&quot; of each telescope&#39;s :class:`.GreatCircle` which</span>
+<span class="sd">        The basis is the &quot;trace&quot; of each telescope&#39;s `GreatCircle` which</span>
 <span class="sd">        can be determined by the telescope&#39;s position P=(Px, Py) and</span>
 <span class="sd">        the circle&#39;s normal vector, projected to the ground n=(nx,</span>
 <span class="sd">        ny), so that for every r=(x, y) on the trace</span>
@@ -530,6 +537,8 @@
 <span class="sd">        form:</span>
 
 <span class="sd">        .. math::</span>
+<span class="sd">            :label: fullmatrix</span>
+<span class="sd">            </span>
 <span class="sd">            \begin{pmatrix}</span>
 <span class="sd">                nx_1  &amp;  ny_1  \\</span>
 <span class="sd">                \vdots &amp; \vdots \\</span>
@@ -541,7 +550,7 @@
 <span class="sd">                \vdots \\</span>
 <span class="sd">                d_n</span>
 <span class="sd">            \end{pmatrix}</span>
-<span class="sd">            :label: fullmatrix</span>
+<span class="sd">            </span>
 
 
 <span class="sd">        or :math:`\boldsymbol{A} \cdot \vec r = \vec D`.</span>
@@ -551,20 +560,23 @@
 <span class="sd">        the method of least linear square:</span>
 
 <span class="sd">        .. math::</span>
+<span class="sd">            :label: rchisqr</span>
+<span class="sd">            </span>
 <span class="sd">            \vec{r}_{\chi^2} = (\boldsymbol{A}^\text{T} \cdot \boldsymbol{A})^{-1}</span>
 <span class="sd">            \boldsymbol{A}^\text{T} \cdot \vec D</span>
-<span class="sd">            :label: rchisqr</span>
+<span class="sd">            </span>
 
 <span class="sd">        :math:`\vec{r}_{\chi^2}` minimises the squared difference of</span>
+
 
 <span class="sd">        .. math::</span>
 
 <span class="sd">            \vec D - \boldsymbol{A} \cdot \vec r.</span>
 
-<span class="sd">        Weights are applied to every line of equation :eq:`fullmatrix` as stored in</span>
-<span class="sd">        circle.weight (assuming they have been set in</span>
-<span class="sd">        :func:`get_great_circles&lt;ctapipe.reco.FitGammaHillas.get_great_circles&gt;`</span>
-<span class="sd">        or elsewhere).</span>
+
+<span class="sd">        Weights are applied to every line of equation </span>
+<span class="sd">        :eq:`fullmatrix` as stored in circle.weight (assuming they have been </span>
+<span class="sd">        set in `get_great_circles` or elsewhere).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -702,7 +714,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:08.
 
     </p>
   </div>
@@ -724,7 +736,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post377+gitb116417',
+            VERSION:'0.4.0.post379+gitfd54a25',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
