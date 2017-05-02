@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.io.containers &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>ctapipe.io.containers &mdash; ctapipe v0.4.0.post377+gitb116417</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post377+gitb116417
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -189,6 +190,8 @@
     <span class="n">telescope_ids</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span> <span class="s2">&quot;list of IDs of telescopes used in the run&quot;</span><span class="p">)</span>
     <span class="n">pixel_pos</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to pixel positions&quot;</span><span class="p">)</span>
     <span class="n">optical_foclen</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to focal length&quot;</span><span class="p">)</span>
+    <span class="n">mirror_dish_area</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to the area of the mirror dish&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mirror_numtiles</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to the number of tiles for the mirror&quot;</span><span class="p">)</span>
     <span class="n">tel_pos</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">ndarray</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to telescope position&quot;</span><span class="p">)</span>
     <span class="n">num_pixels</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to number of pixels in camera&quot;</span><span class="p">)</span>
     <span class="n">num_channels</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;map of tel_id to number of channels&quot;</span><span class="p">)</span></div>
@@ -428,6 +431,112 @@
     <span class="n">trig</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">CentralTriggerContainer</span><span class="p">(),</span> <span class="s2">&quot;central trigger information&quot;</span><span class="p">)</span>
     <span class="n">count</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;number of events processed&quot;</span><span class="p">)</span>
     <span class="n">inst</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="n">InstrumentContainer</span><span class="p">(),</span> <span class="s2">&quot;instrumental information (deprecated&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">MuonRingParameter</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage of muon ring fit output</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    run_id : int</span>
+<span class="sd">        run number</span>
+<span class="sd">    event_id : int</span>
+<span class="sd">        event number</span>
+<span class="sd">    tel_id : int</span>
+<span class="sd">        telescope ID</span>
+<span class="sd">    ring_center_x, ring_center_y, ring_radius:</span>
+<span class="sd">        center position and radius of the fitted ring</span>
+<span class="sd">    ring_chi2_fit:</span>
+<span class="sd">        chi squared of the ring fit</span>
+<span class="sd">    ring_cov_matrix:</span>
+<span class="sd">        covariance matrix of ring parameters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#def __init__(self, name=&quot;MuonRingParameter&quot;):</span>
+        <span class="c1">#super().__init__(name)</span>
+    <span class="n">run_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;run identification number&quot;</span><span class="p">)</span>
+    <span class="n">event_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;event identification number&quot;</span><span class="p">)</span>
+    <span class="n">tel_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;telescope identification number&#39;</span><span class="p">)</span>
+    <span class="n">ring_center_x</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;centre (x) of the fitted muon ring&#39;</span><span class="p">)</span>
+    <span class="n">ring_center_y</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;centre (y) of the fitted muon ring&#39;</span><span class="p">)</span>
+    <span class="n">ring_radius</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;radius of the fitted muon ring&#39;</span><span class="p">)</span>
+    <span class="n">ring_chi2_fit</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;chisquare of the muon ring fit&#39;</span><span class="p">)</span>
+    <span class="n">ring_cov_matrix</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;covariance matrix of the muon ring fit&#39;</span><span class="p">)</span>
+    <span class="n">ring_fit_method</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s1">&#39;fitting method used for the muon ring&#39;</span><span class="p">)</span>
+    <span class="n">inputfile</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s1">&#39;input file&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MuonIntensityParameter</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage of muon intensity fit output</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    run_id : int</span>
+<span class="sd">        run number</span>
+<span class="sd">    event_id : int</span>
+<span class="sd">        event number</span>
+<span class="sd">    tel_id : int</span>
+<span class="sd">        telescope ID</span>
+<span class="sd">    impact_parameter: float</span>
+<span class="sd">        reconstructed impact parameter</span>
+<span class="sd">    impact_parameter_chi2:</span>
+<span class="sd">        chi squared impact parameter</span>
+<span class="sd">    intensity_cov_matrix:</span>
+<span class="sd">        Covariance matrix of impact parameters or alternatively:</span>
+<span class="sd">        full 5x5 covariance matrix for the complete fit (ring + impact)</span>
+<span class="sd">    impact_parameter_pos_x, impact_parameter_pos_y:</span>
+<span class="sd">        position on the mirror of the muon impact</span>
+<span class="sd">    COG_x, COG_y:</span>
+<span class="sd">        center of gravity</span>
+<span class="sd">    optical_efficiency_muon:</span>
+<span class="sd">        optical muon efficiency from intensity fit</span>
+<span class="sd">    ring_completeness:</span>
+<span class="sd">        completeness of the ring</span>
+<span class="sd">    ring_num_pixel: int</span>
+<span class="sd">        Number of pixels composing the ring</span>
+<span class="sd">    ring_size:</span>
+<span class="sd">        ring size</span>
+<span class="sd">    off_ring_size:</span>
+<span class="sd">        size outside of the ring</span>
+<span class="sd">    ring_width:</span>
+<span class="sd">        ring width</span>
+<span class="sd">    ring_time_width:</span>
+<span class="sd">        standard deviation of the photons time arrival</span>
+
+<span class="sd">    prediction: dict</span>
+<span class="sd">        ndarray of the predicted charge in all pixels</span>
+<span class="sd">    mask:</span>
+<span class="sd">        ndarray of the mask used on the image for fitting</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#def __init__(self, name=&quot;MuonIntensityParameter&quot;):</span>
+        <span class="c1">#super().__init__(name)</span>
+    <span class="n">run_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;run identification number&#39;</span><span class="p">)</span>
+    <span class="n">event_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;event identification number&#39;</span><span class="p">)</span>
+    <span class="n">tel_id</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;telescope identification number&#39;</span><span class="p">)</span>
+    <span class="n">ring_completeness</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;fraction of ring present&#39;</span><span class="p">)</span>
+    <span class="n">ring_num_pixel</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;number of pixels in the ring image&#39;</span><span class="p">)</span>
+    <span class="n">ring_size</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="s1">&#39;size of the ring in pe&#39;</span><span class="p">)</span>
+    <span class="n">off_ring_size</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;image size outside of ring in pe&#39;</span><span class="p">)</span>
+    <span class="n">ring_width</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;width of the muon ring in degrees&#39;</span><span class="p">)</span>
+    <span class="n">ring_time_width</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;duration of the ring image sequence&#39;</span><span class="p">)</span>
+    <span class="n">impact_parameter</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;distance of muon impact position from centre of mirror&#39;</span><span class="p">)</span>
+    <span class="n">impact_parameter_chi2</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;impact parameter chi squared&#39;</span><span class="p">)</span>
+    <span class="n">intensity_cov_matrix</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;covariance matrix of intensity&#39;</span><span class="p">)</span>
+    <span class="n">impact_parameter_pos_x</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;impact parameter x position&#39;</span><span class="p">)</span>
+    <span class="n">impact_parameter_pos_y</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;impact parameter y position&#39;</span><span class="p">)</span>
+    <span class="n">COG_x</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Centre of Gravity x&#39;</span><span class="p">)</span>
+    <span class="n">COG_y</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Centre of Gravity y&#39;</span><span class="p">)</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span><span class="s1">&#39;image prediction&#39;</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">Item</span><span class="p">([],</span><span class="s1">&#39;image pixel mask&#39;</span><span class="p">)</span>
+    <span class="n">optical_efficiency_muon</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="s1">&#39;optical efficiency muon&#39;</span><span class="p">)</span>
+    <span class="n">intensity_fit_method</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s1">&#39;intensity fit method&#39;</span><span class="p">)</span>
+    <span class="n">inputfile</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s1">&#39;input file&#39;</span><span class="p">)</span>
 </pre></div>
 
            </div>
@@ -439,7 +548,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
 
     </p>
   </div>
@@ -461,7 +570,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post377+gitb116417',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

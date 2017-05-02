@@ -1,0 +1,33 @@
+CHECMWaveformCleaner
+====================
+
+.. currentmodule:: ctapipe.image.waveform_cleaning
+
+.. autoclass:: CHECMWaveformCleaner
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~CHECMWaveformCleaner.name
+      ~CHECMWaveformCleaner.t0
+      ~CHECMWaveformCleaner.window_shift
+      ~CHECMWaveformCleaner.window_width
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~CHECMWaveformCleaner.apply
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: name
+   .. autoattribute:: t0
+   .. autoattribute:: window_shift
+   .. autoattribute:: window_width
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: apply

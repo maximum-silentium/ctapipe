@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.cleaning &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>ctapipe.image.cleaning &mdash; ctapipe v0.4.0.post377+gitb116417</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post377+gitb116417
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -152,7 +153,8 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="tailcuts_clean"><a class="viewcode-back" href="../../../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean">[docs]</a><span class="k">def</span> <span class="nf">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">boundary_thresh</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="tailcuts_clean"><a class="viewcode-back" href="../../../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean">[docs]</a><span class="k">def</span> <span class="nf">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">boundary_thresh</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                   <span class="n">keep_isolated_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Clean an image by selection pixels that pass a two-threshold</span>
 <span class="sd">    tail-cuts procedure.  The picture and boundary thresholds are</span>
 <span class="sd">    defined with respect to the pedestal dispersion. All pixels that</span>
@@ -174,6 +176,10 @@
 <span class="sd">    boundary_thresh: float or array</span>
 <span class="sd">        threshold above which pixels are retained if they have a neighbor </span>
 <span class="sd">        already above the picture_thresh</span>
+<span class="sd">    keep_isolated_pixels: bool</span>
+<span class="sd">        If True, pixels above the picture threshold will be included always, </span>
+<span class="sd">        if not they are only included if a neighbor is in the picture or </span>
+<span class="sd">        boundary</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -191,11 +197,19 @@
     <span class="c1"># matrix (2d), we find all pixels that are above the boundary threshold</span>
     <span class="c1"># AND have any neighbor that is in the picture</span>
     <span class="n">pixels_above_boundary</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;=</span> <span class="n">boundary_thresh</span>
-    <span class="n">pixels_with_picture_neighbors</span> <span class="o">=</span> <span class="p">(</span><span class="n">pixels_in_picture</span>
-                                     <span class="o">*</span> <span class="n">geom</span><span class="o">.</span><span class="n">neighbor_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pixels_with_picture_neighbors</span> <span class="o">=</span> <span class="p">(</span><span class="n">pixels_in_picture</span> <span class="o">*</span>
+                                     <span class="n">geom</span><span class="o">.</span><span class="n">neighbor_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">pixels_above_boundary</span>
-            <span class="o">&amp;</span> <span class="n">pixels_with_picture_neighbors</span><span class="p">)</span> <span class="o">|</span> <span class="n">pixels_in_picture</span></div>
+    <span class="k">if</span> <span class="n">keep_isolated_pixels</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">pixels_above_boundary</span>
+                <span class="o">&amp;</span> <span class="n">pixels_with_picture_neighbors</span><span class="p">)</span> <span class="o">|</span> <span class="n">pixels_in_picture</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pixels_with_boundary_neighbors</span> <span class="o">=</span> <span class="p">(</span><span class="n">pixels_above_boundary</span> <span class="o">*</span>
+                                         <span class="n">geom</span><span class="o">.</span><span class="n">neighbor_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">pixels_above_boundary</span> <span class="o">&amp;</span> <span class="n">pixels_with_picture_neighbors</span><span class="p">)</span> <span class="o">|</span>
+                <span class="p">(</span><span class="n">pixels_in_picture</span> <span class="o">&amp;</span>  <span class="n">pixels_with_boundary_neighbors</span><span class="p">))</span></div>
+
+
 
 
 <div class="viewcode-block" id="dilate"><a class="viewcode-back" href="../../../api/ctapipe.image.dilate.html#ctapipe.image.cleaning.dilate">[docs]</a><span class="k">def</span> <span class="nf">dilate</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
@@ -224,7 +238,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
 
     </p>
   </div>
@@ -246,7 +260,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post377+gitb116417',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

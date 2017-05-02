@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.instrument.camera &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>ctapipe.instrument.camera &mdash; ctapipe v0.4.0.post377+gitb116417</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post377+gitb116417
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -148,18 +149,25 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Utilities for reading or working with Camera geometry files</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">astropy</span> <span class="k">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 <span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">Angle</span>
 <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Table</span>
 <span class="kn">from</span> <span class="nn">astropy.utils</span> <span class="k">import</span> <span class="n">lazyproperty</span>
+
 <span class="kn">from</span> <span class="nn">ctapipe.io.files</span> <span class="k">import</span> <span class="n">get_file_type</span>
-<span class="kn">from</span> <span class="nn">ctapipe.utils.datasets</span> <span class="k">import</span> <span class="n">get_path</span>
+<span class="kn">from</span> <span class="nn">ctapipe.utils.datasets</span> <span class="k">import</span> <span class="n">get_dataset</span>
 <span class="kn">from</span> <span class="nn">ctapipe.utils.linalg</span> <span class="k">import</span> <span class="n">rotation_matrix_2d</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span> <span class="k">as</span> <span class="n">KDTree</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CameraGeometry&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;make_rectangular_camera_geometry&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;get_camera_types&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;print_camera_types&#39;</span><span class="p">]</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 <span class="c1"># dictionary to convert number of pixels to camera + the focal length of the</span>
 <span class="c1"># telescope into a camera type for use in `CameraGeometry.guess()`</span>
@@ -242,7 +250,7 @@
         <span class="c1"># FIXME the rotation does not work on 2D pixel grids</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pix_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">cam_rotation</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cam_rotation</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cam_rotation</span> <span class="o">=</span> <span class="n">cam_rotation</span><span class="c1">#Angle(0 * u.deg)</span>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cam_id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">cam_id</span><span class="p">)</span>
@@ -569,7 +577,7 @@
     <span class="c1"># let&#39;s assume the instrument name is encoded in the</span>
     <span class="c1"># filename</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">instrument_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="n">geomfile</span> <span class="o">=</span> <span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_camgeom.fits.gz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+    <span class="n">geomfile</span> <span class="o">=</span> <span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_camgeom.fits.gz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
     <span class="n">geom</span> <span class="o">=</span> <span class="n">_load_camera_table_from_file</span><span class="p">(</span><span class="n">cam_id</span><span class="p">,</span> <span class="n">geomfile</span><span class="o">=</span><span class="n">geomfile</span><span class="p">)</span>
     <span class="n">neigh_list</span> <span class="o">=</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;PIX_NEIG&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
@@ -592,7 +600,10 @@
         <span class="n">pix_y</span><span class="o">=</span><span class="n">yy</span><span class="p">,</span>
         <span class="n">pix_area</span><span class="o">=</span><span class="n">aa</span><span class="p">,</span>
         <span class="n">neighbors</span><span class="o">=</span><span class="n">neigh</span><span class="p">,</span>
-        <span class="n">pix_type</span><span class="o">=</span><span class="s1">&#39;hexagonal&#39;</span>
+        <span class="n">pix_type</span><span class="o">=</span><span class="s1">&#39;hexagonal&#39;</span><span class="p">,</span>
+        <span class="n">cam_rotation</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="s1">&#39;0deg&#39;</span><span class="p">),</span>
+        <span class="n">pix_rotation</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="s1">&#39;0deg&#39;</span><span class="p">),</span>
+
     <span class="p">)</span>
 
 
@@ -653,6 +664,52 @@
             <span class="n">neigh2d</span><span class="p">[</span><span class="n">ipix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">return</span> <span class="n">neigh2d</span>
+
+
+<div class="viewcode-block" id="get_camera_types"><a class="viewcode-back" href="../../../api/ctapipe.instrument.get_camera_types.html#ctapipe.instrument.get_camera_types">[docs]</a><span class="k">def</span> <span class="nf">get_camera_types</span><span class="p">(</span><span class="n">inst</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; return dict of camera names mapped to a list of tel_ids</span>
+<span class="sd">     that use that camera</span>
+<span class="sd">     </span>
+<span class="sd">     Parameters</span>
+<span class="sd">     ----------</span>
+<span class="sd">     inst: instument Container</span>
+<span class="sd">     </span>
+<span class="sd">     &quot;&quot;&quot;</span>
+
+    <span class="n">cam_types</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">telid</span> <span class="ow">in</span> <span class="n">inst</span><span class="o">.</span><span class="n">pixel_pos</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">pixel_pos</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">optical_foclen</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span>
+        <span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">guess</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="n">camid</span><span class="p">[</span><span class="n">geom</span><span class="o">.</span><span class="n">cam_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">telid</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cam_types</span></div>
+
+
+<div class="viewcode-block" id="print_camera_types"><a class="viewcode-back" href="../../../api/ctapipe.instrument.print_camera_types.html#ctapipe.instrument.print_camera_types">[docs]</a><span class="k">def</span> <span class="nf">print_camera_types</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">printer</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print out a friendly table of which camera types are registered in the </span>
+<span class="sd">    inst dictionary (from a hessio file), along with their starting and </span>
+<span class="sd">    stopping `tel_id`s.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inst: ctapipe.io.containers.InstrumentContainer</span>
+<span class="sd">        input container</span>
+<span class="sd">    printer:</span>
+<span class="sd">        function to call to output the text (default is the standard python </span>
+<span class="sd">        print command, but you can give for example logger.info to have it </span>
+<span class="sd">        write to a logger) </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">camtypes</span> <span class="o">=</span> <span class="n">get_camera_types</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+
+    <span class="n">printer</span><span class="p">(</span><span class="s2">&quot;              CAMERA  Num IDmin  IDmax&quot;</span><span class="p">)</span>
+    <span class="n">printer</span><span class="p">(</span><span class="s2">&quot;=====================================&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">cam</span><span class="p">,</span> <span class="n">tels</span> <span class="ow">in</span> <span class="n">camtypes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">printer</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:&gt;20s}</span><span class="s2"> </span><span class="si">{:4d}</span><span class="s2"> </span><span class="si">{:4d}</span><span class="s2"> ..</span><span class="si">{:4d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cam</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tels</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">tels</span><span class="p">),</span>
+                                                     <span class="nb">max</span><span class="p">(</span><span class="n">tels</span><span class="p">)))</span></div>
 </pre></div>
 
            </div>
@@ -664,7 +721,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
 
     </p>
   </div>
@@ -686,7 +743,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post377+gitb116417',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

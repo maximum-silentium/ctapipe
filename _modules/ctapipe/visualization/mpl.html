@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.visualization.mpl &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>ctapipe.visualization.mpl &mdash; ctapipe v0.4.0.post377+gitb116417</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post377+gitb116417
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -148,10 +149,11 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Visualization routines using matplotlib</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="k">import</span> <span class="n">PatchCollection</span>
+<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="k">import</span> <span class="n">PatchCollection</span><span class="p">,</span> <span class="n">LineCollection</span>
 <span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="k">import</span> <span class="n">Ellipse</span><span class="p">,</span> <span class="n">RegularPolygon</span><span class="p">,</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Circle</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="k">import</span> <span class="n">Line2D</span>
 <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <span class="n">Normalize</span><span class="p">,</span> <span class="n">LogNorm</span><span class="p">,</span> <span class="n">SymLogNorm</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">sqrt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -530,8 +532,8 @@
 
 
         <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_ellipse</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">(</span><span class="n">cen_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="p">),</span>
-                              <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span>
-                              <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">momparams</span><span class="o">.</span><span class="n">psi</span><span class="o">.</span><span class="n">rad</span><span class="p">,</span>
+                              <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+                              <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">momparams</span><span class="o">.</span><span class="n">psi</span><span class="o">.</span><span class="n">rad</span><span class="p">,</span>
                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">cen_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="p">,</span>
                        <span class="p">(</span><span class="s2">&quot;(</span><span class="si">{:.02f}</span><span class="s2">,</span><span class="si">{:.02f}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -576,18 +578,20 @@
 <span class="sd">    Display a top-town view of a telescope array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">telx</span><span class="p">,</span> <span class="n">tely</span><span class="p">,</span> <span class="n">mirrorarea</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">telx</span><span class="p">,</span> <span class="n">tely</span><span class="p">,</span> <span class="n">tel_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
                  <span class="n">axes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Array&quot;</span><span class="p">,</span> <span class="n">autoupdate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
-        <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">Circle</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-                   <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">telx</span><span class="p">,</span> <span class="n">tely</span><span class="p">,</span> <span class="n">mirrorarea</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">tel_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tel_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">telx</span><span class="p">))</span>
+        <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">radius</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="n">radius</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                   <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">telx</span><span class="p">,</span> <span class="n">tely</span><span class="p">)]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">autoupdate</span> <span class="o">=</span> <span class="n">autoupdate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span> <span class="o">=</span> <span class="n">PatchCollection</span><span class="p">(</span><span class="n">patches</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">telx</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_cmap</span><span class="p">(</span><span class="s1">&#39;spectral_r&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span> <span class="o">=</span> <span class="n">PatchCollection</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="n">match_original</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Set1</span><span class="p">((</span><span class="n">tel_type</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span> <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="p">)</span>
@@ -596,8 +600,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">telescopes</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes_hillas</span> <span class="o">=</span> <span class="n">axes</span> <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -613,7 +617,116 @@
     <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; signal a redraw if necessary &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoupdate</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span></div>
+            <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">add_ellipse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroid</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        plot an ellipse on top of the camera</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        centroid: (float, float)</span>
+<span class="sd">            position of centroid</span>
+<span class="sd">        length: float</span>
+<span class="sd">            major axis</span>
+<span class="sd">        width: float</span>
+<span class="sd">            minor axis</span>
+<span class="sd">        angle: float</span>
+<span class="sd">            rotation angle wrt x-axis about the centroid, anticlockwise, in radians</span>
+<span class="sd">        asymmetry: float</span>
+<span class="sd">            3rd-order moment for directionality if known</span>
+<span class="sd">        kwargs:</span>
+<span class="sd">            any MatPlotLib style arguments to pass to the Ellipse patch</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="n">centroid</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+                          <span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ellipse</span>
+
+    <span class="k">def</span> <span class="nf">add_polygon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroid</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">nsides</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        plot a polygon on top of the camera</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        centroid: (float, float)</span>
+<span class="sd">            position of centroid</span>
+<span class="sd">        radius: float</span>
+<span class="sd">            radius</span>
+<span class="sd">        nsides: int</span>
+<span class="sd">            Number of points on polygon</span>
+<span class="sd">        kwargs:</span>
+<span class="sd">            any MatPlotLib style arguments to pass to the RegularPolygon patch</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">polygon</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="n">centroid</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">numVertices</span><span class="o">=</span><span class="n">nsides</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">polygon</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">polygon</span>
+
+    <span class="k">def</span> <span class="nf">overlay_moments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">momparams</span><span class="p">,</span> <span class="n">tel_position</span><span class="p">,</span> <span class="n">scale_fac</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;helper to overlay ellipse from a `reco.MomentParameters` structure</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        momparams: `reco.MomentParameters`</span>
+<span class="sd">            structuring containing Hillas-style parameterization</span>
+<span class="sd">        tel_position: list</span>
+<span class="sd">            (x, y) positions of each telescope</span>
+<span class="sd">        scale_fac: float</span>
+<span class="sd">            scaling factor to apply to width and length when overlaying moments</span>
+<span class="sd">        kwargs: key=value</span>
+<span class="sd">            any style keywords to pass to matplotlib (e.g. color=&#39;red&#39;</span>
+<span class="sd">            or linewidth=6)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># strip off any units</span>
+        <span class="n">ellipse_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">size_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">momparams</span><span class="p">:</span>
+
+            <span class="n">length</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">scale_fac</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">width</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">scale_fac</span>
+            <span class="n">size_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">tel_x</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">tel_position</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">tel_y</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">tel_position</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">tel_x</span><span class="p">,</span><span class="n">tel_y</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+                              <span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">momparams</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">psi</span><span class="o">.</span><span class="n">rad</span><span class="p">))</span>
+            <span class="n">ellipse_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+
+        <span class="n">patches</span> <span class="o">=</span> <span class="n">PatchCollection</span><span class="p">(</span><span class="n">ellipse_list</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">patches</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="c1"># Set ellipse colour based on image size</span>
+        <span class="n">patches</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">size_list</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes_hillas</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">patches</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">overlay_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">momparams</span><span class="p">,</span> <span class="n">tel_position</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;helper to overlay ellipse from a `reco.MomentParameters` structure</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        momparams: `reco.MomentParameters`</span>
+<span class="sd">            structuring containing Hillas-style parameterization</span>
+<span class="sd">        tel_position: list</span>
+<span class="sd">            (x, y) positions of each telescope</span>
+<span class="sd">        kwargs: key=value</span>
+<span class="sd">            any style keywords to pass to matplotlib (e.g. color=&#39;red&#39;</span>
+<span class="sd">            or linewidth=6)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># strip off any units</span>
+        <span class="n">line_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">size_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">momparams</span><span class="p">:</span>
+            <span class="n">tel_x</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">tel_position</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">tel_y</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">tel_position</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">psi</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">x_sc</span> <span class="o">=</span> <span class="p">[</span><span class="n">tel_x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">tel_x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">]</span>
+            <span class="n">y_sc</span> <span class="o">=</span> <span class="p">[</span><span class="n">tel_y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">tel_y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">]</span>
+
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">axes_hillas</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">Line2D</span><span class="p">(</span><span class="n">x_sc</span><span class="p">,</span> <span class="n">y_sc</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span></div>
 </pre></div>
 
            </div>
@@ -625,7 +738,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
 
     </p>
   </div>
@@ -647,7 +760,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post377+gitb116417',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

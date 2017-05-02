@@ -1,0 +1,19 @@
+TableInterpolator
+=================
+
+.. currentmodule:: ctapipe.utils
+
+.. autoclass:: TableInterpolator
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~TableInterpolator.interpolate
+      ~TableInterpolator.interpolated_image
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: interpolate
+   .. automethod:: interpolated_image

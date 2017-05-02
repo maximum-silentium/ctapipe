@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.core.provenance &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>ctapipe.core.provenance &mdash; ctapipe v0.4.0.post377+gitb116417</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post377+gitb116417
               </div>
             
           
@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -363,21 +364,21 @@
 
 
 <span class="k">def</span> <span class="nf">_sample_cpu_and_memory</span><span class="p">():</span>
-    <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">(</span><span class="n">percpu</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-    <span class="n">mem</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
+    <span class="c1"># times = np.asarray(psutil.cpu_times(percpu=True))</span>
+    <span class="c1"># mem = psutil.virtual_memory()</span>
 
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="n">time_utc</span><span class="o">=</span><span class="n">Time</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">utc</span><span class="o">.</span><span class="n">isot</span><span class="p">,</span>
-        <span class="n">memory</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">mem</span><span class="o">.</span><span class="n">total</span><span class="p">,</span>
-                    <span class="n">inactive</span><span class="o">=</span><span class="n">mem</span><span class="o">.</span><span class="n">inactive</span><span class="p">,</span>
-                    <span class="n">available</span><span class="o">=</span><span class="n">mem</span><span class="o">.</span><span class="n">available</span><span class="p">,</span>
-                    <span class="n">free</span><span class="o">=</span><span class="n">mem</span><span class="o">.</span><span class="n">free</span><span class="p">,</span>
-                    <span class="n">wired</span><span class="o">=</span><span class="n">mem</span><span class="o">.</span><span class="n">wired</span><span class="p">),</span>
-        <span class="n">cpu</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">ncpu</span><span class="o">=</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(),</span>
-                 <span class="n">user</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">times</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]),</span>
-                 <span class="n">nice</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">times</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
-                 <span class="n">system</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">times</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]),</span>
-                 <span class="n">idle</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">times</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])),</span>
+        <span class="c1"># memory=dict(total=mem.total,</span>
+        <span class="c1">#             inactive=mem.inactive,</span>
+        <span class="c1">#             available=mem.available,</span>
+        <span class="c1">#             free=mem.free,</span>
+        <span class="c1">#             wired=mem.wired),</span>
+        <span class="c1"># cpu=dict(ncpu=psutil.cpu_count(),</span>
+        <span class="c1">#          user=list(times[:, 0]),</span>
+        <span class="c1">#          nice=list(times[:, 1]),</span>
+        <span class="c1">#          system=list(times[:, 2]),</span>
+        <span class="c1">#          idle=list(times[:, 3])),</span>
     <span class="p">)</span>
 </pre></div>
 
@@ -390,7 +391,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
 
     </p>
   </div>
@@ -412,7 +413,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post377+gitb116417',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

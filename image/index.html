@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.4.0.post105+gitd78cb8b</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post377+gitb116417</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post105+gitd78cb8b" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post377+gitb116417" href="../index.html"/>
         <link rel="next" title="chi_squared" href="../api/ctapipe.image.chi_squared.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.4.0.post105+gitd78cb8b
+                0.4.0.post377+gitb116417
               </div>
             
           
@@ -123,6 +123,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#id7">Class Inheritance Diagram</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.charge_extractors">ctapipe.image.charge_extractors Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.waveform_cleaning">ctapipe.image.waveform_cleaning Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Class Inheritance Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.reductors">ctapipe.image.reductors Module</a></li>
 </ul>
 </li>
 </ul>
@@ -132,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 </ul>
 
             
@@ -192,6 +204,9 @@
 <li><a class="reference internal" href="#module-ctapipe.image.hillas" title="ctapipe.image.hillas"><code class="xref py py-obj docutils literal"><span class="pre">hillas</span></code></a>: image moment parameterization</li>
 <li><a class="reference internal" href="#module-ctapipe.image.toymodel" title="ctapipe.image.toymodel"><code class="xref py py-obj docutils literal"><span class="pre">toymodel</span></code></a>: fake shower image generation for testing purposes</li>
 <li><a class="reference internal" href="#module-ctapipe.image.pixel_likelihood" title="ctapipe.image.pixel_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">pixel_likelihood</span></code></a>: generates the likelihood of a pixel intensity, given an expectation value</li>
+<li><a class="reference internal" href="#module-ctapipe.image.charge_extractors" title="ctapipe.image.charge_extractors"><code class="xref py py-obj docutils literal"><span class="pre">charge_extractors</span></code></a>: extracts charge from the waveform, resulting in a single number per pixel</li>
+<li><code class="xref py py-obj docutils literal"><span class="pre">waveform_cleaners</span></code>: cleans the waveform, e.g. applying filters, convolutions, or baseline subtractions</li>
+<li><a class="reference internal" href="#module-ctapipe.image.reductors" title="ctapipe.image.reductors"><code class="xref py py-obj docutils literal"><span class="pre">reductors</span></code></a>: performs data volume reduction</li>
 </ul>
 </div>
 <div class="section" id="reference-api">
@@ -257,14 +272,44 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.HillasParameterizationError.html#ctapipe.image.HillasParameterizationError" title="ctapipe.image.HillasParameterizationError"><code class="xref py py-obj docutils literal"><span class="pre">HillasParameterizationError</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.AverageWfPeakIntegrator.html#ctapipe.image.AverageWfPeakIntegrator" title="ctapipe.image.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.CHECMWaveformCleaner.html#ctapipe.image.CHECMWaveformCleaner" title="ctapipe.image.CHECMWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">CHECMWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.ChargeExtractorFactory.html#ctapipe.image.ChargeExtractorFactory" title="ctapipe.image.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Factory to obtain a ChargeExtractor.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.FullIntegrator.html#ctapipe.image.FullIntegrator" title="ctapipe.image.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.GlobalPeakIntegrator.html#ctapipe.image.GlobalPeakIntegrator" title="ctapipe.image.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.HillasParameterizationError.html#ctapipe.image.HillasParameterizationError" title="ctapipe.image.HillasParameterizationError"><code class="xref py py-obj docutils literal"><span class="pre">HillasParameterizationError</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.LocalPeakIntegrator.html#ctapipe.image.LocalPeakIntegrator" title="ctapipe.image.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.MomentParameters.html#ctapipe.image.MomentParameters" title="ctapipe.image.MomentParameters"><code class="xref py py-obj docutils literal"><span class="pre">MomentParameters</span></code></a>(size,&nbsp;cen_x,&nbsp;cen_y,&nbsp;length,&nbsp;...)</td>
 <td></td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.NeighbourPeakIntegrator.html#ctapipe.image.NeighbourPeakIntegrator" title="ctapipe.image.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.NullWaveformCleaner.html#ctapipe.image.NullWaveformCleaner" title="ctapipe.image.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Dummy waveform cleaner that simply returns its input</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.PixelLikelihoodError.html#ctapipe.image.PixelLikelihoodError" title="ctapipe.image.PixelLikelihoodError"><code class="xref py py-obj docutils literal"><span class="pre">PixelLikelihoodError</span></code></a></td>
 <td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.SimpleIntegrator.html#ctapipe.image.SimpleIntegrator" title="ctapipe.image.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.WaveformCleanerFactory.html#ctapipe.image.WaveformCleanerFactory" title="ctapipe.image.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Factory to obtain a WaveformCleaner.</td>
 </tr>
 </tbody>
 </table>
@@ -508,6 +553,101 @@ implementation, which tries to intellegently switch between the two. Speed tests
 </map>
 </div>
 </div>
+<hr class="docutils" />
+<div class="section" id="module-ctapipe.image.charge_extractors">
+<span id="ctapipe-image-charge-extractors-module"></span><h3>ctapipe.image.charge_extractors Module<a class="headerlink" href="#module-ctapipe.image.charge_extractors" title="Permalink to this headline">¶</a></h3>
+<p>Charge extraction algorithms to reduce the image to one value per pixel</p>
+<div class="section" id="id8">
+<h4>Classes<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" title="ctapipe.image.charge_extractors.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Factory to obtain a ChargeExtractor.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.FullIntegrator.html#ctapipe.image.charge_extractors.FullIntegrator" title="ctapipe.image.charge_extractors.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.SimpleIntegrator.html#ctapipe.image.charge_extractors.SimpleIntegrator" title="ctapipe.image.charge_extractors.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" title="ctapipe.image.charge_extractors.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" title="ctapipe.image.charge_extractors.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" title="ctapipe.image.charge_extractors.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" title="ctapipe.image.charge_extractors.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id9">
+<h4>Class Inheritance Diagram<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<img src="../_images/inheritance-e0b62dd1c49f653bd5e44e8d090e192573dc3427.png" alt="Inheritance diagram of ctapipe.image.charge_extractors.ChargeExtractorFactory, ctapipe.image.charge_extractors.FullIntegrator, ctapipe.image.charge_extractors.SimpleIntegrator, ctapipe.image.charge_extractors.GlobalPeakIntegrator, ctapipe.image.charge_extractors.LocalPeakIntegrator, ctapipe.image.charge_extractors.NeighbourPeakIntegrator, ctapipe.image.charge_extractors.AverageWfPeakIntegrator" usemap="#inheritancec8a2081ea2" class="inheritance"/>
+<map id="inheritancec8a2081ea2" name="inheritancec8a2081ea2">
+<area shape="rect" id="node1" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" target="_top" title="AverageWfPeakIntegrator" alt="" coords="676,3,765,16"/>
+<area shape="rect" id="node11" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" target="_top" title="GlobalPeakIntegrator" alt="" coords="683,28,758,41"/>
+<area shape="rect" id="node13" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" target="_top" title="LocalPeakIntegrator" alt="" coords="685,53,756,66"/>
+<area shape="rect" id="node14" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" target="_top" title="NeighbourPeakIntegrator" alt="" coords="677,78,764,91"/>
+<area shape="rect" id="node4" title="Base class of all Components (sometimes called" alt="" coords="223,53,269,66"/>
+<area shape="rect" id="node6" title="A base class for all class factories that exist in the `Tools`/`Components`" alt="" coords="305,66,341,78"/>
+<area shape="rect" id="node5" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" target="_top" title="Factory to obtain a ChargeExtractor." alt="" coords="378,66,461,78"/>
+<area shape="rect" id="node9" href="../api/ctapipe.image.charge_extractors.FullIntegrator.html#ctapipe.image.charge_extractors.FullIntegrator" target="_top" title="FullIntegrator" alt="" coords="492,28,543,41"/>
+<area shape="rect" id="node12" title="The base class for all classes that have descriptors." alt="" coords="3,53,60,66"/>
+<area shape="rect" id="node16" href="../api/ctapipe.image.charge_extractors.SimpleIntegrator.html#ctapipe.image.charge_extractors.SimpleIntegrator" target="_top" title="SimpleIntegrator" alt="" coords="582,66,643,78"/>
+</map>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="module-ctapipe.image.waveform_cleaning">
+<span id="ctapipe-image-waveform-cleaning-module"></span><h3>ctapipe.image.waveform_cleaning Module<a class="headerlink" href="#module-ctapipe.image.waveform_cleaning" title="Permalink to this headline">¶</a></h3>
+<p>Waveform cleaning algorithms (smoothing, filtering, baseline subtraction)</p>
+<div class="section" id="id10">
+<h4>Classes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.waveform_cleaning.WaveformCleanerFactory.html#ctapipe.image.waveform_cleaning.WaveformCleanerFactory" title="ctapipe.image.waveform_cleaning.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Factory to obtain a WaveformCleaner.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.waveform_cleaning.CHECMWaveformCleaner.html#ctapipe.image.waveform_cleaning.CHECMWaveformCleaner" title="ctapipe.image.waveform_cleaning.CHECMWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">CHECMWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html#ctapipe.image.waveform_cleaning.NullWaveformCleaner" title="ctapipe.image.waveform_cleaning.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Dummy waveform cleaner that simply returns its input</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id11">
+<h4>Class Inheritance Diagram<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<img src="../_images/inheritance-970a5ff3425bc3628cb7b7fad56065abb67f3d09.png" alt="Inheritance diagram of ctapipe.image.waveform_cleaning.WaveformCleanerFactory, ctapipe.image.waveform_cleaning.CHECMWaveformCleaner, ctapipe.image.waveform_cleaning.NullWaveformCleaner" usemap="#inheritance853583608d" class="inheritance"/>
+<map id="inheritance853583608d" name="inheritance853583608d">
+<area shape="rect" id="node1" href="../api/ctapipe.image.waveform_cleaning.CHECMWaveformCleaner.html#ctapipe.image.waveform_cleaning.CHECMWaveformCleaner" target="_top" title="CHECMWaveformCleaner" alt="" coords="617,4,764,25"/>
+<area shape="rect" id="node8" href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html#ctapipe.image.waveform_cleaning.NullWaveformCleaner" target="_top" title="Dummy waveform cleaner that simply returns its input" alt="" coords="628,45,753,65"/>
+<area shape="rect" id="node3" title="Base class of all Components (sometimes called" alt="" coords="359,65,433,86"/>
+<area shape="rect" id="node6" title="A base class for all class factories that exist in the `Tools`/`Components`" alt="" coords="496,85,555,106"/>
+<area shape="rect" id="node9" href="../api/ctapipe.image.waveform_cleaning.WaveformCleanerFactory.html#ctapipe.image.waveform_cleaning.WaveformCleanerFactory" target="_top" title="Factory to obtain a WaveformCleaner." alt="" coords="620,85,761,106"/>
+<area shape="rect" id="node7" title="The base class for all classes that have descriptors." alt="" coords="4,65,97,86"/>
+</map>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="module-ctapipe.image.reductors">
+<span id="ctapipe-image-reductors-module"></span><h3>ctapipe.image.reductors Module<a class="headerlink" href="#module-ctapipe.image.reductors" title="Permalink to this headline">¶</a></h3>
+<p>Reductor algorithms for the data volume reduction.</p>
+</div>
 </div>
 </div>
 
@@ -530,7 +670,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 21 Apr 2017 15:53.
+        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 15:37.
 
     </p>
   </div>
@@ -552,7 +692,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post105+gitd78cb8b',
+            VERSION:'0.4.0.post377+gitb116417',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
