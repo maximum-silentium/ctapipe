@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraGeometry &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
+  <title>CameraGeometry &mdash; ctapipe v0.4.0.post391+git4be2ea6</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post391+git4be2ea6" href="../index.html"/>
         <link rel="up" title="Instrument (instrument)" href="../instrument/index.html"/>
         <link rel="next" title="Input/Output (io)" href="../io/index.html"/>
         <link rel="prev" title="print_camera_types" href="ctapipe.instrument.print_camera_types.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.0.post379+gitfd54a25
+                0.4.0.post391+git4be2ea6
               </div>
             
           
@@ -205,14 +205,14 @@ times with the same inputs will give back the same object (for speed).</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_file" title="ctapipe.instrument.CameraGeometry.from_file"><code class="xref py py-obj docutils literal"><span class="pre">from_file</span></code></a>(filename,&nbsp;tel_id)</td>
-<td>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> from the a data file</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_name" title="ctapipe.instrument.CameraGeometry.from_name"><code class="xref py py-obj docutils literal"><span class="pre">from_name</span></code></a>([camera_id,&nbsp;array_id,&nbsp;version])</td>
+<td>Construct a CameraGeometry using the name of the camera and array.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_name" title="ctapipe.instrument.CameraGeometry.from_name"><code class="xref py py-obj docutils literal"><span class="pre">from_name</span></code></a>(name,&nbsp;tel_id)</td>
-<td>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> from the name of the instrument and telescope id, if it can be found in a standard database.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_table" title="ctapipe.instrument.CameraGeometry.from_table"><code class="xref py py-obj docutils literal"><span class="pre">from_table</span></code></a>(url_or_table,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_table" title="ctapipe.instrument.CameraGeometry.from_table"><code class="xref py py-obj docutils literal"><span class="pre">from_table</span></code></a>(url_or_table,&nbsp;\*\*kwargs)</td>
 <td>Load a CameraGeometry from an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18139)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> instance or a</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.get_known_camera_names" title="ctapipe.instrument.CameraGeometry.get_known_camera_names"><code class="xref py py-obj docutils literal"><span class="pre">get_known_camera_names</span></code></a>([array_id])</td>
+<td>Returns a list of camera_ids that are registered in  <code class="xref py py-obj docutils literal"><span class="pre">ctapipe_resources</span></code>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.instrument.CameraGeometry.guess" title="ctapipe.instrument.CameraGeometry.guess"><code class="xref py py-obj docutils literal"><span class="pre">guess</span></code></a>(pix_x:&nbsp;Unit(&quot;m&quot;),&nbsp;pix_y:&nbsp;Unit(&quot;m&quot;),&nbsp;...)</td>
 <td>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> by guessing the appropriate quantities from a list of pixel positions and the focal length.</td>
@@ -243,16 +243,35 @@ calculated</p>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="classmethod">
-<dt id="ctapipe.instrument.CameraGeometry.from_file">
-<em class="property">classmethod </em><code class="descname">from_file</code><span class="sig-paren">(</span><em>filename</em>, <em>tel_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/camera.html#CameraGeometry.from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraGeometry.from_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> from the a data file</p>
-</dd></dl>
-
-<dl class="classmethod">
 <dt id="ctapipe.instrument.CameraGeometry.from_name">
-<em class="property">classmethod </em><code class="descname">from_name</code><span class="sig-paren">(</span><em>name</em>, <em>tel_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/camera.html#CameraGeometry.from_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraGeometry.from_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a <a class="reference internal" href="#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> from the name of the instrument and
-telescope id, if it can be found in a standard database.</p>
+<em class="property">classmethod </em><code class="descname">from_name</code><span class="sig-paren">(</span><em>camera_id='NectarCam'</em>, <em>array_id='CTA'</em>, <em>version=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/camera.html#CameraGeometry.from_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraGeometry.from_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a CameraGeometry using the name of the camera and array.</p>
+<p>This expects that there is a resource in the <code class="xref py py-obj docutils literal"><span class="pre">ctapipe_resources</span></code> module
+called &quot;[array]-[camera].camgeom.fits.gz&quot; or &quot;[array]-[camera]-[
+version].camgeom.fits.gz&quot;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>camera_id: str</strong></p>
+<blockquote>
+<div><p>name of camera (e.g. 'NectarCam', 'LSTCam', 'GCT', 'SST-1M')</p>
+</div></blockquote>
+<p><strong>array_id: str</strong></p>
+<blockquote>
+<div><p>array identifier (e.g. 'CTA', 'HESS')</p>
+</div></blockquote>
+<p><strong>version:</strong></p>
+<blockquote>
+<div><p>camera version id (currently unused)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">new CameraGeometry</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -278,6 +297,29 @@ format cannot be determined from the file extension</p>
 <div><p>extra arguments passed to <code class="xref py py-obj docutils literal"><span class="pre">astropy.table.read()</span></code>, depending on 
 file type (e.g. format, hdu, path)</p>
 </div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ctapipe.instrument.CameraGeometry.get_known_camera_names">
+<em class="property">classmethod </em><code class="descname">get_known_camera_names</code><span class="sig-paren">(</span><em>array_id='CTA'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/camera.html#CameraGeometry.get_known_camera_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraGeometry.get_known_camera_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of camera_ids that are registered in 
+<code class="xref py py-obj docutils literal"><span class="pre">ctapipe_resources</span></code>. These are all the camera-ids that can be 
+instantiated by the <a class="reference internal" href="#ctapipe.instrument.CameraGeometry.from_name" title="ctapipe.instrument.CameraGeometry.from_name"><code class="xref py py-obj docutils literal"><span class="pre">from_name</span></code></a> method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>array_id: str</strong></p>
+<blockquote>
+<div><p>which array to search (default CTA)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list(str)</p>
 </td>
 </tr>
 </tbody>
@@ -381,7 +423,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:09.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:29.
 
     </p>
   </div>
@@ -403,7 +445,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post379+gitfd54a25',
+            VERSION:'0.4.0.post391+git4be2ea6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

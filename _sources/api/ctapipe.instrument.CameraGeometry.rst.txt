@@ -17,9 +17,9 @@ CameraGeometry
 
    .. autosummary::
 
-      ~CameraGeometry.from_file
       ~CameraGeometry.from_name
       ~CameraGeometry.from_table
+      ~CameraGeometry.get_known_camera_names
       ~CameraGeometry.guess
       ~CameraGeometry.make_rectangular
       ~CameraGeometry.rotate
@@ -32,9 +32,9 @@ CameraGeometry
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: from_file
    .. automethod:: from_name
    .. automethod:: from_table
+   .. automethod:: get_known_camera_names
    .. automethod:: guess
    .. automethod:: make_rectangular
    .. automethod:: rotate

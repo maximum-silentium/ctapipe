@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.4.0.post379+gitfd54a25</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post391+git4be2ea6</title>
   
 
   
@@ -33,8 +33,8 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post379+gitfd54a25" href="../index.html"/>
-        <link rel="next" title="chi_squared" href="../api/ctapipe.image.chi_squared.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post391+git4be2ea6" href="../index.html"/>
+        <link rel="next" title="Hillas Parameterization" href="hillas.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.4.0.post379+gitfd54a25
+                0.4.0.post391+git4be2ea6
               </div>
             
           
@@ -95,45 +95,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets (<code class="docutils literal"><span class="pre">datasets</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../flow/index.html">Flow-based framework (<code class="docutils literal"><span class="pre">flow</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hillas.html">Hillas Parameterization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleaning.html">Image and Waveform Cleaning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="muon.html">Muon image analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toymodel.html">Toy model image generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pixel_likelihood.html">Pixel likelihood calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charge_extractors.html">Charge Extraction (cube to image)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reductors.html">Image volume reduction</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image">ctapipe.image Package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.toymodel">ctapipe.image.toymodel Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Functions</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.hillas">ctapipe.image.hillas Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.cleaning">ctapipe.image.cleaning Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">Functions</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.pixel_likelihood">ctapipe.image.pixel_likelihood Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#todo">TODO:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.charge_extractors">ctapipe.image.charge_extractors Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">Classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.waveform_cleaning">ctapipe.image.waveform_cleaning Module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id10">Classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id11">Class Inheritance Diagram</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.reductors">ctapipe.image.reductors Module</a></li>
 </ul>
 </li>
 </ul>
@@ -196,18 +173,20 @@
 <p>A <em>Cherenkov image</em> is defined as two pieces of data:</p>
 <ul class="simple">
 <li>a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-obj docutils literal"><span class="pre">numpy</span></code></a> array of pixel values (which can either be 1D, or 2D if time samples are included)</li>
-<li>a description of the Camera geometry (pixel positions, etc), usually a <code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code> object</li>
+<li>a description of the Camera geometry (pixel positions, etc), usually a <a class="reference internal" href="../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry" title="ctapipe.instrument.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.instrument.CameraGeometry</span></code></a> object</li>
 </ul>
 <p>This module contains the following sub-modules, but the most important functions of each are imported into the <a class="reference internal" href="#module-ctapipe.image" title="ctapipe.image"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.image</span></code></a> namespace</p>
-<ul class="simple">
-<li><a class="reference internal" href="#module-ctapipe.image.cleaning" title="ctapipe.image.cleaning"><code class="xref py py-obj docutils literal"><span class="pre">cleaning</span></code></a> : image noise suppression</li>
-<li><a class="reference internal" href="#module-ctapipe.image.hillas" title="ctapipe.image.hillas"><code class="xref py py-obj docutils literal"><span class="pre">hillas</span></code></a>: image moment parameterization</li>
-<li><a class="reference internal" href="#module-ctapipe.image.toymodel" title="ctapipe.image.toymodel"><code class="xref py py-obj docutils literal"><span class="pre">toymodel</span></code></a>: fake shower image generation for testing purposes</li>
-<li><a class="reference internal" href="#module-ctapipe.image.pixel_likelihood" title="ctapipe.image.pixel_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">pixel_likelihood</span></code></a>: generates the likelihood of a pixel intensity, given an expectation value</li>
-<li><a class="reference internal" href="#module-ctapipe.image.charge_extractors" title="ctapipe.image.charge_extractors"><code class="xref py py-obj docutils literal"><span class="pre">charge_extractors</span></code></a>: extracts charge from the waveform, resulting in a single number per pixel</li>
-<li><code class="xref py py-obj docutils literal"><span class="pre">waveform_cleaners</span></code>: cleans the waveform, e.g. applying filters, convolutions, or baseline subtractions</li>
-<li><a class="reference internal" href="#module-ctapipe.image.reductors" title="ctapipe.image.reductors"><code class="xref py py-obj docutils literal"><span class="pre">reductors</span></code></a>: performs data volume reduction</li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hillas.html">Hillas Parameterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cleaning.html">Image and Waveform Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="muon.html">Muon image analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toymodel.html">Toy model image generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pixel_likelihood.html">Pixel likelihood calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="charge_extractors.html">Charge Extraction (cube to image)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reductors.html">Image volume reduction</a></li>
 </ul>
+</div>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
@@ -227,6 +206,12 @@
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.dilate.html#ctapipe.image.dilate" title="ctapipe.image.dilate"><code class="xref py py-obj docutils literal"><span class="pre">dilate</span></code></a>(geom,&nbsp;mask)</td>
 <td>Add one row of neighbors to the True values of a pixel mask and return  the new mask.</td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.efficiency_fit.html#ctapipe.image.efficiency_fit" title="ctapipe.image.efficiency_fit"><code class="xref py py-obj docutils literal"><span class="pre">efficiency_fit</span></code></a>(pe_charge,&nbsp;pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
+<td>Estimate optical efficiency for a muon ring using method of [R9].</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.expected_pixel_light_content.html#ctapipe.image.expected_pixel_light_content" title="ctapipe.image.expected_pixel_light_content"><code class="xref py py-obj docutils literal"><span class="pre">expected_pixel_light_content</span></code></a>(pixel_x,&nbsp;...[,&nbsp;...])</td>
+<td>Calculate the expected light content of each pixel for a muon ring with the</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas_parameters.html#ctapipe.image.hillas_parameters" title="ctapipe.image.hillas_parameters"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
 <td>Compute Hillas parameters for a given shower image.</td>
 </tr>
@@ -242,20 +227,44 @@
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas_parameters_4.html#ctapipe.image.hillas_parameters_4" title="ctapipe.image.hillas_parameters_4"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters_4</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
 <td>Compute Hillas parameters for a given shower image.</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.impact_parameter_chisq_fit.html#ctapipe.image.impact_parameter_chisq_fit" title="ctapipe.image.impact_parameter_chisq_fit"><code class="xref py py-obj docutils literal"><span class="pre">impact_parameter_chisq_fit</span></code></a>(pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
+<td>Impact parameter calculation for a ring fit before.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.kundu_chaudhuri_circle_fit.html#ctapipe.image.kundu_chaudhuri_circle_fit" title="ctapipe.image.kundu_chaudhuri_circle_fit"><code class="xref py py-obj docutils literal"><span class="pre">kundu_chaudhuri_circle_fit</span></code></a>(x,&nbsp;y,&nbsp;weights)</td>
+<td>Fast, analytic calculation of circle center and radius for</td>
+</tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.mean_poisson_likelihood_full.html#ctapipe.image.mean_poisson_likelihood_full" title="ctapipe.image.mean_poisson_likelihood_full"><code class="xref py py-obj docutils literal"><span class="pre">mean_poisson_likelihood_full</span></code></a>(prediction,&nbsp;...)</td>
 <td>Calculation of the mean  likelihood for a give expectation value of pixel intensity using the full numerical integration.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.mean_poisson_likelihood_gaussian.html#ctapipe.image.mean_poisson_likelihood_gaussian" title="ctapipe.image.mean_poisson_likelihood_gaussian"><code class="xref py py-obj docutils literal"><span class="pre">mean_poisson_likelihood_gaussian</span></code></a>(prediction,&nbsp;...)</td>
 <td>Calculation of the mean  likelihood for a give expectation value of pixel intensity in the gaussian approximation.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood.html#ctapipe.image.poisson_likelihood" title="ctapipe.image.poisson_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood</span></code></a>(image,&nbsp;prediction,&nbsp;...[,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.mean_squared_error.html#ctapipe.image.mean_squared_error" title="ctapipe.image.mean_squared_error"><code class="xref py py-obj docutils literal"><span class="pre">mean_squared_error</span></code></a>(pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
+<td>Calculate the weighted mean squared error for a circle</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.mirror_integration_distance.html#ctapipe.image.mirror_integration_distance" title="ctapipe.image.mirror_integration_distance"><code class="xref py py-obj docutils literal"><span class="pre">mirror_integration_distance</span></code></a>(phi,&nbsp;phi_max,&nbsp;...)</td>
+<td>Calculate the distance the muon light went across the telescope mirror Function (6) from G.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.photon_ratio_inside_ring.html#ctapipe.image.photon_ratio_inside_ring" title="ctapipe.image.photon_ratio_inside_ring"><code class="xref py py-obj docutils literal"><span class="pre">photon_ratio_inside_ring</span></code></a>(pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
+<td>Calculate the ratio of the photons inside a given ring with coordinates (center_x, center_y), radius and width.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood.html#ctapipe.image.poisson_likelihood" title="ctapipe.image.poisson_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood</span></code></a>(image,&nbsp;prediction,&nbsp;...[,&nbsp;...])</td>
 <td>Safe implementation of the poissonian likelihood implementation , adaptively switches between the full solution and the gaussian approx depending on the signal.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood_full.html#ctapipe.image.poisson_likelihood_full" title="ctapipe.image.poisson_likelihood_full"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_full</span></code></a>(image,&nbsp;prediction,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood_full.html#ctapipe.image.poisson_likelihood_full" title="ctapipe.image.poisson_likelihood_full"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_full</span></code></a>(image,&nbsp;prediction,&nbsp;...)</td>
 <td>Calculate likelihood of prediction given the measured signal, full numerical integration from de Naurois et al 2009.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood_gaussian.html#ctapipe.image.poisson_likelihood_gaussian" title="ctapipe.image.poisson_likelihood_gaussian"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_gaussian</span></code></a>(image,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.poisson_likelihood_gaussian.html#ctapipe.image.poisson_likelihood_gaussian" title="ctapipe.image.poisson_likelihood_gaussian"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_gaussian</span></code></a>(image,&nbsp;...)</td>
 <td>Calculate likelihood of prediction given the measured signal, gaussian approx from</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.psf_likelihood_fit.html#ctapipe.image.psf_likelihood_fit" title="ctapipe.image.psf_likelihood_fit"><code class="xref py py-obj docutils literal"><span class="pre">psf_likelihood_fit</span></code></a>(x,&nbsp;y,&nbsp;weights)</td>
+<td>Do a likelihood fit using a ring with gaussian profile.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.radial_light_intensity.html#ctapipe.image.radial_light_intensity" title="ctapipe.image.radial_light_intensity"><code class="xref py py-obj docutils literal"><span class="pre">radial_light_intensity</span></code></a>(phi,&nbsp;phi_max,&nbsp;...[,&nbsp;...])</td>
+<td>Amount of photons per azimuthal angle phi on the muon ring as given in</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.ring_completeness.html#ctapipe.image.ring_completeness" title="ctapipe.image.ring_completeness"><code class="xref py py-obj docutils literal"><span class="pre">ring_completeness</span></code></a>(pixel_x,&nbsp;pixel_y,&nbsp;weights,&nbsp;...)</td>
+<td>Estimate how complete a ring is.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.tailcuts_clean" title="ctapipe.image.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">tailcuts_clean</span></code></a>(geom,&nbsp;image[,&nbsp;...])</td>
 <td>Clean an image by selection pixels that pass a two-threshold tail-cuts procedure.</td>
@@ -314,339 +323,6 @@
 </table>
 </div>
 </div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.toymodel">
-<span id="ctapipe-image-toymodel-module"></span><h3>ctapipe.image.toymodel Module<a class="headerlink" href="#module-ctapipe.image.toymodel" title="Permalink to this headline">¶</a></h3>
-<p>Utilities to generate toymodel (fake) reconstruction inputs for testing 
-purposes.</p>
-<p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">instrument</span> <span class="kn">import</span> <span class="n">CameraGeometry</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">make_rectangular</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">showermodel</span> <span class="o">=</span> <span class="n">generate_2d_shower_model</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> 
-<span class="go">length=0.1,width=0.02, psi=&#39;40d&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="n">make_toymodel_shower_image</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">showermodel</span><span class="o">.</span><span class="n">pdf</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="go">(400,)</span>
-</pre></div>
-</div>
-<div class="section" id="id1">
-<h4>Functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.toymodel.generate_2d_shower_model.html#ctapipe.image.toymodel.generate_2d_shower_model" title="ctapipe.image.toymodel.generate_2d_shower_model"><code class="xref py py-obj docutils literal"><span class="pre">generate_2d_shower_model</span></code></a>(centroid,&nbsp;width,&nbsp;...)</td>
-<td>Create a statistical model (2D gaussian) for a shower image in a camera.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.toymodel.make_toymodel_shower_image.html#ctapipe.image.toymodel.make_toymodel_shower_image" title="ctapipe.image.toymodel.make_toymodel_shower_image"><code class="xref py py-obj docutils literal"><span class="pre">make_toymodel_shower_image</span></code></a>(geom,&nbsp;showerpdf)</td>
-<td>Generates a pedestal-subtracted shower image from a statistical shower model (as generated by <code class="xref py py-obj docutils literal"><span class="pre">shower_model</span></code>).</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Example how to make a toymodel shower image and plot it.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">ctapipe.image.toymodel</span> <span class="kn">import</span> <span class="n">generate_2d_shower_model</span><span class="p">,</span> \
-    <span class="n">make_toymodel_shower_image</span>
-<span class="kn">from</span> <span class="nn">ctapipe.instrument</span> <span class="kn">import</span> <span class="n">CameraGeometry</span>
-
-<span class="n">NX</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">NY</span> <span class="o">=</span> <span class="mi">40</span>
-
-<span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">make_rectangular</span><span class="p">(</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">)</span>
-
-<span class="n">showermodel</span> <span class="o">=</span> <span class="n">generate_2d_shower_model</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                                       <span class="n">width</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">psi</span><span class="o">=</span><span class="s1">&#39;40d&#39;</span><span class="p">)</span>
-
-<span class="n">image</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="n">make_toymodel_shower_image</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">showermodel</span><span class="o">.</span><span class="n">pdf</span><span class="p">,</span>
-                                                  <span class="n">intensity</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">nsb_level_pe</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-
-<span class="c1"># make them into 2D arrays so we can plot them with imshow</span>
-<span class="n">image</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">)</span>
-<span class="n">signal</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">)</span>
-<span class="n">noise</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">)</span>
-
-<span class="c1"># here we just plot the images using imshow().  For a more general</span>
-<span class="c1"># case, one should use a ctapipe.visualization.CameraDisplay</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Signal&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">noise</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noise&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>(<a class="reference external" href="../image/image_example.py">Source code</a>, <a class="reference external" href="../image/image_example.png">png</a>, <a class="reference external" href="../image/image_example.hires.png">hires.png</a>, <a class="reference external" href="../image/image_example.pdf">pdf</a>)</p>
-<div class="figure">
-<img alt="../_images/image_example.png" src="../_images/image_example.png" />
-</div>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.hillas">
-<span id="ctapipe-image-hillas-module"></span><h3>ctapipe.image.hillas Module<a class="headerlink" href="#module-ctapipe.image.hillas" title="Permalink to this headline">¶</a></h3>
-<p>Hillas-style moment-based shower image parametrization.</p>
-<div class="section" id="id2">
-<h4>Functions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas.hillas_parameters.html#ctapipe.image.hillas.hillas_parameters" title="ctapipe.image.hillas.hillas_parameters"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
-<td>Compute Hillas parameters for a given shower image.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.hillas.hillas_parameters_1.html#ctapipe.image.hillas.hillas_parameters_1" title="ctapipe.image.hillas.hillas_parameters_1"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters_1</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
-<td>Compute Hillas parameters for a given shower image.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas.hillas_parameters_2.html#ctapipe.image.hillas.hillas_parameters_2" title="ctapipe.image.hillas.hillas_parameters_2"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters_2</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
-<td>Compute Hillas parameters for a given shower image.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.hillas.hillas_parameters_3.html#ctapipe.image.hillas.hillas_parameters_3" title="ctapipe.image.hillas.hillas_parameters_3"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters_3</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
-<td>Compute Hillas parameters for a given shower image.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas.hillas_parameters_4.html#ctapipe.image.hillas.hillas_parameters_4" title="ctapipe.image.hillas.hillas_parameters_4"><code class="xref py py-obj docutils literal"><span class="pre">hillas_parameters_4</span></code></a>(pix_x,&nbsp;pix_y,&nbsp;image[,&nbsp;...])</td>
-<td>Compute Hillas parameters for a given shower image.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="id3">
-<h4>Classes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.hillas.MomentParameters.html#ctapipe.image.hillas.MomentParameters" title="ctapipe.image.hillas.MomentParameters"><code class="xref py py-obj docutils literal"><span class="pre">MomentParameters</span></code></a>(size,&nbsp;cen_x,&nbsp;cen_y,&nbsp;length,&nbsp;...)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.hillas.HillasParameterizationError.html#ctapipe.image.hillas.HillasParameterizationError" title="ctapipe.image.hillas.HillasParameterizationError"><code class="xref py py-obj docutils literal"><span class="pre">HillasParameterizationError</span></code></a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="class-inheritance-diagram">
-<h4>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h4>
-<img src="../_images/inheritance-c8bd406fee75aaae561cb975639efe16439652ae.png" alt="Inheritance diagram of ctapipe.image.hillas.MomentParameters, ctapipe.image.hillas.HillasParameterizationError" usemap="#inheritance06a709c349" class="inheritance"/>
-<map id="inheritance06a709c349" name="inheritance06a709c349">
-<area shape="rect" id="node1" href="../api/ctapipe.image.hillas.HillasParameterizationError.html#ctapipe.image.hillas.HillasParameterizationError" target="_top" title="HillasParameterizationError" alt="" coords="5,55,191,80"/>
-<area shape="rect" id="node2" href="../api/ctapipe.image.hillas.MomentParameters.html#ctapipe.image.hillas.MomentParameters" target="_top" title="MomentParameters(size, cen_x, cen_y, length, width, r, phi, psi, miss, skewness, kurtosis)" alt="" coords="29,5,167,31"/>
-</map>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.cleaning">
-<span id="ctapipe-image-cleaning-module"></span><h3>ctapipe.image.cleaning Module<a class="headerlink" href="#module-ctapipe.image.cleaning" title="Permalink to this headline">¶</a></h3>
-<p>Image Cleaning Algorithms (identification of noisy pixels)</p>
-<div class="section" id="id4">
-<h4>Functions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.cleaning.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean" title="ctapipe.image.cleaning.tailcuts_clean"><code class="xref py py-obj docutils literal"><span class="pre">tailcuts_clean</span></code></a>(geom,&nbsp;image[,&nbsp;...])</td>
-<td>Clean an image by selection pixels that pass a two-threshold tail-cuts procedure.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.cleaning.dilate.html#ctapipe.image.cleaning.dilate" title="ctapipe.image.cleaning.dilate"><code class="xref py py-obj docutils literal"><span class="pre">dilate</span></code></a>(geom,&nbsp;mask)</td>
-<td>Add one row of neighbors to the True values of a pixel mask and return  the new mask.</td>
-</tr>
-</tbody>
-</table>
-<p>An example of image cleaning and dilation:</p>
-<img alt="../_images/dilate.png" src="../_images/dilate.png" />
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.pixel_likelihood">
-<span id="ctapipe-image-pixel-likelihood-module"></span><h3>ctapipe.image.pixel_likelihood Module<a class="headerlink" href="#module-ctapipe.image.pixel_likelihood" title="Permalink to this headline">¶</a></h3>
-<p>Class for calculation of likelihood of a pixel expectation, given the pixel amplitude,
-the level of noise in the pixel and the photoelectron resolution. This calculation is
-taken from:
-de Naurois &amp; Rolland, Astroparticle Physics, Volume 32, Issue 5, p. 231-252 (2009)
-<a class="reference external" href="https://arxiv.org/abs/0907.2610">https://arxiv.org/abs/0907.2610</a></p>
-<p>The likelihood is essentially a poissonian convolved with a gaussian, at low signal
-a full possonian approach must be adopted, which requires the sum of contibutions
-over a number of potential contributing photoelectrons (which is slow and can fail
-at high signals due to the factorial which mst be calculated). At high signal this
-simplifies to a gaussian approximation.</p>
-<p>The full and gaussian approximations are implemented, in addition to a general purpose
-implementation, which tries to intellegently switch between the two. Speed tests are below:</p>
-<p>poisson_likelihood_gaussian(image, prediction, spe, ped)
-29.8 µs per loop</p>
-<p>poisson_likelihood_full(image, prediction, spe, ped)
-93.4 µs per loop</p>
-<p>poisson_likelihood(image, prediction, spe, ped)
-59.9 µs per loop</p>
-<div class="section" id="todo">
-<h4>TODO:<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>Need to implement more tests, particularly checking for error states</li>
-<li>Additional terms may be useful to add to the likelihood</li>
-</ul>
-</div>
-<div class="section" id="id5">
-<h4>Functions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.poisson_likelihood_gaussian.html#ctapipe.image.pixel_likelihood.poisson_likelihood_gaussian" title="ctapipe.image.pixel_likelihood.poisson_likelihood_gaussian"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_gaussian</span></code></a>(image,&nbsp;...)</td>
-<td>Calculate likelihood of prediction given the measured signal, gaussian approx from</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.poisson_likelihood_full.html#ctapipe.image.pixel_likelihood.poisson_likelihood_full" title="ctapipe.image.pixel_likelihood.poisson_likelihood_full"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood_full</span></code></a>(image,&nbsp;prediction,&nbsp;...)</td>
-<td>Calculate likelihood of prediction given the measured signal, full numerical integration from de Naurois et al 2009.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.poisson_likelihood.html#ctapipe.image.pixel_likelihood.poisson_likelihood" title="ctapipe.image.pixel_likelihood.poisson_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">poisson_likelihood</span></code></a>(image,&nbsp;prediction,&nbsp;...[,&nbsp;...])</td>
-<td>Safe implementation of the poissonian likelihood implementation , adaptively switches between the full solution and the gaussian approx depending on the signal.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.mean_poisson_likelihood_gaussian.html#ctapipe.image.pixel_likelihood.mean_poisson_likelihood_gaussian" title="ctapipe.image.pixel_likelihood.mean_poisson_likelihood_gaussian"><code class="xref py py-obj docutils literal"><span class="pre">mean_poisson_likelihood_gaussian</span></code></a>(prediction,&nbsp;...)</td>
-<td>Calculation of the mean  likelihood for a give expectation value of pixel intensity in the gaussian approximation.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.mean_poisson_likelihood_full.html#ctapipe.image.pixel_likelihood.mean_poisson_likelihood_full" title="ctapipe.image.pixel_likelihood.mean_poisson_likelihood_full"><code class="xref py py-obj docutils literal"><span class="pre">mean_poisson_likelihood_full</span></code></a>(prediction,&nbsp;...)</td>
-<td>Calculation of the mean  likelihood for a give expectation value of pixel intensity using the full numerical integration.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.chi_squared.html#ctapipe.image.pixel_likelihood.chi_squared" title="ctapipe.image.pixel_likelihood.chi_squared"><code class="xref py py-obj docutils literal"><span class="pre">chi_squared</span></code></a>(image,&nbsp;prediction,&nbsp;ped[,&nbsp;...])</td>
-<td>Simple chi-squared statistic from Le Bohec et al 2008</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="id6">
-<h4>Classes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html#ctapipe.image.pixel_likelihood.PixelLikelihoodError" title="ctapipe.image.pixel_likelihood.PixelLikelihoodError"><code class="xref py py-obj docutils literal"><span class="pre">PixelLikelihoodError</span></code></a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="id7">
-<h4>Class Inheritance Diagram<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
-<img src="../_images/inheritance-3fbb6b8af91154dff93d5b7d39921e581d29abd0.png" alt="Inheritance diagram of ctapipe.image.pixel_likelihood.PixelLikelihoodError" usemap="#inheritance06ec4ffbc4" class="inheritance"/>
-<map id="inheritance06ec4ffbc4" name="inheritance06ec4ffbc4">
-<area shape="rect" id="node1" href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html#ctapipe.image.pixel_likelihood.PixelLikelihoodError" target="_top" title="PixelLikelihoodError" alt="" coords="5,5,145,31"/>
-</map>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.charge_extractors">
-<span id="ctapipe-image-charge-extractors-module"></span><h3>ctapipe.image.charge_extractors Module<a class="headerlink" href="#module-ctapipe.image.charge_extractors" title="Permalink to this headline">¶</a></h3>
-<p>Charge extraction algorithms to reduce the image to one value per pixel</p>
-<div class="section" id="id8">
-<h4>Classes<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" title="ctapipe.image.charge_extractors.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td>Factory to obtain a ChargeExtractor.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.FullIntegrator.html#ctapipe.image.charge_extractors.FullIntegrator" title="ctapipe.image.charge_extractors.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.SimpleIntegrator.html#ctapipe.image.charge_extractors.SimpleIntegrator" title="ctapipe.image.charge_extractors.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" title="ctapipe.image.charge_extractors.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" title="ctapipe.image.charge_extractors.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" title="ctapipe.image.charge_extractors.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" title="ctapipe.image.charge_extractors.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="id9">
-<h4>Class Inheritance Diagram<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
-<img src="../_images/inheritance-e0b62dd1c49f653bd5e44e8d090e192573dc3427.png" alt="Inheritance diagram of ctapipe.image.charge_extractors.ChargeExtractorFactory, ctapipe.image.charge_extractors.FullIntegrator, ctapipe.image.charge_extractors.SimpleIntegrator, ctapipe.image.charge_extractors.GlobalPeakIntegrator, ctapipe.image.charge_extractors.LocalPeakIntegrator, ctapipe.image.charge_extractors.NeighbourPeakIntegrator, ctapipe.image.charge_extractors.AverageWfPeakIntegrator" usemap="#inheritancec8a2081ea2" class="inheritance"/>
-<map id="inheritancec8a2081ea2" name="inheritancec8a2081ea2">
-<area shape="rect" id="node1" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" target="_top" title="AverageWfPeakIntegrator" alt="" coords="676,3,765,16"/>
-<area shape="rect" id="node11" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" target="_top" title="GlobalPeakIntegrator" alt="" coords="683,28,758,41"/>
-<area shape="rect" id="node13" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" target="_top" title="LocalPeakIntegrator" alt="" coords="685,53,756,66"/>
-<area shape="rect" id="node14" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" target="_top" title="NeighbourPeakIntegrator" alt="" coords="677,78,764,91"/>
-<area shape="rect" id="node4" title="Base class of all Components (sometimes called" alt="" coords="223,53,269,66"/>
-<area shape="rect" id="node6" title="A base class for all class factories that exist in the `Tools`/`Components`" alt="" coords="305,66,341,78"/>
-<area shape="rect" id="node5" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" target="_top" title="Factory to obtain a ChargeExtractor." alt="" coords="378,66,461,78"/>
-<area shape="rect" id="node9" href="../api/ctapipe.image.charge_extractors.FullIntegrator.html#ctapipe.image.charge_extractors.FullIntegrator" target="_top" title="FullIntegrator" alt="" coords="492,28,543,41"/>
-<area shape="rect" id="node12" title="The base class for all classes that have descriptors." alt="" coords="3,53,60,66"/>
-<area shape="rect" id="node16" href="../api/ctapipe.image.charge_extractors.SimpleIntegrator.html#ctapipe.image.charge_extractors.SimpleIntegrator" target="_top" title="SimpleIntegrator" alt="" coords="582,66,643,78"/>
-</map>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.waveform_cleaning">
-<span id="ctapipe-image-waveform-cleaning-module"></span><h3>ctapipe.image.waveform_cleaning Module<a class="headerlink" href="#module-ctapipe.image.waveform_cleaning" title="Permalink to this headline">¶</a></h3>
-<p>Waveform cleaning algorithms (smoothing, filtering, baseline subtraction)</p>
-<div class="section" id="id10">
-<h4>Classes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.waveform_cleaning.WaveformCleanerFactory.html#ctapipe.image.waveform_cleaning.WaveformCleanerFactory" title="ctapipe.image.waveform_cleaning.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td>Factory to obtain a WaveformCleaner.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.waveform_cleaning.CHECMWaveformCleaner.html#ctapipe.image.waveform_cleaning.CHECMWaveformCleaner" title="ctapipe.image.waveform_cleaning.CHECMWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">CHECMWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html#ctapipe.image.waveform_cleaning.NullWaveformCleaner" title="ctapipe.image.waveform_cleaning.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td>Dummy waveform cleaner that simply returns its input</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="id11">
-<h4>Class Inheritance Diagram<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
-<img src="../_images/inheritance-970a5ff3425bc3628cb7b7fad56065abb67f3d09.png" alt="Inheritance diagram of ctapipe.image.waveform_cleaning.WaveformCleanerFactory, ctapipe.image.waveform_cleaning.CHECMWaveformCleaner, ctapipe.image.waveform_cleaning.NullWaveformCleaner" usemap="#inheritance853583608d" class="inheritance"/>
-<map id="inheritance853583608d" name="inheritance853583608d">
-<area shape="rect" id="node1" href="../api/ctapipe.image.waveform_cleaning.CHECMWaveformCleaner.html#ctapipe.image.waveform_cleaning.CHECMWaveformCleaner" target="_top" title="CHECMWaveformCleaner" alt="" coords="617,4,764,25"/>
-<area shape="rect" id="node8" href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html#ctapipe.image.waveform_cleaning.NullWaveformCleaner" target="_top" title="Dummy waveform cleaner that simply returns its input" alt="" coords="628,45,753,65"/>
-<area shape="rect" id="node3" title="Base class of all Components (sometimes called" alt="" coords="359,65,433,86"/>
-<area shape="rect" id="node6" title="A base class for all class factories that exist in the `Tools`/`Components`" alt="" coords="496,85,555,106"/>
-<area shape="rect" id="node9" href="../api/ctapipe.image.waveform_cleaning.WaveformCleanerFactory.html#ctapipe.image.waveform_cleaning.WaveformCleanerFactory" target="_top" title="Factory to obtain a WaveformCleaner." alt="" coords="620,85,761,106"/>
-<area shape="rect" id="node7" title="The base class for all classes that have descriptors." alt="" coords="4,65,97,86"/>
-</map>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="module-ctapipe.image.reductors">
-<span id="ctapipe-image-reductors-module"></span><h3>ctapipe.image.reductors Module<a class="headerlink" href="#module-ctapipe.image.reductors" title="Permalink to this headline">¶</a></h3>
-<p>Reductor algorithms for the data volume reduction.</p>
-</div>
 </div>
 </div>
 
@@ -657,7 +333,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.image.chi_squared.html" class="btn btn-neutral float-right" title="chi_squared" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="hillas.html" class="btn btn-neutral float-right" title="Hillas Parameterization" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../flow/index.html" class="btn btn-neutral" title="Flow-based framework (flow)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -669,7 +345,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 02 May 2017 17:09.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:29.
 
     </p>
   </div>
@@ -691,7 +367,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post379+gitfd54a25',
+            VERSION:'0.4.0.post391+git4be2ea6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
