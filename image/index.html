@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.4.0.post392+gitf3baf07</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post392+gitf3baf07" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
         <link rel="next" title="Hillas Parameterization" href="hillas.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.4.0.post392+gitf3baf07
+                0.4.0.post393+gitdd48071
               </div>
             
           
@@ -201,7 +201,7 @@
 <td>Add one row of neighbors to the True values of a pixel mask and return  the new mask.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.efficiency_fit.html#ctapipe.image.efficiency_fit" title="ctapipe.image.efficiency_fit"><code class="xref py py-obj docutils literal"><span class="pre">efficiency_fit</span></code></a>(pe_charge,&nbsp;pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
-<td>Estimate optical efficiency for a muon ring using method of [R9].</td>
+<td>Estimate optical efficiency for a muon ring using method of <a class="reference internal" href="../api/ctapipe.image.efficiency_fit.html#r3" id="id1">[R3]</a>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.expected_pixel_light_content.html#ctapipe.image.expected_pixel_light_content" title="ctapipe.image.expected_pixel_light_content"><code class="xref py py-obj docutils literal"><span class="pre">expected_pixel_light_content</span></code></a>(pixel_x,&nbsp;...[,&nbsp;...])</td>
 <td>Calculate the expected light content of each pixel for a muon ring with the</td>
@@ -283,6 +283,12 @@
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.ChargeExtractorFactory.html#ctapipe.image.ChargeExtractorFactory" title="ctapipe.image.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
 <td>Factory to obtain a ChargeExtractor.</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.DataVolumeReductor.html#ctapipe.image.DataVolumeReductor" title="ctapipe.image.DataVolumeReductor"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductor</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Base component for data volume reductors.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.DataVolumeReductorFactory.html#ctapipe.image.DataVolumeReductorFactory" title="ctapipe.image.DataVolumeReductorFactory"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Factory class for creating a DataVolumeReductor</td>
+</tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.FullIntegrator.html#ctapipe.image.FullIntegrator" title="ctapipe.image.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
 <td></td>
 </tr>
@@ -339,7 +345,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:37.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
 
     </p>
   </div>
@@ -361,7 +367,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post392+gitf3baf07',
+            VERSION:'0.4.0.post393+gitdd48071',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

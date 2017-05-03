@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image volume reduction &mdash; ctapipe v0.4.0.post392+gitf3baf07</title>
+  <title>Image volume reduction &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post392+gitf3baf07" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
         <link rel="up" title="Imaging (image)" href="index.html"/>
-        <link rel="next" title="chi_squared" href="../api/ctapipe.image.chi_squared.html"/>
+        <link rel="next" title="DataVolumeReductor" href="../api/ctapipe.image.reductors.DataVolumeReductor.html"/>
         <link rel="prev" title="AverageWfPeakIntegrator" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html"/> 
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.0.post392+gitf3baf07
+                0.4.0.post393+gitdd48071
               </div>
             
           
@@ -103,7 +103,12 @@
 <li class="toctree-l2"><a class="reference internal" href="pixel_likelihood.html">Pixel likelihood calculation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="charge_extractors.html">Charge Extraction (cube to image)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Image volume reduction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.reductors">ctapipe.image.reductors Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-reference">API Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.reductors">ctapipe.image.reductors Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#reference-api">Reference/API</a></li>
@@ -164,9 +169,40 @@
   <div class="section" id="image-volume-reduction">
 <span id="image-reductors"></span><h1>Image volume reduction<a class="headerlink" href="#image-volume-reduction" title="Permalink to this headline">¶</a></h1>
 <p>Algorithms for reducing image size via volume selection and other methods.</p>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-ctapipe.image.reductors">
 <span id="ctapipe-image-reductors-module"></span><h2>ctapipe.image.reductors Module<a class="headerlink" href="#module-ctapipe.image.reductors" title="Permalink to this headline">¶</a></h2>
-<p>Reductor algorithms for the data volume reduction.</p>
+<p>Algorithms for the data volume reduction.</p>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.reductors.DataVolumeReductor.html#ctapipe.image.reductors.DataVolumeReductor" title="ctapipe.image.reductors.DataVolumeReductor"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductor</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Base component for data volume reductors.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.reductors.DataVolumeReductorFactory.html#ctapipe.image.reductors.DataVolumeReductorFactory" title="ctapipe.image.reductors.DataVolumeReductorFactory"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<td>Factory class for creating a DataVolumeReductor</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="class-inheritance-diagram">
+<h3>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h3>
+<img src="../_images/inheritance-8c7e45e4e3b36d8e1fa8db07f9089c79e7a8da9c.png" alt="Inheritance diagram of ctapipe.image.reductors.DataVolumeReductor, ctapipe.image.reductors.DataVolumeReductorFactory" usemap="#inheritance291028802f" class="inheritance"/>
+<map id="inheritance291028802f" name="inheritance291028802f">
+<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="346,24,418,44"/>
+<area shape="rect" id="node4" href="../api/ctapipe.image.reductors.DataVolumeReductor.html#ctapipe.image.reductors.DataVolumeReductor" target="_top" title="Base component for data volume reductors." alt="" coords="456,4,573,24"/>
+<area shape="rect" id="node6" title="A base class for all class factories that exist in the `Tools`/`Components`" alt="" coords="486,43,543,63"/>
+<area shape="rect" id="node5" href="../api/ctapipe.image.reductors.DataVolumeReductorFactory.html#ctapipe.image.reductors.DataVolumeReductorFactory" target="_top" title="Factory class for creating a DataVolumeReductor" alt="" coords="611,43,764,63"/>
+<area shape="rect" id="node7" title="The base class for all classes that have descriptors." alt="" coords="4,24,94,44"/>
+</map>
+</div>
 </div>
 </div>
 
@@ -177,7 +213,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.image.chi_squared.html" class="btn btn-neutral float-right" title="chi_squared" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.image.reductors.DataVolumeReductor.html" class="btn btn-neutral float-right" title="DataVolumeReductor" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html" class="btn btn-neutral" title="AverageWfPeakIntegrator" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -189,7 +225,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:37.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
 
     </p>
   </div>
@@ -211,7 +247,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post392+gitf3baf07',
+            VERSION:'0.4.0.post393+gitdd48071',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
