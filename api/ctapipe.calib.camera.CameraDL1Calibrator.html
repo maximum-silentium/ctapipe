@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraDL1Calibrator &mdash; ctapipe v0.4.0.post391+git4be2ea6</title>
+  <title>CameraDL1Calibrator &mdash; ctapipe v0.4.0.post392+gitf3baf07</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post391+git4be2ea6" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post392+gitf3baf07" href="../index.html"/>
         <link rel="up" title="Camera calibration" href="../calib/index_camera.html"/>
         <link rel="next" title="CameraR1CalibratorFactory" href="ctapipe.calib.camera.CameraR1CalibratorFactory.html"/>
         <link rel="prev" title="CameraDL0Reducer" href="ctapipe.calib.camera.CameraDL0Reducer.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.0.post391+git4be2ea6
+                0.4.0.post392+gitf3baf07
               </div>
             
           
@@ -169,6 +169,41 @@
 <dt id="ctapipe.calib.camera.CameraDL1Calibrator">
 <em class="property">class </em><code class="descclassname">ctapipe.calib.camera.</code><code class="descname">CameraDL1Calibrator</code><span class="sig-paren">(</span><em>config</em>, <em>tool</em>, <em>extractor=None</em>, <em>cleaner=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/calib/camera/dl1.html#CameraDL1Calibrator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.calib.camera.CameraDL1Calibrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ctapipe.core.component.Component</span></code></p>
+<p>The calibrator for DL1 charge extraction. Fills the dl1 container.</p>
+<p>It handles the integration correction and, if required, the list of
+neighbours.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>config</strong> : traitlets.loader.Config</p>
+<blockquote>
+<div><p>Configuration specified by config file or cmdline arguments.
+Used to set traitlet values.
+Set to None if no configuration to pass.</p>
+</div></blockquote>
+<p><strong>tool</strong> : ctapipe.core.Tool or None</p>
+<blockquote>
+<div><p>Tool executable that is calling this component.
+Passes the correct logger to the component.
+Set to None if no Tool to pass.</p>
+</div></blockquote>
+<p><strong>extractor</strong> : ctapipe.calib.camera.charge_extractors.ChargeExtractor</p>
+<blockquote>
+<div><p>The extractor to use to extract the charge from the waveforms.
+By default the NeighbourPeakIntegrator with default configuration
+is used.</p>
+</div></blockquote>
+<p><strong>cleaner</strong> : ctapipe.calib.camera.waveform_cleaners.Cleaner</p>
+<blockquote>
+<div><p>The waveform cleaner to use. By default no cleaning is
+applied to the waveforms.</p>
+</div></blockquote>
+<p class="last"><strong>kwargs</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -351,7 +386,7 @@ The neighbours are calculated once per telescope.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:29.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:37.
 
     </p>
   </div>
@@ -373,7 +408,7 @@ The neighbours are calculated once per telescope.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post391+git4be2ea6',
+            VERSION:'0.4.0.post392+gitf3baf07',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

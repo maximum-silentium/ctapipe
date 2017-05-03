@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.calib.camera.dl0 &mdash; ctapipe v0.4.0.post391+git4be2ea6</title>
+  <title>ctapipe.calib.camera.dl0 &mdash; ctapipe v0.4.0.post392+gitf3baf07</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post391+git4be2ea6" href="../../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post392+gitf3baf07" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.0.post391+git4be2ea6
+                0.4.0.post392+gitf3baf07
               </div>
             
           
@@ -161,28 +161,29 @@
 
 
 <div class="viewcode-block" id="CameraDL0Reducer"><a class="viewcode-back" href="../../../../api/ctapipe.calib.camera.dl0.CameraDL0Reducer.html#ctapipe.calib.CameraDL0Reducer">[docs]</a><span class="k">class</span> <span class="nc">CameraDL0Reducer</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parent class for the dl0 data volume reducers. Fills the dl0 container.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    config : traitlets.loader.Config</span>
+<span class="sd">        Configuration specified by config file or cmdline arguments.</span>
+<span class="sd">        Used to set traitlet values.</span>
+<span class="sd">        Set to None if no configuration to pass.</span>
+<span class="sd">    tool : ctapipe.core.Tool or None</span>
+<span class="sd">        Tool executable that is calling this component.</span>
+<span class="sd">        Passes the correct logger to the component.</span>
+<span class="sd">        Set to None if no Tool to pass.</span>
+<span class="sd">    reductor : ctapipe.calib.camera.reductors.Reductor</span>
+<span class="sd">        The reductor to use to reduce the waveforms in the event.</span>
+<span class="sd">        By default no data volume reduction is applied, and the dl0 samples</span>
+<span class="sd">        will equal the r1 samples.</span>
+<span class="sd">    kwargs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;CameraDL0Reducer&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">tool</span><span class="p">,</span> <span class="n">reductor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parent class for the dl0 data volume reducers. Fills the dl0 container.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        config : traitlets.loader.Config</span>
-<span class="sd">            Configuration specified by config file or cmdline arguments.</span>
-<span class="sd">            Used to set traitlet values.</span>
-<span class="sd">            Set to None if no configuration to pass.</span>
-<span class="sd">        tool : ctapipe.core.Tool or None</span>
-<span class="sd">            Tool executable that is calling this component.</span>
-<span class="sd">            Passes the correct logger to the component.</span>
-<span class="sd">            Set to None if no Tool to pass.</span>
-<span class="sd">        reductor : ctapipe.calib.camera.reductors.Reductor</span>
-<span class="sd">            The reductor to use to reduce the waveforms in the event.</span>
-<span class="sd">            By default no data volume reduction is applied, and the dl0 samples</span>
-<span class="sd">            will equal the r1 samples.</span>
-<span class="sd">        kwargs</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tool</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">reductor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Applying no data volume reduction in the &quot;</span>
@@ -249,7 +250,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:29.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:37.
 
     </p>
   </div>
@@ -271,7 +272,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'0.4.0.post391+git4be2ea6',
+            VERSION:'0.4.0.post392+gitf3baf07',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.4.0.post391+git4be2ea6</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post392+gitf3baf07</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post391+git4be2ea6" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post392+gitf3baf07" href="../index.html"/>
         <link rel="next" title="Hillas Parameterization" href="hillas.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.4.0.post391+git4be2ea6
+                0.4.0.post392+gitf3baf07
               </div>
             
           
@@ -95,16 +95,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../datasets/index.html">Datasets (<code class="docutils literal"><span class="pre">datasets</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../flow/index.html">Flow-based framework (<code class="docutils literal"><span class="pre">flow</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="hillas.html">Hillas Parameterization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleaning.html">Image and Waveform Cleaning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="muon.html">Muon image analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="toymodel.html">Toy model image generation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pixel_likelihood.html">Pixel likelihood calculation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="charge_extractors.html">Charge Extraction (cube to image)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reductors.html">Image volume reduction</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="hillas.html">Hillas Parameterization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleaning.html">Image and Waveform Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="muon.html">Muon image analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toymodel.html">Toy model image generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pixel_likelihood.html">Pixel likelihood calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="charge_extractors.html">Charge Extraction (cube to image)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reductors.html">Image volume reduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image">ctapipe.image Package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
@@ -167,8 +164,6 @@
             
   <div class="section" id="imaging-image">
 <span id="image"></span><h1>Imaging (<code class="xref py py-obj docutils literal"><span class="pre">image</span></code>)<a class="headerlink" href="#imaging-image" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#module-ctapipe.image" title="ctapipe.image"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.image</span></code></a> contains all algortihms that operate on Cherenkov camera images.</p>
 <p>A <em>Cherenkov image</em> is defined as two pieces of data:</p>
 <ul class="simple">
@@ -186,7 +181,6 @@
 <li class="toctree-l1"><a class="reference internal" href="charge_extractors.html">Charge Extraction (cube to image)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reductors.html">Image volume reduction</a></li>
 </ul>
-</div>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
@@ -284,7 +278,7 @@
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.CHECMWaveformCleaner.html#ctapipe.image.CHECMWaveformCleaner" title="ctapipe.image.CHECMWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">CHECMWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<td>Waveform cleaner used by CHEC-M.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.ChargeExtractorFactory.html#ctapipe.image.ChargeExtractorFactory" title="ctapipe.image.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
 <td>Factory to obtain a ChargeExtractor.</td>
@@ -345,7 +339,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:29.
+        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:37.
 
     </p>
   </div>
@@ -367,7 +361,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post391+git4be2ea6',
+            VERSION:'0.4.0.post392+gitf3baf07',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
