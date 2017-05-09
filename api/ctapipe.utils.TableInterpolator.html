@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>TableInterpolator &mdash; ctapipe v0.4.0.post431+gitea390f3</title>
+  <title>TableInterpolator &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post431+gitea390f3" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../index.html"/>
         <link rel="up" title="Utilities (utils)" href="../utils/index.html"/>
         <link rel="next" title="rotate_around_axis" href="ctapipe.utils.linalg.rotate_around_axis.html"/>
         <link rel="prev" title="Histogram" href="ctapipe.utils.Histogram.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post431+gitea390f3
+                0.4.0.post450+gitb4b159c
               </div>
             
           
@@ -190,10 +190,10 @@
 <h1>TableInterpolator<a class="headerlink" href="#tableinterpolator" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="ctapipe.utils.TableInterpolator">
-<em class="property">class </em><code class="descclassname">ctapipe.utils.</code><code class="descname">TableInterpolator</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/table_interpolator.html#TableInterpolator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.TableInterpolator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ctapipe.utils.</code><code class="descname">TableInterpolator</code><span class="sig-paren">(</span><em>filename</em>, <em>verbose=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/table_interpolator.html#TableInterpolator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.TableInterpolator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>This is a simple class for loading image templates from a pickle file and
-interpolating between them to provide the model for impact_reco style fitting</p>
+<p>This is a simple class for loading lookup tables from a fits file and
+interpolating between them</p>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -214,6 +214,9 @@ interpolating between them to provide the model for impact_reco style fitting</p
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.TableInterpolator.interpolated_image" title="ctapipe.utils.TableInterpolator.interpolated_image"><code class="xref py py-obj docutils literal"><span class="pre">interpolated_image</span></code></a>(params)</td>
 <td>Function for creating a ful interpolated image template from the interpolation library</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.TableInterpolator.parse_fits_table" title="ctapipe.utils.TableInterpolator.parse_fits_table"><code class="xref py py-obj docutils literal"><span class="pre">parse_fits_table</span></code></a>(filename)</td>
+<td>Function opens tables contained within fits files and parses them into a format  recognisable by the interpolator.</td>
 </tr>
 </tbody>
 </table>
@@ -269,6 +272,28 @@ currently [energy, impact distance, xmax]</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="ctapipe.utils.TableInterpolator.parse_fits_table">
+<code class="descname">parse_fits_table</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/table_interpolator.html#TableInterpolator.parse_fits_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.TableInterpolator.parse_fits_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function opens tables contained within fits files and parses them into a format 
+recognisable by the interpolator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename: str</strong></p>
+<blockquote>
+<div><p>Name of table file</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">tuple (grid points, bin centres, images)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -295,7 +320,7 @@ currently [energy, impact distance, xmax]</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 14:04.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
 
     </p>
   </div>
@@ -317,7 +342,7 @@ currently [energy, impact distance, xmax]</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post431+gitea390f3',
+            VERSION:'0.4.0.post450+gitb4b159c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

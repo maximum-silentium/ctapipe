@@ -12,8 +12,10 @@ TableInterpolator
 
       ~TableInterpolator.interpolate
       ~TableInterpolator.interpolated_image
+      ~TableInterpolator.parse_fits_table
 
    .. rubric:: Methods Documentation
 
    .. automethod:: interpolate
    .. automethod:: interpolated_image
+   .. automethod:: parse_fits_table

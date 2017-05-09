@@ -1,21 +1,21 @@
-FitGammaHillas
-==============
+HillasReconstructor
+===================
 
 .. currentmodule:: ctapipe.reco
 
-.. autoclass:: FitGammaHillas
+.. autoclass:: HillasReconstructor
    :show-inheritance:
 
    .. rubric:: Methods Summary
 
    .. autosummary::
 
-      ~FitGammaHillas.fit_core_crosses
-      ~FitGammaHillas.fit_core_minimise
-      ~FitGammaHillas.fit_origin_crosses
-      ~FitGammaHillas.fit_origin_minimise
-      ~FitGammaHillas.get_great_circles
-      ~FitGammaHillas.predict
+      ~HillasReconstructor.fit_core_crosses
+      ~HillasReconstructor.fit_core_minimise
+      ~HillasReconstructor.fit_origin_crosses
+      ~HillasReconstructor.fit_origin_minimise
+      ~HillasReconstructor.get_great_circles
+      ~HillasReconstructor.predict
 
    .. rubric:: Methods Documentation
 

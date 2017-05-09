@@ -1,16 +1,16 @@
-RecoShowerGeomAlgorithm
-=======================
+Reconstructor
+=============
 
 .. currentmodule:: ctapipe.reco
 
-.. autoclass:: RecoShowerGeomAlgorithm
+.. autoclass:: Reconstructor
    :show-inheritance:
 
    .. rubric:: Methods Summary
 
    .. autosummary::
 
-      ~RecoShowerGeomAlgorithm.predict
+      ~Reconstructor.predict
 
    .. rubric:: Methods Documentation
 

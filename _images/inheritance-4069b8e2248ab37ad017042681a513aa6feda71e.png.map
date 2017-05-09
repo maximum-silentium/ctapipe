@@ -1,0 +1,8 @@
+<map id="inheritanceecbaf69216" name="inheritanceecbaf69216">
+<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="411,80,483,100"/>
+<area shape="rect" id="node7" title="This is the base class from which all direction reconstruction" alt="" coords="521,80,604,100"/>
+<area shape="rect" id="node4" title="a tiny helper class to collect some parameters for each great great circle" alt="" coords="46,42,116,61"/>
+<area shape="rect" id="node5" title="The base class for all classes that have descriptors." alt="" coords="36,80,126,100"/>
+<area shape="rect" id="node6" title="class that reconstructs the direction of an atmospheric shower" alt="" coords="648,61,757,80"/>
+<area shape="rect" id="node8" title="This class is an implementation if the impact_reco Monte Carlo" alt="" coords="642,100,764,119"/>
+</map>

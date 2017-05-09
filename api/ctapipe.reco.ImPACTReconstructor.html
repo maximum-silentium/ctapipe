@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ImPACTFitter &mdash; ctapipe v0.4.0.post431+gitea390f3</title>
+  <title>ImPACTReconstructor &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
   
 
   
@@ -35,10 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post431+gitea390f3" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../index.html"/>
         <link rel="up" title="Reconstruction (reco)" href="../reco/index.html"/>
-        <link rel="next" title="RecoShowerGeomAlgorithm" href="ctapipe.reco.RecoShowerGeomAlgorithm.html"/>
-        <link rel="prev" title="GreatCircle" href="ctapipe.reco.GreatCircle.html"/> 
+        <link rel="next" title="Reconstructor" href="ctapipe.reco.Reconstructor.html"/>
+        <link rel="prev" title="HillasReconstructor" href="ctapipe.reco.HillasReconstructor.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post431+gitea390f3
+                0.4.0.post450+gitb4b159c
               </div>
             
           
@@ -167,13 +167,13 @@
         
           <li><a href="../reco/index.html">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a> &raquo;</li>
         
-      <li>ImPACTFitter</li>
+      <li>ImPACTReconstructor</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/ctapipe.reco.ImPACTFitter.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.reco.ImPACTReconstructor.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -186,12 +186,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="impactfitter">
-<h1>ImPACTFitter<a class="headerlink" href="#impactfitter" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="impactreconstructor">
+<h1>ImPACTReconstructor<a class="headerlink" href="#impactreconstructor" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="ctapipe.reco.ImPACTFitter">
-<em class="property">class </em><code class="descclassname">ctapipe.reco.</code><code class="descname">ImPACTFitter</code><span class="sig-paren">(</span><em>fit_xmax=True</em>, <em>root_dir='.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ctapipe.reco.reco_algorithms.RecoShowerGeomAlgorithm</span></code></p>
+<dt id="ctapipe.reco.ImPACTReconstructor">
+<em class="property">class </em><code class="descclassname">ctapipe.reco.</code><code class="descname">ImPACTReconstructor</code><span class="sig-paren">(</span><em>fit_xmax=True</em>, <em>root_dir='.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ctapipe.reco.reco_algorithms.Reconstructor</span></code></p>
 <p>This class is an implementation if the impact_reco Monte Carlo
 Template based image fitting method from <a class="reference internal" href="#parsons14" id="id1">[parsons14]</a>.  This method uses a
 comparision of the predicted image from a library of image
@@ -220,37 +220,37 @@ are fixed:</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.draw_nominal_surface" title="ctapipe.reco.ImPACTFitter.draw_nominal_surface"><code class="xref py py-obj docutils literal"><span class="pre">draw_nominal_surface</span></code></a>(x_src,&nbsp;y_src,&nbsp;x_grd,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.draw_nominal_surface" title="ctapipe.reco.ImPACTReconstructor.draw_nominal_surface"><code class="xref py py-obj docutils literal"><span class="pre">draw_nominal_surface</span></code></a>(x_src,&nbsp;y_src,&nbsp;x_grd,&nbsp;...)</td>
 <td>Function for creating test statistic surface in nominal plane</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.draw_surfaces" title="ctapipe.reco.ImPACTFitter.draw_surfaces"><code class="xref py py-obj docutils literal"><span class="pre">draw_surfaces</span></code></a>(x_src,&nbsp;y_src,&nbsp;x_grd,&nbsp;y_grd,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.draw_surfaces" title="ctapipe.reco.ImPACTReconstructor.draw_surfaces"><code class="xref py py-obj docutils literal"><span class="pre">draw_surfaces</span></code></a>(x_src,&nbsp;y_src,&nbsp;x_grd,&nbsp;y_grd,&nbsp;...)</td>
 <td>Simple function to draw the surface of the test statistic in both the nominal and tilted planes while keeping the values in the other plane fixed at the best fit value.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.draw_tilted_surface" title="ctapipe.reco.ImPACTFitter.draw_tilted_surface"><code class="xref py py-obj docutils literal"><span class="pre">draw_tilted_surface</span></code></a>(x_src,&nbsp;y_src,&nbsp;x_grd,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.draw_tilted_surface" title="ctapipe.reco.ImPACTReconstructor.draw_tilted_surface"><code class="xref py py-obj docutils literal"><span class="pre">draw_tilted_surface</span></code></a>(x_src,&nbsp;y_src,&nbsp;x_grd,&nbsp;...)</td>
 <td>Function for creating test statistic surface in tilted plane</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.get_brightest_mean" title="ctapipe.reco.ImPACTFitter.get_brightest_mean"><code class="xref py py-obj docutils literal"><span class="pre">get_brightest_mean</span></code></a>([num_pix])</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.get_brightest_mean" title="ctapipe.reco.ImPACTReconstructor.get_brightest_mean"><code class="xref py py-obj docutils literal"><span class="pre">get_brightest_mean</span></code></a>([num_pix])</td>
 <td>This is a simple function to find the peak position of each image in an event which will be used later in the Xmax calculation.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.get_likelihood" title="ctapipe.reco.ImPACTFitter.get_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">get_likelihood</span></code></a>(source_x,&nbsp;source_y,&nbsp;core_x,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.get_likelihood" title="ctapipe.reco.ImPACTReconstructor.get_likelihood"><code class="xref py py-obj docutils literal"><span class="pre">get_likelihood</span></code></a>(source_x,&nbsp;source_y,&nbsp;core_x,&nbsp;...)</td>
 <td>Get the likelihood that the image predicted at the given test position matches the camera image.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.get_likelihood_min" title="ctapipe.reco.ImPACTFitter.get_likelihood_min"><code class="xref py py-obj docutils literal"><span class="pre">get_likelihood_min</span></code></a>(x)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.get_likelihood_min" title="ctapipe.reco.ImPACTReconstructor.get_likelihood_min"><code class="xref py py-obj docutils literal"><span class="pre">get_likelihood_min</span></code></a>(x)</td>
 <td>Wrapper class around likelihood function for use with scipy</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.get_prediction" title="ctapipe.reco.ImPACTFitter.get_prediction"><code class="xref py py-obj docutils literal"><span class="pre">get_prediction</span></code></a>(tel_id,&nbsp;shower_reco,&nbsp;energy_reco)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.get_prediction" title="ctapipe.reco.ImPACTReconstructor.get_prediction"><code class="xref py py-obj docutils literal"><span class="pre">get_prediction</span></code></a>(tel_id,&nbsp;shower_reco,&nbsp;energy_reco)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.get_shower_max" title="ctapipe.reco.ImPACTFitter.get_shower_max"><code class="xref py py-obj docutils literal"><span class="pre">get_shower_max</span></code></a>(source_x,&nbsp;source_y,&nbsp;core_x,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.get_shower_max" title="ctapipe.reco.ImPACTReconstructor.get_shower_max"><code class="xref py py-obj docutils literal"><span class="pre">get_shower_max</span></code></a>(source_x,&nbsp;source_y,&nbsp;core_x,&nbsp;...)</td>
 <td>Function to calculate the depth of shower maximum geometrically under the assumption that the shower maximum lies at the brightest point of the camera image.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.image_prediction" title="ctapipe.reco.ImPACTFitter.image_prediction"><code class="xref py py-obj docutils literal"><span class="pre">image_prediction</span></code></a>(type,&nbsp;zenith,&nbsp;azimuth,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.image_prediction" title="ctapipe.reco.ImPACTReconstructor.image_prediction"><code class="xref py py-obj docutils literal"><span class="pre">image_prediction</span></code></a>(type,&nbsp;zenith,&nbsp;azimuth,&nbsp;...)</td>
 <td>Creates predicted image for the specified pixels, interpolated from the template library.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.initialise_templates" title="ctapipe.reco.ImPACTFitter.initialise_templates"><code class="xref py py-obj docutils literal"><span class="pre">initialise_templates</span></code></a>(tel_type)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.initialise_templates" title="ctapipe.reco.ImPACTReconstructor.initialise_templates"><code class="xref py py-obj docutils literal"><span class="pre">initialise_templates</span></code></a>(tel_type)</td>
 <td>Check if templates for a given telescope type has been initialised</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.predict" title="ctapipe.reco.ImPACTFitter.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(shower_seed,&nbsp;energy_seed)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.predict" title="ctapipe.reco.ImPACTReconstructor.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(shower_seed,&nbsp;energy_seed)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -261,18 +261,18 @@ are fixed:</p>
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.rotate_translate" title="ctapipe.reco.ImPACTFitter.rotate_translate"><code class="xref py py-obj docutils literal"><span class="pre">rotate_translate</span></code></a>(pixel_pos_x,&nbsp;pixel_pos_y,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.rotate_translate" title="ctapipe.reco.ImPACTReconstructor.rotate_translate"><code class="xref py py-obj docutils literal"><span class="pre">rotate_translate</span></code></a>(pixel_pos_x,&nbsp;pixel_pos_y,&nbsp;...)</td>
 <td>Function to perform rotation and translation of pixel lists</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTFitter.set_event_properties" title="ctapipe.reco.ImPACTFitter.set_event_properties"><code class="xref py py-obj docutils literal"><span class="pre">set_event_properties</span></code></a>(image,&nbsp;pixel_x,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.ImPACTReconstructor.set_event_properties" title="ctapipe.reco.ImPACTReconstructor.set_event_properties"><code class="xref py py-obj docutils literal"><span class="pre">set_event_properties</span></code></a>(image,&nbsp;pixel_x,&nbsp;...)</td>
 <td>The setter class is used to set the event properties within this class before minimisation can take place.</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.draw_nominal_surface">
-<code class="descname">draw_nominal_surface</code><span class="sig-paren">(</span><em>x_src</em>, <em>y_src</em>, <em>x_grd</em>, <em>y_grd</em>, <em>energy</em>, <em>xmax</em>, <em>plot_name</em>, <em>bins=30</em>, <em>range=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.draw_nominal_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.draw_nominal_surface" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.draw_nominal_surface">
+<code class="descname">draw_nominal_surface</code><span class="sig-paren">(</span><em>x_src</em>, <em>y_src</em>, <em>x_grd</em>, <em>y_grd</em>, <em>energy</em>, <em>xmax</em>, <em>plot_name</em>, <em>bins=30</em>, <em>range=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.draw_nominal_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.draw_nominal_surface" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function for creating test statistic surface in nominal plane</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -316,8 +316,8 @@ are fixed:</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.draw_surfaces">
-<code class="descname">draw_surfaces</code><span class="sig-paren">(</span><em>x_src</em>, <em>y_src</em>, <em>x_grd</em>, <em>y_grd</em>, <em>energy</em>, <em>xmax</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.draw_surfaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.draw_surfaces" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.draw_surfaces">
+<code class="descname">draw_surfaces</code><span class="sig-paren">(</span><em>x_src</em>, <em>y_src</em>, <em>x_grd</em>, <em>y_grd</em>, <em>energy</em>, <em>xmax</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.draw_surfaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.draw_surfaces" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple function to draw the surface of the test statistic in both
 the nominal and tilted planes while keeping the values in the
 other plane fixed at the best fit value.</p>
@@ -348,8 +348,8 @@ other plane fixed at the best fit value.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.draw_tilted_surface">
-<code class="descname">draw_tilted_surface</code><span class="sig-paren">(</span><em>x_src</em>, <em>y_src</em>, <em>x_grd</em>, <em>y_grd</em>, <em>energy</em>, <em>xmax</em>, <em>bins=50</em>, <em>range=&lt;Quantity 100.0 m&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.draw_tilted_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.draw_tilted_surface" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.draw_tilted_surface">
+<code class="descname">draw_tilted_surface</code><span class="sig-paren">(</span><em>x_src</em>, <em>y_src</em>, <em>x_grd</em>, <em>y_grd</em>, <em>energy</em>, <em>xmax</em>, <em>bins=50</em>, <em>range=&lt;Quantity 100.0 m&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.draw_tilted_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.draw_tilted_surface" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function for creating test statistic surface in tilted plane</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -393,8 +393,8 @@ other plane fixed at the best fit value.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.get_brightest_mean">
-<code class="descname">get_brightest_mean</code><span class="sig-paren">(</span><em>num_pix=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.get_brightest_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.get_brightest_mean" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.get_brightest_mean">
+<code class="descname">get_brightest_mean</code><span class="sig-paren">(</span><em>num_pix=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.get_brightest_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.get_brightest_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a simple function to find the peak position of each image
 in an event which will be used later in the Xmax
 calculation. Peak is found by taking the average position of
@@ -417,8 +417,8 @@ the n hottest pixels in the image.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.get_likelihood">
-<code class="descname">get_likelihood</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em>, <em>core_x</em>, <em>core_y</em>, <em>energy</em>, <em>x_max_scale</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.get_likelihood"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.get_likelihood" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.get_likelihood">
+<code class="descname">get_likelihood</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em>, <em>core_x</em>, <em>core_y</em>, <em>energy</em>, <em>x_max_scale</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.get_likelihood"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.get_likelihood" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the likelihood that the image predicted at the given test
 position matches the camera image.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -459,8 +459,8 @@ position matches the camera image.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.get_likelihood_min">
-<code class="descname">get_likelihood_min</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.get_likelihood_min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.get_likelihood_min" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.get_likelihood_min">
+<code class="descname">get_likelihood_min</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.get_likelihood_min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.get_likelihood_min" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper class around likelihood function for use with scipy
 minimisers</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -481,13 +481,13 @@ minimisers</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.get_prediction">
-<code class="descname">get_prediction</code><span class="sig-paren">(</span><em>tel_id</em>, <em>shower_reco</em>, <em>energy_reco</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.get_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.get_prediction" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.get_prediction">
+<code class="descname">get_prediction</code><span class="sig-paren">(</span><em>tel_id</em>, <em>shower_reco</em>, <em>energy_reco</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.get_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.get_prediction" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.get_shower_max">
-<code class="descname">get_shower_max</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em>, <em>core_x</em>, <em>core_y</em>, <em>zen</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.get_shower_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.get_shower_max" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.get_shower_max">
+<code class="descname">get_shower_max</code><span class="sig-paren">(</span><em>source_x</em>, <em>source_y</em>, <em>core_x</em>, <em>core_y</em>, <em>zen</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.get_shower_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.get_shower_max" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to calculate the depth of shower maximum geometrically
 under the assumption that the shower maximum lies at the
 brightest point of the camera image.</p>
@@ -525,8 +525,8 @@ brightest point of the camera image.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.image_prediction">
-<code class="descname">image_prediction</code><span class="sig-paren">(</span><em>type</em>, <em>zenith</em>, <em>azimuth</em>, <em>energy</em>, <em>impact</em>, <em>x_max</em>, <em>pix_x</em>, <em>pix_y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.image_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.image_prediction" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.image_prediction">
+<code class="descname">image_prediction</code><span class="sig-paren">(</span><em>type</em>, <em>zenith</em>, <em>azimuth</em>, <em>energy</em>, <em>impact</em>, <em>x_max</em>, <em>pix_x</em>, <em>pix_y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.image_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.image_prediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates predicted image for the specified pixels, interpolated
 from the template library.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -575,8 +575,8 @@ from the template library.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.initialise_templates">
-<code class="descname">initialise_templates</code><span class="sig-paren">(</span><em>tel_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.initialise_templates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.initialise_templates" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.initialise_templates">
+<code class="descname">initialise_templates</code><span class="sig-paren">(</span><em>tel_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.initialise_templates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.initialise_templates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if templates for a given telescope type has been initialised
 and if not do it and add to the dictionary</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -597,8 +597,8 @@ and if not do it and add to the dictionary</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>shower_seed</em>, <em>energy_seed</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.predict" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>shower_seed</em>, <em>energy_seed</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.predict" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -633,8 +633,8 @@ and if not do it and add to the dictionary</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="ctapipe.reco.ImPACTFitter.rotate_translate">
-<em class="property">static </em><code class="descname">rotate_translate</code><span class="sig-paren">(</span><em>pixel_pos_x</em>, <em>pixel_pos_y</em>, <em>x_trans</em>, <em>y_trans</em>, <em>phi</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.rotate_translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.rotate_translate" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.rotate_translate">
+<em class="property">static </em><code class="descname">rotate_translate</code><span class="sig-paren">(</span><em>pixel_pos_x</em>, <em>pixel_pos_y</em>, <em>x_trans</em>, <em>y_trans</em>, <em>phi</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.rotate_translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.rotate_translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to perform rotation and translation of pixel lists</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -670,8 +670,8 @@ and if not do it and add to the dictionary</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.reco.ImPACTFitter.set_event_properties">
-<code class="descname">set_event_properties</code><span class="sig-paren">(</span><em>image</em>, <em>pixel_x</em>, <em>pixel_y</em>, <em>pixel_area</em>, <em>type_tel</em>, <em>tel_x</em>, <em>tel_y</em>, <em>array_direction</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTFitter.set_event_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTFitter.set_event_properties" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.ImPACTReconstructor.set_event_properties">
+<code class="descname">set_event_properties</code><span class="sig-paren">(</span><em>image</em>, <em>pixel_x</em>, <em>pixel_y</em>, <em>pixel_area</em>, <em>type_tel</em>, <em>tel_x</em>, <em>tel_y</em>, <em>array_direction</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/ImPACT.html#ImPACTReconstructor.set_event_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.ImPACTReconstructor.set_event_properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>The setter class is used to set the event properties within this
 class before minimisation can take place. This simply copies a
 bunch of useful properties to class members, so that we can
@@ -731,10 +731,10 @@ use them later without passing all this information around.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ctapipe.reco.RecoShowerGeomAlgorithm.html" class="btn btn-neutral float-right" title="RecoShowerGeomAlgorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.reco.Reconstructor.html" class="btn btn-neutral float-right" title="Reconstructor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ctapipe.reco.GreatCircle.html" class="btn btn-neutral" title="GreatCircle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ctapipe.reco.HillasReconstructor.html" class="btn btn-neutral" title="HillasReconstructor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -743,7 +743,7 @@ use them later without passing all this information around.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 14:04.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
 
     </p>
   </div>
@@ -765,7 +765,7 @@ use them later without passing all this information around.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post431+gitea390f3',
+            VERSION:'0.4.0.post450+gitb4b159c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

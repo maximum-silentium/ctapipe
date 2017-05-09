@@ -1,5 +1,5 @@
 <map id="inheritancec2e205d1cc" name="inheritancec2e205d1cc">
-<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="379,5,458,27"/>
-<area shape="rect" id="node4" title="The base class for all classes that have descriptors." alt="" coords="5,5,103,27"/>
-<area shape="rect" id="node5" href="../api/ctapipe.io.hdftableio.SimpleHDF5TableWriter.html#ctapipe.io.hdftableio.SimpleHDF5TableWriter" target="_top" title="A very basic table writer that can take a container (or more than one) " alt="" coords="619,5,763,27"/>
+<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="381,5,459,26"/>
+<area shape="rect" id="node4" title="The base class for all classes that have descriptors." alt="" coords="5,5,103,26"/>
+<area shape="rect" id="node5" href="../api/ctapipe.io.hdftableio.SimpleHDF5TableWriter.html#ctapipe.io.hdftableio.SimpleHDF5TableWriter" target="_top" title="A very basic table writer that can take a container (or more than one) " alt="" coords="620,5,763,26"/>
 </map>
