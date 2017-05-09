@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.4.0.post421+git8046559</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post424+git91ff0c8</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post424+git91ff0c8" href="../index.html"/>
         <link rel="next" title="Hillas Parameterization" href="hillas.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.4.0.post421+git8046559
+                0.4.0.post424+git91ff0c8
               </div>
             
           
@@ -333,19 +333,22 @@
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.MomentParameters.html#ctapipe.image.MomentParameters" title="ctapipe.image.MomentParameters"><code class="xref py py-obj docutils literal"><span class="pre">MomentParameters</span></code></a>(size,&nbsp;cen_x,&nbsp;cen_y,&nbsp;length,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.NeighbourPeakIntegrator.html#ctapipe.image.NeighbourPeakIntegrator" title="ctapipe.image.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.MuonLineIntegrate.html#ctapipe.image.MuonLineIntegrate" title="ctapipe.image.MuonLineIntegrate"><code class="xref py py-obj docutils literal"><span class="pre">MuonLineIntegrate</span></code></a>(mirror_radius,&nbsp;hole_radius)</td>
+<td>Object for calculating the expected 2D shape of muon image for a given mirror geometry.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.NeighbourPeakIntegrator.html#ctapipe.image.NeighbourPeakIntegrator" title="ctapipe.image.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Charge extractor that defines an integration window defined by the  peaks in the neighbouring pixels.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.NullWaveformCleaner.html#ctapipe.image.NullWaveformCleaner" title="ctapipe.image.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.NullWaveformCleaner.html#ctapipe.image.NullWaveformCleaner" title="ctapipe.image.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Dummy waveform cleaner that simply returns its input</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.PixelLikelihoodError.html#ctapipe.image.PixelLikelihoodError" title="ctapipe.image.PixelLikelihoodError"><code class="xref py py-obj docutils literal"><span class="pre">PixelLikelihoodError</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.PixelLikelihoodError.html#ctapipe.image.PixelLikelihoodError" title="ctapipe.image.PixelLikelihoodError"><code class="xref py py-obj docutils literal"><span class="pre">PixelLikelihoodError</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.SimpleIntegrator.html#ctapipe.image.SimpleIntegrator" title="ctapipe.image.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.SimpleIntegrator.html#ctapipe.image.SimpleIntegrator" title="ctapipe.image.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.WaveformCleanerFactory.html#ctapipe.image.WaveformCleanerFactory" title="ctapipe.image.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.WaveformCleanerFactory.html#ctapipe.image.WaveformCleanerFactory" title="ctapipe.image.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Factory to obtain a WaveformCleaner.</td>
 </tr>
 </tbody>
@@ -377,7 +380,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:37.
 
     </p>
   </div>
@@ -399,7 +402,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post421+git8046559',
+            VERSION:'0.4.0.post424+git91ff0c8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
