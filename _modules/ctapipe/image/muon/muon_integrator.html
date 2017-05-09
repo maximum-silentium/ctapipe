@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.muon.muon_integrator &mdash; ctapipe v0.4.0.post424+git91ff0c8</title>
+  <title>ctapipe.image.muon.muon_integrator &mdash; ctapipe v0.4.0.post428+git72416d2</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post424+git91ff0c8" href="../../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post428+git72416d2" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post424+git91ff0c8
+                0.4.0.post428+git72416d2
               </div>
             
           
@@ -203,39 +203,32 @@
 
 <span class="sd">    Expected 2D images can then be generated when the pixel geometry</span>
 <span class="sd">    is passed to the class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mirror_radius: float</span>
+<span class="sd">        Radius of telescope mirror (circular approx)</span>
+<span class="sd">    hole_radius: float</span>
+<span class="sd">        Radius of telescope mirror hole (circular approx)</span>
+<span class="sd">    pixel_width: float</span>
+<span class="sd">        width of pixel in camera</span>
+<span class="sd">    oversample_bins: int</span>
+<span class="sd">        number of angular bins to evaluate for each pixel width</span>
+<span class="sd">    sct_flag: bool</span>
+<span class="sd">        flags whether the telescope uses Schwarzschild-Couder Optics</span>
+<span class="sd">    secondary_radius: float</span>
+<span class="sd">        Radius of the secondary mirror (circular approx) for dual</span>
+<span class="sd">        mirror telescopes</span>
+<span class="sd">    minlambda: float</span>
+<span class="sd">        minimum wavelength for integration (300nm typical)</span>
+<span class="sd">    maxlambda: float</span>
+<span class="sd">        maximum wavelength for integration (600nm typical)</span>
+<span class="sd">    photemit: float</span>
+<span class="sd">        1/lambda^2 integrated over the above defined wavelength range</span>
+<span class="sd">        multiplied by the fine structure constant (1/137)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mirror_radius</span><span class="p">,</span> <span class="n">hole_radius</span><span class="p">,</span> <span class="n">pixel_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
                  <span class="n">oversample_bins</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">sct_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">secondary_radius</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Class initialisation funtion</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        mirror_radius: float</span>
-<span class="sd">            Radius of telescope mirror (circular approx)</span>
-<span class="sd">        hole_radius: float</span>
-<span class="sd">            Radius of telescope mirror hole (circular approx)</span>
-<span class="sd">        pixel_width: float</span>
-<span class="sd">            width of pixel in camera</span>
-<span class="sd">        oversample_bins: int</span>
-<span class="sd">            number of angular bins to evaluate for each pixel width</span>
-<span class="sd">        sct_flag: bool</span>
-<span class="sd">            flags whether the telescope uses Schwarzschild-Couder Optics</span>
-<span class="sd">        secondary_radius: float</span>
-<span class="sd">            Radius of the secondary mirror (circular approx) for dual</span>
-<span class="sd">            mirror telescopes</span>
-<span class="sd">        minlambda: float</span>
-<span class="sd">            minimum wavelength for integration (300nm typical)</span>
-<span class="sd">        maxlambda: float</span>
-<span class="sd">            maximum wavelength for integration (600nm typical)</span>
-<span class="sd">        photemit: float</span>
-<span class="sd">            1/lambda^2 integrated over the above defined wavelength range</span>
-<span class="sd">            multiplied by the fine structure constant (1/137)</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">            None</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">mirror_radius</span> <span class="o">=</span> <span class="n">mirror_radius</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hole_radius</span> <span class="o">=</span> <span class="n">hole_radius</span>
@@ -295,7 +288,7 @@
 <span class="sd">        angle: float</span>
 <span class="sd">            Angle along which to integrate mirror</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns</span>
 <span class="sd">        --------</span>
 <span class="sd">        float: length from impact point to mirror edge</span>
 
@@ -615,7 +608,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:37.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:57.
 
     </p>
   </div>
@@ -637,7 +630,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'0.4.0.post424+git91ff0c8',
+            VERSION:'0.4.0.post428+git72416d2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

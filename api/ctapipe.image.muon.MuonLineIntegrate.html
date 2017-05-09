@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MuonLineIntegrate &mdash; ctapipe v0.4.0.post424+git91ff0c8</title>
+  <title>MuonLineIntegrate &mdash; ctapipe v0.4.0.post428+git72416d2</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post424+git91ff0c8" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post428+git72416d2" href="../index.html"/>
         <link rel="up" title="Muon image analysis" href="../image/muon.html"/>
         <link rel="next" title="Toy model image generation" href="../image/toymodel.html"/>
         <link rel="prev" title="ChaudhuriKunduRingFitter" href="ctapipe.image.muon.ChaudhuriKunduRingFitter.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post424+git91ff0c8
+                0.4.0.post428+git72416d2
               </div>
             
           
@@ -208,6 +208,52 @@ Muon profiles are then calculated bsed of the line integral along a given
 axis from the muon impact point.</p>
 <p>Expected 2D images can then be generated when the pixel geometry
 is passed to the class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mirror_radius: float</strong></p>
+<blockquote>
+<div><p>Radius of telescope mirror (circular approx)</p>
+</div></blockquote>
+<p><strong>hole_radius: float</strong></p>
+<blockquote>
+<div><p>Radius of telescope mirror hole (circular approx)</p>
+</div></blockquote>
+<p><strong>pixel_width: float</strong></p>
+<blockquote>
+<div><p>width of pixel in camera</p>
+</div></blockquote>
+<p><strong>oversample_bins: int</strong></p>
+<blockquote>
+<div><p>number of angular bins to evaluate for each pixel width</p>
+</div></blockquote>
+<p><strong>sct_flag: bool</strong></p>
+<blockquote>
+<div><p>flags whether the telescope uses Schwarzschild-Couder Optics</p>
+</div></blockquote>
+<p><strong>secondary_radius: float</strong></p>
+<blockquote>
+<div><p>Radius of the secondary mirror (circular approx) for dual
+mirror telescopes</p>
+</div></blockquote>
+<p><strong>minlambda: float</strong></p>
+<blockquote>
+<div><p>minimum wavelength for integration (300nm typical)</p>
+</div></blockquote>
+<p><strong>maxlambda: float</strong></p>
+<blockquote>
+<div><p>maximum wavelength for integration (600nm typical)</p>
+</div></blockquote>
+<p><strong>photemit: float</strong></p>
+<blockquote class="last">
+<div><p>1/lambda^2 integrated over the above defined wavelength range
+multiplied by the fine structure constant (1/137)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -420,9 +466,12 @@ given an impact point on the mirrot</p>
 <div><p>Impact position on mirror (tilted telescope system)</p>
 </div></blockquote>
 <p><strong>angle: float</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><p>Angle along which to integrate mirror</p>
 </div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float: length from impact point to mirror edge</p>
 </td>
 </tr>
 </tbody>
@@ -564,7 +613,7 @@ given an impact point on the mirrot</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:37.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:57.
 
     </p>
   </div>
@@ -586,7 +635,7 @@ given an impact point on the mirrot</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post424+git91ff0c8',
+            VERSION:'0.4.0.post428+git72416d2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
