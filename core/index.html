@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../index.html"/>
         <link rel="next" title="Component" href="../api/ctapipe.core.Component.html"/>
         <link rel="prev" title="TiltedGroundFrame" href="../api/ctapipe.coordinates.TiltedGroundFrame.html"/> 
 
@@ -44,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -63,7 +66,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -84,7 +87,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -112,6 +118,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">References</a></li>
 </ul>
 
             
@@ -124,8 +131,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -134,23 +143,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-    <li>Core Structures and Base Classes (<code class="docutils literal"><span class="pre">core</span></code>)</li>
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Core Structures and Base Classes (<code class="docutils literal"><span class="pre">core</span></code>)</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/core/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -196,7 +222,7 @@ Deserialization are simply specialized Components that perform data access.</p>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Container.html#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a>()</td>
 <td>Generic class that can hold and accumulate data to be passed between Components.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Tool.html#ctapipe.core.Tool" title="ctapipe.core.Tool"><code class="xref py py-obj docutils literal"><span class="pre">Tool</span></code></a>(\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Tool.html#ctapipe.core.Tool" title="ctapipe.core.Tool"><code class="xref py py-obj docutils literal"><span class="pre">Tool</span></code></a>(**kwargs)</td>
 <td>A base class for all executable tools (applications) that handles configuration loading/saving, logging, command-line processing, and provenance meta-data handling.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Item.html#ctapipe.core.Item" title="ctapipe.core.Item"><code class="xref py py-obj docutils literal"><span class="pre">Item</span></code></a>(default[,&nbsp;description,&nbsp;unit])</td>
@@ -205,7 +231,7 @@ Deserialization are simply specialized Components that perform data access.</p>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Map.html#ctapipe.core.Map" title="ctapipe.core.Map"><code class="xref py py-obj docutils literal"><span class="pre">Map</span></code></a></td>
 <td>A dictionary of sub-containers that can be added to a Container.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Factory.html#ctapipe.core.Factory" title="ctapipe.core.Factory"><code class="xref py py-obj docutils literal"><span class="pre">Factory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Factory.html#ctapipe.core.Factory" title="ctapipe.core.Factory"><code class="xref py py-obj docutils literal"><span class="pre">Factory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>A base class for all class factories that exist in the <code class="xref py py-obj docutils literal"><span class="pre">Tools</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">Components</span></code> frameworks.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Provenance.html#ctapipe.core.Provenance" title="ctapipe.core.Provenance"><code class="xref py py-obj docutils literal"><span class="pre">Provenance</span></code></a>()</td>
@@ -238,15 +264,18 @@ Deserialization are simply specialized Components that perform data access.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.core.Component.html" class="btn btn-neutral float-right" title="Component" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.core.Component.html" class="btn btn-neutral float-right" title="Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../api/ctapipe.coordinates.TiltedGroundFrame.html" class="btn btn-neutral" title="TiltedGroundFrame" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../api/ctapipe.coordinates.TiltedGroundFrame.html" class="btn btn-neutral" title="TiltedGroundFrame" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -255,7 +284,7 @@ Deserialization are simply specialized Components that perform data access.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -277,10 +306,11 @@ Deserialization are simply specialized Components that perform data access.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

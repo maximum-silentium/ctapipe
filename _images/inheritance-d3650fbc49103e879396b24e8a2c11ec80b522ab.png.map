@@ -1,0 +1,5 @@
+<map id="inheritancec754091004" name="inheritancec754091004">
+<area shape="rect" id="node2" title="This is the base class from which all ring fitters should inherit from" alt="" coords="498,5,567,26"/>
+<area shape="rect" id="node3" title="Base class of all Components (sometimes called" alt="" coords="378,5,456,26"/>
+<area shape="rect" id="node6" title="The base class for all classes that have descriptors." alt="" coords="5,5,102,26"/>
+</map>

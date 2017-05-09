@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.instrument.camera &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>ctapipe.instrument.camera &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -43,6 +45,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -83,7 +86,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -100,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">References</a></li>
 </ul>
 
             
@@ -112,8 +119,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -126,19 +135,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-      
-    <li>ctapipe.instrument.camera</li>
+        
+      <li>ctapipe.instrument.camera</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -161,16 +187,16 @@
 <span class="kn">from</span> <span class="nn">astropy.utils</span> <span class="k">import</span> <span class="n">lazyproperty</span>
 
 <span class="kn">from</span> <span class="nn">ctapipe.io.files</span> <span class="k">import</span> <span class="n">get_file_type</span>
-<span class="kn">from</span> <span class="nn">ctapipe.utils.datasets</span> <span class="k">import</span> <span class="n">get_dataset</span>
+<span class="kn">from</span> <span class="nn">ctapipe.utils</span> <span class="k">import</span> <span class="n">get_dataset</span>
 <span class="kn">from</span> <span class="nn">ctapipe.utils.linalg</span> <span class="k">import</span> <span class="n">rotation_matrix_2d</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span> <span class="k">as</span> <span class="n">KDTree</span>
-<span class="kn">from</span> <span class="nn">ctapipe.utils.datasets</span> <span class="k">import</span> <span class="n">get_dataset</span>
+<span class="kn">from</span> <span class="nn">ctapipe.utils</span> <span class="k">import</span> <span class="n">get_dataset</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CameraGeometry&#39;</span><span class="p">,</span>
            <span class="s1">&#39;get_camera_types&#39;</span><span class="p">,</span>
            <span class="s1">&#39;print_camera_types&#39;</span><span class="p">]</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="c1"># dictionary to convert number of pixels to camera + the focal length of the</span>
 <span class="c1"># telescope into a camera type for use in `CameraGeometry.guess()`</span>
@@ -266,7 +292,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="nd">@u</span><span class="o">.</span><span class="n">quantity_input</span>
-<div class="viewcode-block" id="CameraGeometry.guess"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.guess">[docs]</a>    <span class="k">def</span> <span class="nf">guess</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">optical_foclen</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
+<div class="viewcode-block" id="CameraGeometry.guess"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.guess">[docs]</a>    <span class="k">def</span> <span class="nf">guess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">optical_foclen</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Construct a `CameraGeometry` by guessing the appropriate quantities</span>
 <span class="sd">        from a list of pixel positions and the focal length. </span>
@@ -295,7 +321,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;unsupported pixel type&quot;</span><span class="p">)</span>
 
-        <span class="n">instance</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">cam_id</span><span class="o">=</span><span class="n">cam_id</span><span class="p">,</span>
             <span class="n">pix_id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pix_x</span><span class="p">)),</span>
             <span class="n">pix_x</span><span class="o">=</span><span class="n">pix_x</span><span class="p">,</span>
@@ -311,7 +337,7 @@
         <span class="k">return</span> <span class="n">instance</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CameraGeometry.get_known_camera_names"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.get_known_camera_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_known_camera_names</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">array_id</span><span class="o">=</span><span class="s1">&#39;CTA&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="CameraGeometry.get_known_camera_names"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.get_known_camera_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_known_camera_names</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">array_id</span><span class="o">=</span><span class="s1">&#39;CTA&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of camera_ids that are registered in </span>
 <span class="sd">        `ctapipe_resources`. These are all the camera-ids that can be </span>
@@ -336,7 +362,7 @@
 
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CameraGeometry.from_name"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.from_name">[docs]</a>    <span class="k">def</span> <span class="nf">from_name</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">camera_id</span><span class="o">=</span><span class="s1">&#39;NectarCam&#39;</span><span class="p">,</span> <span class="n">array_id</span><span class="o">=</span><span class="s1">&#39;CTA&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CameraGeometry.from_name"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.from_name">[docs]</a>    <span class="k">def</span> <span class="nf">from_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">camera_id</span><span class="o">=</span><span class="s1">&#39;NectarCam&#39;</span><span class="p">,</span> <span class="n">array_id</span><span class="o">=</span><span class="s1">&#39;CTA&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a CameraGeometry using the name of the camera and array.</span>
 <span class="sd">        </span>
@@ -385,7 +411,7 @@
 
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CameraGeometry.from_table"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.from_table">[docs]</a>    <span class="k">def</span> <span class="nf">from_table</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">url_or_table</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="CameraGeometry.from_table"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.from_table">[docs]</a>    <span class="k">def</span> <span class="nf">from_table</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">url_or_table</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load a CameraGeometry from an `astropy.table.Table` instance or a </span>
 <span class="sd">        file that is readable by `astropy.table.Table.read()`</span>
@@ -410,7 +436,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url_or_table</span><span class="p">,</span> <span class="n">Table</span><span class="p">):</span>
             <span class="n">tab</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">url_or_table</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">cam_id</span><span class="o">=</span><span class="n">tab</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;CAM_ID&#39;</span><span class="p">],</span>
             <span class="n">pix_id</span><span class="o">=</span><span class="n">tab</span><span class="p">[</span><span class="s1">&#39;pix_id&#39;</span><span class="p">],</span>
             <span class="n">pix_x</span><span class="o">=</span><span class="n">tab</span><span class="p">[</span><span class="s1">&#39;pix_x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span>
@@ -482,7 +508,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pix_rotation</span> <span class="o">-=</span> <span class="n">angle</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CameraGeometry.make_rectangular"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.make_rectangular">[docs]</a>    <span class="k">def</span> <span class="nf">make_rectangular</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">npix_x</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">npix_y</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+<div class="viewcode-block" id="CameraGeometry.make_rectangular"><a class="viewcode-back" href="../../../api/ctapipe.instrument.CameraGeometry.html#ctapipe.instrument.CameraGeometry.make_rectangular">[docs]</a>    <span class="k">def</span> <span class="nf">make_rectangular</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">npix_x</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">npix_y</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
                          <span class="n">range_y</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Generate a simple camera with 2D rectangular geometry.</span>
 
@@ -513,7 +539,7 @@
         <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npix_x</span> <span class="o">*</span> <span class="n">npix_y</span><span class="p">)</span>
         <span class="n">rr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
 
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">cam_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">cam_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
                    <span class="n">pix_id</span><span class="o">=</span><span class="n">ids</span><span class="p">,</span>
                    <span class="n">pix_x</span><span class="o">=</span><span class="n">xx</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span>
                    <span class="n">pix_y</span><span class="o">=</span><span class="n">yy</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span>
@@ -626,7 +652,7 @@
         <span class="n">f</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">optical_foclen</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span>
         <span class="n">geom</span> <span class="o">=</span> <span class="n">CameraGeometry</span><span class="o">.</span><span class="n">guess</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-        <span class="n">camid</span><span class="p">[</span><span class="n">geom</span><span class="o">.</span><span class="n">cam_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">telid</span><span class="p">)</span>
+        <span class="n">cam_types</span><span class="p">[</span><span class="n">geom</span><span class="o">.</span><span class="n">cam_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">telid</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">cam_types</span></div>
 
@@ -656,6 +682,9 @@
 </pre></div>
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -664,7 +693,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -686,10 +715,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>

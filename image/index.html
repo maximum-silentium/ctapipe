@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>Imaging (image) &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../index.html"/>
         <link rel="next" title="Hillas Parameterization" href="hillas.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -44,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -63,7 +66,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -84,7 +87,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -118,6 +124,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">References</a></li>
 </ul>
 
             
@@ -130,8 +137,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -140,23 +149,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-    <li>Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</li>
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/image/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -201,7 +227,7 @@
 <td>Add one row of neighbors to the True values of a pixel mask and return  the new mask.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.efficiency_fit.html#ctapipe.image.efficiency_fit" title="ctapipe.image.efficiency_fit"><code class="xref py py-obj docutils literal"><span class="pre">efficiency_fit</span></code></a>(pe_charge,&nbsp;pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
-<td>Estimate optical efficiency for a muon ring using method of <a class="reference internal" href="../api/ctapipe.image.efficiency_fit.html#r3" id="id1">[R3]</a>.</td>
+<td>Estimate optical efficiency for a muon ring using method of <a class="reference internal" href="../bibliography.html#mitchell15" id="id1">[mitchell15]</a>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.expected_pixel_light_content.html#ctapipe.image.expected_pixel_light_content" title="ctapipe.image.expected_pixel_light_content"><code class="xref py py-obj docutils literal"><span class="pre">expected_pixel_light_content</span></code></a>(pixel_x,&nbsp;...[,&nbsp;...])</td>
 <td>Calculate the expected light content of each pixel for a muon ring with the</td>
@@ -274,49 +300,52 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.AverageWfPeakIntegrator.html#ctapipe.image.AverageWfPeakIntegrator" title="ctapipe.image.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.AverageWfPeakIntegrator.html#ctapipe.image.AverageWfPeakIntegrator" title="ctapipe.image.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window defined by the  average waveform across all pixels.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.CHECMWaveformCleaner.html#ctapipe.image.CHECMWaveformCleaner" title="ctapipe.image.CHECMWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">CHECMWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.CHECMWaveformCleaner.html#ctapipe.image.CHECMWaveformCleaner" title="ctapipe.image.CHECMWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">CHECMWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Waveform cleaner used by CHEC-M.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.ChargeExtractorFactory.html#ctapipe.image.ChargeExtractorFactory" title="ctapipe.image.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.ChargeExtractorFactory.html#ctapipe.image.ChargeExtractorFactory" title="ctapipe.image.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Factory to obtain a ChargeExtractor.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.DataVolumeReductor.html#ctapipe.image.DataVolumeReductor" title="ctapipe.image.DataVolumeReductor"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductor</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.ChaudhuriKunduRingFitter.html#ctapipe.image.ChaudhuriKunduRingFitter" title="ctapipe.image.ChaudhuriKunduRingFitter"><code class="xref py py-obj docutils literal"><span class="pre">ChaudhuriKunduRingFitter</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.DataVolumeReductor.html#ctapipe.image.DataVolumeReductor" title="ctapipe.image.DataVolumeReductor"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductor</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Base component for data volume reductors.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.DataVolumeReductorFactory.html#ctapipe.image.DataVolumeReductorFactory" title="ctapipe.image.DataVolumeReductorFactory"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.DataVolumeReductorFactory.html#ctapipe.image.DataVolumeReductorFactory" title="ctapipe.image.DataVolumeReductorFactory"><code class="xref py py-obj docutils literal"><span class="pre">DataVolumeReductorFactory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Factory class for creating a DataVolumeReductor</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.FullIntegrator.html#ctapipe.image.FullIntegrator" title="ctapipe.image.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.FullIntegrator.html#ctapipe.image.FullIntegrator" title="ctapipe.image.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.GlobalPeakIntegrator.html#ctapipe.image.GlobalPeakIntegrator" title="ctapipe.image.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.GlobalPeakIntegrator.html#ctapipe.image.GlobalPeakIntegrator" title="ctapipe.image.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window about the global peak in the image.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.HillasParameterizationError.html#ctapipe.image.HillasParameterizationError" title="ctapipe.image.HillasParameterizationError"><code class="xref py py-obj docutils literal"><span class="pre">HillasParameterizationError</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.HillasParameterizationError.html#ctapipe.image.HillasParameterizationError" title="ctapipe.image.HillasParameterizationError"><code class="xref py py-obj docutils literal"><span class="pre">HillasParameterizationError</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.LocalPeakIntegrator.html#ctapipe.image.LocalPeakIntegrator" title="ctapipe.image.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window about the local peak in each pixel.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.MomentParameters.html#ctapipe.image.MomentParameters" title="ctapipe.image.MomentParameters"><code class="xref py py-obj docutils literal"><span class="pre">MomentParameters</span></code></a>(size,&nbsp;cen_x,&nbsp;cen_y,&nbsp;length,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.LocalPeakIntegrator.html#ctapipe.image.LocalPeakIntegrator" title="ctapipe.image.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.NeighbourPeakIntegrator.html#ctapipe.image.NeighbourPeakIntegrator" title="ctapipe.image.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window defined by the  peaks in the neighbouring pixels.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.MomentParameters.html#ctapipe.image.MomentParameters" title="ctapipe.image.MomentParameters"><code class="xref py py-obj docutils literal"><span class="pre">MomentParameters</span></code></a>(size,&nbsp;cen_x,&nbsp;cen_y,&nbsp;length,&nbsp;...)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.NeighbourPeakIntegrator.html#ctapipe.image.NeighbourPeakIntegrator" title="ctapipe.image.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.NullWaveformCleaner.html#ctapipe.image.NullWaveformCleaner" title="ctapipe.image.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.NullWaveformCleaner.html#ctapipe.image.NullWaveformCleaner" title="ctapipe.image.NullWaveformCleaner"><code class="xref py py-obj docutils literal"><span class="pre">NullWaveformCleaner</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Dummy waveform cleaner that simply returns its input</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.PixelLikelihoodError.html#ctapipe.image.PixelLikelihoodError" title="ctapipe.image.PixelLikelihoodError"><code class="xref py py-obj docutils literal"><span class="pre">PixelLikelihoodError</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.PixelLikelihoodError.html#ctapipe.image.PixelLikelihoodError" title="ctapipe.image.PixelLikelihoodError"><code class="xref py py-obj docutils literal"><span class="pre">PixelLikelihoodError</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.SimpleIntegrator.html#ctapipe.image.SimpleIntegrator" title="ctapipe.image.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.SimpleIntegrator.html#ctapipe.image.SimpleIntegrator" title="ctapipe.image.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.WaveformCleanerFactory.html#ctapipe.image.WaveformCleanerFactory" title="ctapipe.image.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.WaveformCleanerFactory.html#ctapipe.image.WaveformCleanerFactory" title="ctapipe.image.WaveformCleanerFactory"><code class="xref py py-obj docutils literal"><span class="pre">WaveformCleanerFactory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Factory to obtain a WaveformCleaner.</td>
 </tr>
 </tbody>
@@ -328,15 +357,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="hillas.html" class="btn btn-neutral float-right" title="Hillas Parameterization" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="hillas.html" class="btn btn-neutral float-right" title="Hillas Parameterization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../flow/index.html" class="btn btn-neutral" title="Flow-based framework (flow)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../flow/index.html" class="btn btn-neutral" title="Flow-based framework (flow)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -345,7 +377,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -367,10 +399,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

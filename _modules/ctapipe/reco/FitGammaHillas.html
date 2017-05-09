@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.reco.FitGammaHillas &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>ctapipe.reco.FitGammaHillas &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -43,6 +45,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -83,7 +86,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -100,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">References</a></li>
 </ul>
 
             
@@ -112,8 +119,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -126,19 +135,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-      
-    <li>ctapipe.reco.FitGammaHillas</li>
+        
+      <li>ctapipe.reco.FitGammaHillas</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -340,7 +366,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configurable</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">configurable</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configurable</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circles</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="FitGammaHillas.predict"><a class="viewcode-back" href="../../../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hillas_dict</span><span class="p">,</span> <span class="n">inst</span><span class="p">,</span> <span class="n">tel_phi</span><span class="p">,</span> <span class="n">tel_theta</span><span class="p">,</span> <span class="n">seed_pos</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
@@ -517,7 +543,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">linalg</span><span class="o">.</span><span class="n">normalise</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_result_origin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimless</span></div>
 
 <div class="viewcode-block" id="FitGammaHillas.fit_core_crosses"><a class="viewcode-back" href="../../../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas.fit_core_crosses">[docs]</a>    <span class="k">def</span> <span class="nf">fit_core_crosses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
-        <span class="sd">r&quot;&quot;&quot;calculates the core position as the least linear square solution</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;calculates the core position as the least linear square solution</span>
 <span class="sd">        of an (over-constrained) equation system</span>
 
 <span class="sd">        Notes</span>
@@ -706,6 +732,9 @@
 </pre></div>
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -714,7 +743,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -736,10 +765,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>

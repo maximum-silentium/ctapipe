@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Muon image analysis &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>Muon image analysis &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../index.html"/>
         <link rel="up" title="Imaging (image)" href="index.html"/>
         <link rel="next" title="efficiency_fit" href="../api/ctapipe.image.muon.efficiency_fit.html"/>
         <link rel="prev" title="NullWaveformCleaner" href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html"/> 
@@ -45,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -64,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -85,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -101,6 +107,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Muon image analysis</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.image.muon">ctapipe.image.muon Package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -118,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">References</a></li>
 </ul>
 
             
@@ -130,8 +139,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -140,25 +151,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a> &raquo;</li>
-      
-    <li>Muon image analysis</li>
+        
+      <li>Muon image analysis</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/image/muon.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -178,7 +206,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.muon.efficiency_fit.html#ctapipe.image.muon.efficiency_fit" title="ctapipe.image.muon.efficiency_fit"><code class="xref py py-obj docutils literal"><span class="pre">efficiency_fit</span></code></a>(pe_charge,&nbsp;pixel_x,&nbsp;pixel_y,&nbsp;...)</td>
-<td>Estimate optical efficiency for a muon ring using method of [R12].</td>
+<td>Estimate optical efficiency for a muon ring using method of <a class="reference internal" href="../bibliography.html#mitchell15" id="id1">[mitchell15]</a>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.muon.expected_pixel_light_content.html#ctapipe.image.muon.expected_pixel_light_content" title="ctapipe.image.muon.expected_pixel_light_content"><code class="xref py py-obj docutils literal"><span class="pre">expected_pixel_light_content</span></code></a>(pixel_x,&nbsp;...[,&nbsp;...])</td>
 <td>Calculate the expected light content of each pixel for a muon ring with the</td>
@@ -210,20 +238,46 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.muon.ChaudhuriKunduRingFitter.html#ctapipe.image.muon.ChaudhuriKunduRingFitter" title="ctapipe.image.muon.ChaudhuriKunduRingFitter"><code class="xref py py-obj docutils literal"><span class="pre">ChaudhuriKunduRingFitter</span></code></a>([parent])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="class-inheritance-diagram">
+<h3>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h3>
+<img src="../_images/inheritance-d3650fbc49103e879396b24e8a2c11ec80b522ab.png" alt="Inheritance diagram of ctapipe.image.muon.muon_ring_finder.ChaudhuriKunduRingFitter" usemap="#inheritancec754091004" class="inheritance"/>
+<map id="inheritancec754091004" name="inheritancec754091004">
+<area shape="rect" id="node2" title="This is the base class from which all ring fitters should inherit from" alt="" coords="498,5,567,26"/>
+<area shape="rect" id="node3" title="Base class of all Components (sometimes called" alt="" coords="378,5,456,26"/>
+<area shape="rect" id="node6" title="The base class for all classes that have descriptors." alt="" coords="5,5,102,26"/>
+</map>
+</div>
 </div>
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.image.muon.efficiency_fit.html" class="btn btn-neutral float-right" title="efficiency_fit" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.image.muon.efficiency_fit.html" class="btn btn-neutral float-right" title="efficiency_fit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html" class="btn btn-neutral" title="NullWaveformCleaner" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../api/ctapipe.image.waveform_cleaning.NullWaveformCleaner.html" class="btn btn-neutral" title="NullWaveformCleaner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -232,7 +286,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -254,10 +308,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

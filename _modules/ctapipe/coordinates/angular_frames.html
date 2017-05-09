@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.coordinates.angular_frames &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>ctapipe.coordinates.angular_frames &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -43,6 +45,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -83,7 +86,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -100,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">References</a></li>
 </ul>
 
             
@@ -112,8 +119,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -126,19 +135,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-      
-    <li>ctapipe.coordinates.angular_frames</li>
+        
+      <li>ctapipe.coordinates.angular_frames</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -356,7 +382,7 @@
     <span class="n">offset</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x_off</span> <span class="o">*</span> <span class="n">x_off</span> <span class="o">+</span> <span class="n">y_off</span> <span class="o">*</span> <span class="n">y_off</span><span class="p">)</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">offset</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># find offset 0 positions</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">offset</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span>  <span class="c1"># add a very small offset to prevent math errors</span>
+        <span class="n">offset</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>  <span class="c1"># add a very small offset to prevent math errors</span>
 
     <span class="n">atan_off</span> <span class="o">=</span> <span class="n">arctan</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
 
@@ -411,7 +437,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">alt_norm</span><span class="p">,</span> <span class="n">az_norm</span> <span class="o">=</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">array_direction</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">array_direction</span><span class="o">.</span><span class="n">az</span>
 
-    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">norm_coord</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">__module__</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">__name__</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">norm_coord</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span>
         <span class="n">x_off</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">x_off</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">value</span>
         <span class="n">x_off</span> <span class="o">=</span> <span class="n">x_off</span> <span class="o">*</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">unit</span>
@@ -444,7 +470,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    nominal Coordinates</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">alt_norm</span><span class="p">,</span> <span class="n">az_norm</span> <span class="o">=</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">array_direction</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">array_direction</span><span class="o">.</span><span class="n">alt</span>
+    <span class="n">alt_norm</span><span class="p">,</span> <span class="n">az_norm</span> <span class="o">=</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">array_direction</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">norm_coord</span><span class="o">.</span><span class="n">array_direction</span><span class="o">.</span><span class="n">az</span>
     <span class="n">azimuth</span> <span class="o">=</span> <span class="n">altaz_coord</span><span class="o">.</span><span class="n">az</span>
     <span class="n">altitude</span> <span class="o">=</span> <span class="n">altaz_coord</span><span class="o">.</span><span class="n">alt</span>
     <span class="n">x_off</span><span class="p">,</span> <span class="n">y_off</span> <span class="o">=</span> <span class="n">altaz_to_offset</span><span class="p">(</span><span class="n">azimuth</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">az_norm</span><span class="p">,</span> <span class="n">alt_norm</span><span class="p">)</span>
@@ -597,6 +623,9 @@
 </pre></div>
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -605,7 +634,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -627,10 +656,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>

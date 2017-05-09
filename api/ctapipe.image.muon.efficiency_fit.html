@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>efficiency_fit &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>efficiency_fit &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../index.html"/>
         <link rel="up" title="Muon image analysis" href="../image/muon.html"/>
         <link rel="next" title="expected_pixel_light_content" href="ctapipe.image.muon.expected_pixel_light_content.html"/>
         <link rel="prev" title="Muon image analysis" href="../image/muon.html"/> 
@@ -45,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -64,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -85,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -101,6 +107,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../image/muon.html">Muon image analysis</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../image/muon.html#module-ctapipe.image.muon">ctapipe.image.muon Package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../image/muon.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image/muon.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image/muon.html#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -118,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">References</a></li>
 </ul>
 
             
@@ -130,8 +139,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -140,27 +151,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../image/index.html">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a> &raquo;</li>
-      
+        
           <li><a href="../image/muon.html">Muon image analysis</a> &raquo;</li>
-      
-    <li>efficiency_fit</li>
+        
+      <li>efficiency_fit</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/api/ctapipe.image.muon.efficiency_fit.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -171,7 +199,7 @@
 <dl class="function">
 <dt id="ctapipe.image.muon.efficiency_fit">
 <code class="descclassname">ctapipe.image.muon.</code><code class="descname">efficiency_fit</code><span class="sig-paren">(</span><em>pe_charge</em>, <em>pixel_x</em>, <em>pixel_y</em>, <em>pixel_fov</em>, <em>pixel_diameter</em>, <em>mirror_radius</em>, <em>focal_length</em>, <em>lambda1=3e-07</em>, <em>lambda2=9e-07</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/image/muon/fitting.html#efficiency_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.image.muon.efficiency_fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Estimate optical efficiency for a muon ring using method of <a class="reference internal" href="#r5" id="id1">[R5]</a>.
+<dd><p>Estimate optical efficiency for a muon ring using method of <a class="reference internal" href="../bibliography.html#mitchell15" id="id1">[mitchell15]</a>.
 This is performing several steps:</p>
 <ol class="arabic simple">
 <li>fit r, x, y and width with the psf_likelihood_fit</li>
@@ -234,29 +262,24 @@ of photons.</li>
 </tr>
 </tbody>
 </table>
-<p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="r5" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[R5]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> A Generic Algorithm for IACT Optical Efficiency Calibration 
-using Muons, Allison Mitchell et al. arXiv: 1509.04258v1</td></tr>
-</tbody>
-</table>
 </dd></dl>
 
 </div>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ctapipe.image.muon.expected_pixel_light_content.html" class="btn btn-neutral float-right" title="expected_pixel_light_content" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.image.muon.expected_pixel_light_content.html" class="btn btn-neutral float-right" title="expected_pixel_light_content" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../image/muon.html" class="btn btn-neutral" title="Muon image analysis" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../image/muon.html" class="btn btn-neutral" title="Muon image analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -265,7 +288,7 @@ using Muons, Allison Mitchell et al. arXiv: 1509.04258v1</td></tr>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -287,10 +310,11 @@ using Muons, Allison Mitchell et al. arXiv: 1509.04258v1</td></tr>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

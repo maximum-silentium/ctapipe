@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Charge Extraction (cube to image) &mdash; ctapipe v0.4.0.post393+gitdd48071</title>
+  <title>Charge Extraction (cube to image) &mdash; ctapipe v0.4.0.post421+git8046559</title>
   
 
+  
+  
   
   
 
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post393+gitdd48071" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post421+git8046559" href="../index.html"/>
         <link rel="up" title="Imaging (image)" href="index.html"/>
         <link rel="next" title="ChargeExtractorFactory" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html"/>
         <link rel="prev" title="PixelLikelihoodError" href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html"/> 
@@ -45,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -64,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post393+gitdd48071
+                0.4.0.post421+git8046559
               </div>
             
           
@@ -85,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development Guidelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Command line tools (<code class="docutils literal"><span class="pre">tools</span></code>)</a></li>
@@ -119,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../utils/index.html">Utilities (<code class="docutils literal"><span class="pre">utils</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization (<code class="docutils literal"><span class="pre">visualization</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">References</a></li>
 </ul>
 
             
@@ -131,8 +138,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">ctapipe</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ctapipe</a>
+        
       </nav>
 
 
@@ -141,25 +150,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Imaging (<code class="docutils literal"><span class="pre">image</span></code>)</a> &raquo;</li>
-      
-    <li>Charge Extraction (cube to image)</li>
+        
+      <li>Charge Extraction (cube to image)</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/image/charge_extractors.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -179,38 +205,38 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" title="ctapipe.image.charge_extractors.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" title="ctapipe.image.charge_extractors.ChargeExtractorFactory"><code class="xref py py-obj docutils literal"><span class="pre">ChargeExtractorFactory</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td>Factory to obtain a ChargeExtractor.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.FullIntegrator.html#ctapipe.image.charge_extractors.FullIntegrator" title="ctapipe.image.charge_extractors.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.FullIntegrator.html#ctapipe.image.charge_extractors.FullIntegrator" title="ctapipe.image.charge_extractors.FullIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">FullIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.SimpleIntegrator.html#ctapipe.image.charge_extractors.SimpleIntegrator" title="ctapipe.image.charge_extractors.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.SimpleIntegrator.html#ctapipe.image.charge_extractors.SimpleIntegrator" title="ctapipe.image.charge_extractors.SimpleIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">SimpleIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" title="ctapipe.image.charge_extractors.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" title="ctapipe.image.charge_extractors.GlobalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">GlobalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window about the global peak in the image.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" title="ctapipe.image.charge_extractors.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" title="ctapipe.image.charge_extractors.LocalPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">LocalPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window about the local peak in each pixel.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" title="ctapipe.image.charge_extractors.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" title="ctapipe.image.charge_extractors.NeighbourPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">NeighbourPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window defined by the  peaks in the neighbouring pixels.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" title="ctapipe.image.charge_extractors.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;\*\*kwargs)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" title="ctapipe.image.charge_extractors.AverageWfPeakIntegrator"><code class="xref py py-obj docutils literal"><span class="pre">AverageWfPeakIntegrator</span></code></a>(config,&nbsp;tool,&nbsp;**kwargs)</td>
+<td>Charge extractor that defines an integration window defined by the  average waveform across all pixels.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="class-inheritance-diagram">
 <h3>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h3>
-<img src="../_images/inheritance-e0b62dd1c49f653bd5e44e8d090e192573dc3427.png" alt="Inheritance diagram of ctapipe.image.charge_extractors.ChargeExtractorFactory, ctapipe.image.charge_extractors.FullIntegrator, ctapipe.image.charge_extractors.SimpleIntegrator, ctapipe.image.charge_extractors.GlobalPeakIntegrator, ctapipe.image.charge_extractors.LocalPeakIntegrator, ctapipe.image.charge_extractors.NeighbourPeakIntegrator, ctapipe.image.charge_extractors.AverageWfPeakIntegrator" usemap="#inheritancec8a2081ea2" class="inheritance"/>
+<img src="../_images/inheritance-e4763679981bbde3934dbb229d71ee0e98d7e13b.png" alt="Inheritance diagram of ctapipe.image.charge_extractors.ChargeExtractorFactory, ctapipe.image.charge_extractors.FullIntegrator, ctapipe.image.charge_extractors.SimpleIntegrator, ctapipe.image.charge_extractors.GlobalPeakIntegrator, ctapipe.image.charge_extractors.LocalPeakIntegrator, ctapipe.image.charge_extractors.NeighbourPeakIntegrator, ctapipe.image.charge_extractors.AverageWfPeakIntegrator" usemap="#inheritancec8a2081ea2" class="inheritance"/>
 <map id="inheritancec8a2081ea2" name="inheritancec8a2081ea2">
-<area shape="rect" id="node1" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" target="_top" title="AverageWfPeakIntegrator" alt="" coords="676,3,765,16"/>
-<area shape="rect" id="node11" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" target="_top" title="GlobalPeakIntegrator" alt="" coords="683,28,758,41"/>
-<area shape="rect" id="node13" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" target="_top" title="LocalPeakIntegrator" alt="" coords="685,53,756,66"/>
-<area shape="rect" id="node14" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" target="_top" title="NeighbourPeakIntegrator" alt="" coords="677,78,764,91"/>
+<area shape="rect" id="node1" href="../api/ctapipe.image.charge_extractors.AverageWfPeakIntegrator.html#ctapipe.image.charge_extractors.AverageWfPeakIntegrator" target="_top" title="Charge extractor that defines an integration window defined by the " alt="" coords="676,3,765,16"/>
+<area shape="rect" id="node11" href="../api/ctapipe.image.charge_extractors.GlobalPeakIntegrator.html#ctapipe.image.charge_extractors.GlobalPeakIntegrator" target="_top" title="Charge extractor that defines an integration window about the global" alt="" coords="683,28,758,41"/>
+<area shape="rect" id="node13" href="../api/ctapipe.image.charge_extractors.LocalPeakIntegrator.html#ctapipe.image.charge_extractors.LocalPeakIntegrator" target="_top" title="Charge extractor that defines an integration window about the local" alt="" coords="685,53,756,66"/>
+<area shape="rect" id="node14" href="../api/ctapipe.image.charge_extractors.NeighbourPeakIntegrator.html#ctapipe.image.charge_extractors.NeighbourPeakIntegrator" target="_top" title="Charge extractor that defines an integration window defined by the " alt="" coords="677,78,764,91"/>
 <area shape="rect" id="node4" title="Base class of all Components (sometimes called" alt="" coords="223,53,269,66"/>
 <area shape="rect" id="node6" title="A base class for all class factories that exist in the `Tools`/`Components`" alt="" coords="305,66,341,78"/>
 <area shape="rect" id="node5" href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html#ctapipe.image.charge_extractors.ChargeExtractorFactory" target="_top" title="Factory to obtain a ChargeExtractor." alt="" coords="378,66,461,78"/>
@@ -224,15 +250,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html" class="btn btn-neutral float-right" title="ChargeExtractorFactory" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.image.charge_extractors.ChargeExtractorFactory.html" class="btn btn-neutral float-right" title="ChargeExtractorFactory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html" class="btn btn-neutral" title="PixelLikelihoodError" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../api/ctapipe.image.pixel_likelihood.PixelLikelihoodError.html" class="btn btn-neutral" title="PixelLikelihoodError" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -241,7 +270,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 03 May 2017 14:50.
+        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 13:23.
 
     </p>
   </div>
@@ -263,10 +292,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post393+gitdd48071',
+            VERSION:'0.4.0.post421+git8046559',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
