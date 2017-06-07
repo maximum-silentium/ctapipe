@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.utils.datasets &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
+  <title>ctapipe.utils.datasets &mdash; ctapipe v0.4.0.post502+gitee27c4e</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post502+gitee27c4e" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post450+gitb4b159c
+                0.4.0.post502+gitee27c4e
               </div>
             
           
@@ -172,8 +172,13 @@
   <h1>Source code for ctapipe.utils.datasets</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Licensed under a 3-clause BSD style license - see LICENSE.rst</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="k">import</span> <span class="n">resource_listdir</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">astropy.utils.decorators</span> <span class="k">import</span> <span class="n">deprecated</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">ctapipe_resources</span>
@@ -183,12 +188,71 @@
                        <span class="s2">&quot;needed by ctapipe. (conda install ctapipe-extra)&quot;</span><span class="p">)</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;get_dataset&#39;</span><span class="p">,</span> <span class="s1">&#39;find_in_path&#39;</span>  <span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;get_dataset&#39;</span><span class="p">,</span> <span class="s1">&#39;find_in_path&#39;</span><span class="p">,</span> <span class="s1">&#39;find_all_matching_datasets&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_searchpath_dirs</span><span class="p">(</span><span class="n">searchpath</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CTAPIPE_SVC_PATH&quot;</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot; returns a list of dirs in specified searchpath&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">searchpath</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">searchpath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">searchpath</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="find_all_matching_datasets"><a class="viewcode-back" href="../../../api/ctapipe.utils.find_all_matching_datasets.html#ctapipe.utils.find_all_matching_datasets">[docs]</a><span class="k">def</span> <span class="nf">find_all_matching_datasets</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span>
+                               <span class="n">searchpath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">regexp_group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a list of resource names (or substrings) matching the given </span>
+<span class="sd">    pattern, searching first in searchpath (a colon-separated list of </span>
+<span class="sd">    directories) and then in the ctapipe_resources module)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pattern: str</span>
+<span class="sd">       regular expression to use for matching</span>
+<span class="sd">    searchpath: str</span>
+<span class="sd">       colon-seprated list of directories in which to search, defaulting to </span>
+<span class="sd">       CTAPIPE_SVC_PATH environment variable</span>
+<span class="sd">    regexp_group: int</span>
+<span class="sd">       if not None, return the regular expression group indicated (assuming </span>
+<span class="sd">       pattern has a group specifier in it)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list(str):</span>
+<span class="sd">       resources names, use get_dataset() to retrieve the full filename</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">searchpath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">searchpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CTAPIPE_SVC_PATH&quot;</span><span class="p">)</span>
+
+    <span class="c1"># first check search path</span>
+    <span class="k">if</span> <span class="n">searchpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">get_searchpath_dirs</span><span class="p">(</span><span class="n">searchpath</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">regexp_group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp_group</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># then check resources module</span>
+    <span class="k">for</span> <span class="n">resource</span> <span class="ow">in</span> <span class="n">resource_listdir</span><span class="p">(</span><span class="s1">&#39;ctapipe_resources&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">resource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">regexp_group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp_group</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="find_in_path"><a class="viewcode-back" href="../../../api/ctapipe.utils.find_in_path.html#ctapipe.utils.find_in_path">[docs]</a><span class="k">def</span> <span class="nf">find_in_path</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">searchpath</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Search in searchpath for filename</span>
+<span class="sd">    Search in searchpath for filename, returning full path.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -203,7 +267,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">searchpath</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">get_searchpath_dirs</span><span class="p">(</span><span class="n">searchpath</span><span class="p">):</span>
         <span class="n">pathname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pathname</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">pathname</span>
@@ -214,7 +278,7 @@
 <div class="viewcode-block" id="get_dataset"><a class="viewcode-back" href="../../../api/ctapipe.utils.get_dataset.html#ctapipe.utils.get_dataset">[docs]</a><span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the full file path to an auxiliary dataset needed by </span>
-<span class="sd">    ctapipe.</span>
+<span class="sd">    ctapipe, given the dataset&#39;s full name (filename with no directory).</span>
 <span class="sd">      </span>
 <span class="sd">    This will first search for the file in directories listed in </span>
 <span class="sd">    tne environment variable CTAPIPE_SVC_PATH (if set), and if not found,  </span>
@@ -237,6 +301,9 @@
         <span class="k">if</span> <span class="n">filepath</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">filepath</span>
 
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Resource &#39;</span><span class="si">{}</span><span class="s2">&#39; not found in CTAPIPE_SVC_PATH, looking in &quot;</span>
+                 <span class="s2">&quot;ctapipe_resources...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+
     <span class="k">return</span> <span class="n">ctapipe_resources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
 <span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;ctapipe-0.5&quot;</span><span class="p">,</span><span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;get_dataset()&#39;</span><span class="p">)</span>
@@ -257,7 +324,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
+        &copy; Copyright ctapipe developers.  Last updated 07 Jun 2017 12:21.
 
     </p>
   </div>
@@ -279,7 +346,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post450+gitb4b159c',
+            VERSION:'0.4.0.post502+gitee27c4e',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -289,7 +356,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

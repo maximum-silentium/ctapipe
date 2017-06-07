@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Support Libraries &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
+  <title>Support Libraries &mdash; ctapipe v0.4.0.post502+gitee27c4e</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post502+gitee27c4e" href="../index.html"/>
         <link rel="up" title="Development Guidelines" href="index.html"/>
         <link rel="next" title="Making and Accepting Pull Requests" href="pullrequests.html"/>
         <link rel="prev" title="Code Guidelines" href="code-guidelines.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post450+gitb4b159c
+                0.4.0.post502+gitee27c4e
               </div>
             
           
@@ -241,15 +241,15 @@ techniques, both for classification and regression.</p>
 <p><a class="reference external" href="http://astropy.org">AstroPy</a> is the accepted package for all
 astronomical calculations. Specifically:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates</span></code></a>: coordinate transforms and frames</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/latest/time/index.html#module-astropy.time" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.time</span></code></a>: time transformations and frames</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/latest/wcs/index.html#module-astropy.wcs" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.wcs</span></code></a>: projections</li>
+<li><a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates</span></code></a>: coordinate transforms and frames</li>
+<li><a class="reference external" href="http://docs.astropy.org/en/latest/time/index.html#module-astropy.time" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.time</span></code></a>: time transformations and frames</li>
+<li><a class="reference external" href="http://docs.astropy.org/en/latest/wcs/index.html#module-astropy.wcs" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.wcs</span></code></a>: projections</li>
 <li><code class="xref py py-obj docutils literal"><span class="pre">astropy.io</span></code>: low-level FITS access</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/latest/units/index.html#module-astropy.units" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.units</span></code></a>: unit quantities with automatic propegation and
+<li><a class="reference external" href="http://docs.astropy.org/en/latest/units/index.html#module-astropy.units" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.units</span></code></a>: unit quantities with automatic propegation and
 cross-checks</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/latest/table/index.html#module-astropy.table" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table</span></code></a>: quick and easy reading of tables in nearly any
+<li><a class="reference external" href="http://docs.astropy.org/en/latest/table/index.html#module-astropy.table" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table</span></code></a>: quick and easy reading of tables in nearly any
 format (FITS, ascii, HDF, VO, etc)</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/latest/convolution/index.html#module-astropy.convolution" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.convolution</span></code></a>: convolution and filtering (built upon
+<li><a class="reference external" href="http://docs.astropy.org/en/latest/convolution/index.html#module-astropy.convolution" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.convolution</span></code></a>: convolution and filtering (built upon
 scipy.signal, but with more robust defaults)</li>
 </ul>
 <p>subpackages of Astropy that are not marked as &quot;reasonable stable&quot; or
@@ -259,7 +259,7 @@ list can be found on the astropy documentation page, under the list
 </div>
 <div class="section" id="fits-table-access">
 <h2>FITS Table Access<a class="headerlink" href="#fits-table-access" title="Permalink to this headline">¶</a></h2>
-<p>FITS Tables can be read via <a class="reference external" href="http://docs.astropy.org/en/latest/table/index.html#module-astropy.table" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table</span></code></a>, or <a class="reference external" href="http://docs.astropy.org/en/latest/io/fits/index.html#module-astropy.io.fits" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.io.fits</span></code></a>
+<p>FITS Tables can be read via <a class="reference external" href="http://docs.astropy.org/en/latest/table/index.html#module-astropy.table" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table</span></code></a>, or <a class="reference external" href="http://docs.astropy.org/en/latest/io/fits/index.html#module-astropy.io.fits" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.io.fits</span></code></a>
 (formerly called <code class="xref py py-obj docutils literal"><span class="pre">pyfits</span></code>), however these implementations are not
 intended for efficient access to very large files (As they access all
 tables column-wise). In the case we want to load GBs or more of data
@@ -295,7 +295,7 @@ installed via pip</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
+        &copy; Copyright ctapipe developers.  Last updated 07 Jun 2017 12:21.
 
     </p>
   </div>
@@ -317,7 +317,7 @@ installed via pip</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post450+gitb4b159c',
+            VERSION:'0.4.0.post502+gitee27c4e',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -327,7 +327,7 @@ installed via pip</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

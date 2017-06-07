@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>astropy.units.quantity &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
+  <title>astropy.units.quantity &mdash; ctapipe v0.4.0.post502+gitee27c4e</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post502+gitee27c4e" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post450+gitb4b159c
+                0.4.0.post502+gitee27c4e
               </div>
             
           
@@ -439,14 +439,22 @@
                 <span class="c1"># the second parts adds possible trailing .+-, which will break</span>
                 <span class="c1"># the float function below and ensure things like 1.2.3deg</span>
                 <span class="c1"># will not work.</span>
-                <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s*[+-]?((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?&#39;</span>
-                             <span class="sa">r</span><span class="s1">&#39;[.+-]?&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s*[+-]?&#39;</span>
+                           <span class="sa">r</span><span class="s1">&#39;((\d+\.?\d*)|(\.\d+)|([nN][aA][nN])|&#39;</span>
+                           <span class="sa">r</span><span class="s1">&#39;([iI][nN][fF]([iI][nN][iI][tT][yY]){0,1}))&#39;</span>
+                           <span class="sa">r</span><span class="s1">&#39;([eE][+-]?\d+)?&#39;</span>
+                           <span class="sa">r</span><span class="s1">&#39;[.+-]?&#39;</span><span class="p">)</span>
+
+                <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="n">unit_string</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Cannot parse &quot;</span><span class="si">{0}</span><span class="s1">&quot; as a </span><span class="si">{1}</span><span class="s1">. It does not &#39;</span>
                                     <span class="s1">&#39;start with a number.&#39;</span>
                                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
                 <span class="n">unit_string</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">string</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">end</span><span class="p">():]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">unit_string</span><span class="p">:</span>
                     <span class="n">value_unit</span> <span class="o">=</span> <span class="n">Unit</span><span class="p">(</span><span class="n">unit_string</span><span class="p">)</span>
@@ -556,6 +564,8 @@
         <span class="c1"># the unit the output from the ufunc will have.</span>
         <span class="k">if</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">UFUNC_HELPERS</span><span class="p">:</span>
             <span class="n">converters</span><span class="p">,</span> <span class="n">result_unit</span> <span class="o">=</span> <span class="n">UFUNC_HELPERS</span><span class="p">[</span><span class="n">function</span><span class="p">](</span><span class="n">function</span><span class="p">,</span> <span class="o">*</span><span class="n">units</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">nout</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">result_unit</span> <span class="o">=</span> <span class="n">result_unit</span><span class="p">[</span><span class="n">context</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unknown ufunc </span><span class="si">{0}</span><span class="s2">.  Please raise issue on &quot;</span>
                             <span class="s2">&quot;https://github.com/astropy/astropy&quot;</span>
@@ -772,18 +782,14 @@
                         <span class="n">obj_array</span> <span class="o">=</span> <span class="kc">None</span>
 
                 <span class="c1"># Re-compute the output using the ufunc</span>
-                <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">nin</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">nout</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">out</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">obj_array</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>  <span class="c1"># 2-output function (np.modf, np.frexp); 1 input</span>
-                        <span class="k">if</span> <span class="n">context</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">obj_array</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">_</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">obj_array</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">context</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj_array</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">out</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">obj_array</span><span class="p">)</span>
-
+                    <span class="n">inputs</span> <span class="o">+=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">obj_array</span><span class="p">]</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">inputs</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">obj_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">nout</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">context</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
                     <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_view</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">result_unit</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">result_unit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># return a plain array</span>
@@ -1151,12 +1157,14 @@
         <span class="sd">&quot;&quot;&quot; Division between `Quantity` objects. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__rtruediv__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__divmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="n">other_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_own_unit</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="n">result_tuple</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">other_value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s1">&#39;divmod&#39;</span><span class="p">):</span>  <span class="c1"># NUMPY_LT_1_13</span>
+        <span class="c1"># In numpy 1.13, divmod goes via a ufunc and thus works without change.</span>
+        <span class="k">def</span> <span class="nf">__divmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+            <span class="n">other_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_own_unit</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="n">result_tuple</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">other_value</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_view</span><span class="p">(</span><span class="n">result_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dimensionless_unscaled</span><span class="p">),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_new_view</span><span class="p">(</span><span class="n">result_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_view</span><span class="p">(</span><span class="n">result_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dimensionless_unscaled</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_new_view</span><span class="p">(</span><span class="n">result_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
     <span class="k">def</span> <span class="nf">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">):</span>
@@ -1769,7 +1777,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
+        &copy; Copyright ctapipe developers.  Last updated 07 Jun 2017 12:21.
 
     </p>
   </div>
@@ -1791,7 +1799,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post450+gitb4b159c',
+            VERSION:'0.4.0.post502+gitee27c4e',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1801,7 +1809,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

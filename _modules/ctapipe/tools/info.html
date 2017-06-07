@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.tools.info &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
+  <title>ctapipe.tools.info &mdash; ctapipe v0.4.0.post502+gitee27c4e</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post502+gitee27c4e" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.4.0.post450+gitb4b159c
+                0.4.0.post502+gitee27c4e
               </div>
             
           
@@ -176,6 +176,9 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">get_parser</span>
+<span class="kn">from</span> <span class="nn">ctapipe.utils</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">ctapipe_resources</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">]</span>
 
@@ -184,7 +187,7 @@
 <span class="n">_dependencies</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s1">&#39;astropy&#39;</span><span class="p">,</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="s1">&#39;traitlets&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;sklearn&#39;</span><span class="p">,</span><span class="s1">&#39;scipy&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;pytest&#39;</span><span class="p">])</span>
+                        <span class="s1">&#39;pytest&#39;</span><span class="p">,</span> <span class="s1">&#39;ctapipe_resources&#39;</span><span class="p">])</span>
 
 <span class="n">_optional_dependencies</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s1">&#39;pytest&#39;</span><span class="p">,</span><span class="s1">&#39;graphviz&#39;</span><span class="p">,</span><span class="s1">&#39;pyzmq&#39;</span><span class="p">,</span><span class="s1">&#39;iminuit&#39;</span><span class="p">,</span>
                                  <span class="s1">&#39;fitsio&#39;</span><span class="p">,</span><span class="s1">&#39;pyhessio&#39;</span><span class="p">,</span><span class="s1">&#39;targetio&#39;</span><span class="p">])</span>
@@ -198,6 +201,8 @@
                         <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Print available command line tools&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--dependencies&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Print available versions of dependencies&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--resources&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Print available versions of dependencies&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--all&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s1">&#39;show all info&#39;</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -209,12 +214,13 @@
     <span class="n">info</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="info"><a class="viewcode-back" href="../../../api/ctapipe.tools.info.html#ctapipe.tools.info">[docs]</a><span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="info"><a class="viewcode-back" href="../../../api/ctapipe.tools.info.html#ctapipe.tools.info">[docs]</a><span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+         <span class="n">resources</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Print various info to the console.</span>
 
 <span class="sd">    TODO: explain.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
                         <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">version</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">:</span>
@@ -224,8 +230,10 @@
         <span class="n">_info_tools</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">dependencies</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">:</span>
-        <span class="n">_info_dependencies</span><span class="p">()</span></div>
+        <span class="n">_info_dependencies</span><span class="p">()</span>
 
+    <span class="k">if</span> <span class="n">resources</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">:</span>
+        <span class="n">_info_resources</span><span class="p">()</span></div>
 
 <span class="k">def</span> <span class="nf">_info_version</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Print version info.&quot;&quot;&quot;</span>
@@ -287,6 +295,39 @@
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:&gt;20s}</span><span class="s1"> -- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">))</span>
 
+
+<span class="k">def</span> <span class="nf">_info_resources</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; display all known resources &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*** ctapipe resources ***</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ctapipe_resources version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ctapipe_resources</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CTAPIPE_SVC_PATH: (directories where resources are searched)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;CTAPIPE_SVC_PATH&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">datasets</span><span class="o">.</span><span class="n">get_searchpath_dirs</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> * </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">dir</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> no path is set&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">all_resources</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">find_all_matching_datasets</span><span class="p">(</span><span class="s2">&quot;\w.*&quot;</span><span class="p">))</span>
+    <span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+                 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">all_resources</span><span class="p">]</span>
+    <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+    <span class="n">resource_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span>
+        <span class="s2">&quot;HESS-I.camgeom.fits.gz&quot;</span><span class="p">))</span>
+
+    <span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{name:&lt;30.30s}</span><span class="s2"> : </span><span class="si">{loc:&lt;30.30s}</span><span class="s2">&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;RESOURCE NAME&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;LOCATION&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">loc</span>  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">all_resources</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;[ctapipe_resources]&quot;</span><span class="p">)</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;~&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">))</span>
+
 </pre></div>
 
            </div>
@@ -301,7 +342,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
+        &copy; Copyright ctapipe developers.  Last updated 07 Jun 2017 12:21.
 
     </p>
   </div>
@@ -323,7 +364,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.0.post450+gitb4b159c',
+            VERSION:'0.4.0.post502+gitee27c4e',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -333,7 +374,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

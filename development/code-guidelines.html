@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Code Guidelines &mdash; ctapipe v0.4.0.post450+gitb4b159c</title>
+  <title>Code Guidelines &mdash; ctapipe v0.4.0.post502+gitee27c4e</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.4.0.post450+gitb4b159c" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.4.0.post502+gitee27c4e" href="../index.html"/>
         <link rel="up" title="Development Guidelines" href="index.html"/>
         <link rel="next" title="Support Libraries" href="support-libraries.html"/>
         <link rel="prev" title="Style Guide" href="style-guide.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.4.0.post450+gitb4b159c
+                0.4.0.post502+gitee27c4e
               </div>
             
           
@@ -260,7 +260,7 @@ basic guidelines:</p>
 <li>basic array-like data should be in an <code class="xref py py-obj docutils literal"><span class="pre">numpy.NDArray</span></code>, with a suitable
 <code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code> (fixed data type)</li>
 <li>for complex sets of arrays, each with a column name and unit, can be
-managed via an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> object (which also provides
+managed via an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a> object (which also provides
 methods to read and write such a table to/from nearly any file
 format, including FITS and HDF5). Other packages like <code class="xref py py-obj docutils literal"><span class="pre">pandas</span></code> or
 <code class="xref py py-obj docutils literal"><span class="pre">dask</span></code> may be explored.</li>
@@ -281,7 +281,44 @@ Python 3 and new-style classes are the default, i.e. subclassing
 common logging failities of <code class="xref py py-obj docutils literal"><span class="pre">ctapipe</span></code>.  Log messages should be
 simple, and no not include the filename, function name, time, or any
 other metadata (which can be attached automatically by the logging
-system)</li>
+system). See <a href="#id1"><span class="problematic" id="id2">`https://docs.python.org/3/howto/logging.html`_</span></a> for more info</li>
+<li>Logging within a <code class="xref py py-obj docutils literal"><span class="pre">Tool</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">Component</span></code> subclass: use the <code class="xref py py-obj docutils literal"><span class="pre">self.log</span></code> logger
+instance</li>
+<li>logging in a library file that is not part of Tool or Component: define a
+logger at the top of the python file, and name it by using <a class="reference external" href="https://docs.python.org/3.5/reference/import.html#__name__" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">__name__</span></code></a> as
+follows:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># at the top of your file:</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Python logging works as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;this might be a problem&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;basic status&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;debugging message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;a serious problem&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;this should never happen!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And which messages print out and in what logging format can be defined at
+run-time, along with filtering capabilities (e.g. only show log messages from
+a particular file or class).</p>
+<p>Some logging guidelines:</p>
+<ul class="simple">
+<li>you should <strong>not</strong> include the name of your function/class, line number, name
+of the file, or similar info in a log message. That information can be added
+automatically by the logger by changing the log format if needed (all log
+messages come with an attached <code class="xref py py-obj docutils literal"><span class="pre">LogRecord</span></code> which contains all of the
+necessary metadata: name, level, pathname, filename, line number, message,
+arguments,exc_info (for exceptions), function name, stack info, process name, and
+optinal user-defined fields.</li>
+<li>the log message should be human-readable and explain to a user not fully
+familiar with the code what is happening.</li>
+<li>if the message refers to a value, you can insert it into the message using
+format <code class="xref py py-obj docutils literal"><span class="pre">logger.debug(&quot;some</span> <span class="pre">message:</span> <span class="pre">{}&quot;.format(val)&quot;)</span></code> or the log syntax
+<code class="xref py py-obj docutils literal"><span class="pre">logger.debug(&quot;some</span> <span class="pre">message:</span> <span class="pre">%d&quot;,</span> <span class="pre">val)</span></code></li>
 </ul>
 </div>
 <div class="section" id="function-or-method-input-output">
@@ -296,7 +333,7 @@ the input to another.</p>
 <div class="section" id="unit-quantities">
 <h2>Unit Quantities<a class="headerlink" href="#unit-quantities" title="Permalink to this headline">¶</a></h2>
 <p>When approprate (e.g. in high-level algorithms APIs), use
-<a class="reference external" href="http://docs.astropy.org/en/latest/units/index.html#module-astropy.units" title="(in Astropy v2.0.dev18200)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.units</span></code></a> for any quantity where the unit may be ambiguous or
+<a class="reference external" href="http://docs.astropy.org/en/latest/units/index.html#module-astropy.units" title="(in Astropy v2.0.dev18525)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.units</span></code></a> for any quantity where the unit may be ambiguous or
 where units need to be transformed.  Internally in a function, this is not necessary since the coder can ensure unit consistency, but for public APIs (function inputs, etc), units are useful.  You can even enforce a function to have particular unit inputs:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 <span class="kn">from</span> <span class="nn">astropy.units.decorators</span> <span class="kn">import</span> <span class="n">quantity_input</span>
@@ -476,7 +513,7 @@ systems be tested.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 09 May 2017 17:00.
+        &copy; Copyright ctapipe developers.  Last updated 07 Jun 2017 12:21.
 
     </p>
   </div>
@@ -498,7 +535,7 @@ systems be tested.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0.post450+gitb4b159c',
+            VERSION:'0.4.0.post502+gitee27c4e',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -508,7 +545,7 @@ systems be tested.</li>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
